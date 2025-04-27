@@ -1,7 +1,10 @@
 export default async function Home() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/videos`, {
-    cache: "no-store",
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`,
+    {
+      cache: "no-store",
+    }
+  );
   const data = await res.json();
   console.log(data);
   return (
@@ -10,9 +13,8 @@ export default async function Home() {
       <ul className="flex flex-col">
         {data.map((element) => (
           <li key={element.id}>
-            <h1>title: {element.title}</h1>
-            <div>description: {element.description}</div>
-            <div>youtube_id: {element["youtube_id"]}</div>
+            <h1>name: {element.name}</h1>
+            <div>parent_id: {element["parent_id"]}</div>
           </li>
         ))}
       </ul>
