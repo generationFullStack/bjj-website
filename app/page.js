@@ -1,21 +1,3 @@
 export default async function Home() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/videos`, {
-    cache: "no-store",
-  });
-  const data = await res.json();
-  console.log(data);
-  return (
-    <div>
-      <h1>Videos</h1>
-      <ul className="flex flex-col">
-        {data.map((element) => (
-          <li key={element.id}>
-            <h1>title: {element.title}</h1>
-            <div>description: {element.description}</div>
-            <div>youtube_id: {element["youtube_id"]}</div>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
+  return <div></div>;
 }
