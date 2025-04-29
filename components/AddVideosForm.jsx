@@ -13,7 +13,7 @@ async function onSubmit(formData) {
 
 export default function AddVideoForm() {
   return (
-    <div className="w-full border-2">
+    <div className="w-full border-2 text-3xl">
       <h1 className="text-center text-5xl mt-5">Add Video Form</h1>
       <form action={onSubmit} className="flex flex-col gap-5 items-center p-10">
         <div className="border-2 border-white/50">
@@ -31,8 +31,8 @@ export default function AddVideoForm() {
         <div className="border-2 border-white/50">
           <input name="end_position" placeholder="ending_position_id" />
         </div>
-        <button type="submit" className="border-2 border-white/50 p-1">
-          Add
+        <button type="submit" className="border-2 border-red-500">
+          Add Video
         </button>
       </form>
     </div>

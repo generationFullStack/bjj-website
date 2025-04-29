@@ -9,7 +9,7 @@ const pool = new Pool({
 export async function GET() {
   try {
     const client = await pool.connect();
-    const result = await client.query("SELECT * FROM videos");
+    const result = await client.query("SELECT * FROM videos ");
     client.release();
     return NextResponse.json(result.rows, { status: 200 });
   } catch (error) {

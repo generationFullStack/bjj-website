@@ -12,23 +12,26 @@ async function onDelete(formData) {
 }
 
 export default async function DeleteVideosForm() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/videos`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/videos`, {
+    cache: "no-cache",
+  });
   const data = await res.json();
 
   return (
-    <div className="w-full">
-      <h1 className="text-center">Videos</h1>
+    <div className="w-full text-3xl">
+      <h1 className="text-center">Delete Videos form</h1>
       <ul className="flex flex-col">
         {data.map((element) => (
           <li
             key={element.id}
-            className="flex justify-around items-center border-2"
+            className="flex border-2 justify-between p-3 items-center"
           >
             <div>
-              <div>video_id: {element.id}</div>
-              <h1>title: {element.title}</h1>
-              <div>description: {element.description}</div>
-              <div>youtube_id: {element.youtube_id}</div>
+              <div>id: {element.id}</div>
+              <div>Title: {element.title}</div>
+              <div>Description: {element.description}</div>
+              <div>Youtube id: {element.youtube_id}</div>
+              <div>Video categories: {element.video_categories}</div>
             </div>
 
             <form action={onDelete}>
