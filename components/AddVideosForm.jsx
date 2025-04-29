@@ -1,3 +1,5 @@
+import { revalidatePath } from "next/cache";
+
 async function onSubmit(formData) {
   "use server";
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/videos`, {
@@ -6,6 +8,7 @@ async function onSubmit(formData) {
   });
   const data = await res.json();
   console.log(data);
+  revalidatePath("/");
 }
 
 export default function AddVideoForm() {

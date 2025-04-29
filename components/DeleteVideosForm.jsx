@@ -1,3 +1,5 @@
+import { revalidatePath } from "next/cache";
+
 async function onDelete(formData) {
   "use server";
   const videoId = formData.get("video_id");
@@ -6,6 +8,7 @@ async function onDelete(formData) {
     body: formData,
   });
   const data = await res.json();
+  revalidatePath("/");
 }
 
 export default async function DeleteVideosForm() {
