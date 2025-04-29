@@ -1,26 +1,58 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* src/app/globals.css */
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Quicksand", sans-serif;
+  font-size: 62.5%;
+  font-size: 10px;
+  background-color: #111; /* 假設使用深色背景 */
+  color: #fff; /* 確保文字為白色 */
+}
+
+.home {
+  width: 100%;
+  height: 100vh;
+  background-image: url("/bjj-wallpaper.jpeg");
+  background-position: center top;
+  background-size: cover;
+}
+
+.myH2 {
+  text-align: center;
+  font-size: 4rem;
+}
+
+.myP {
+  text-align: justify;
+  padding-left: 15%;
+  padding-right: 15%;
+  font-size: 20px;
+}
+
+.learnMoreButton {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #ff5e14; /* 橙色按鈕，與 footer 的 hover 顏色金色形成對比 */
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.learnMoreButton:hover {
+  background-color: #e05012; /* 按鈕 hover 時稍微變暗 */
+}
+
+@media all and (max-width: 700px) {
+  .myP {
+    padding: 2%;
+  }
+
+  .learnMoreButton {
+    padding: 8px 16px; /* 小屏幕上縮小按鈕 */
+  }
 }
