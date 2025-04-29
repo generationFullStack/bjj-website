@@ -57,6 +57,18 @@ export default function NavBar() {
         >
           <ul className={styles.navlinks}>
             <li className={styles.navItem}>
+              <Link href="/about">Submissions</Link>
+            </li>
+            <li className={styles.navItem}>
+              <a href="#">Guard Passing</a>
+            </li>
+            <li className={styles.navItem}>
+              <a href="#">Defense</a>
+            </li>
+            <li className={styles.navItem}>
+              <Link href="/contact">Takedown</Link>
+            </li>
+            <li className={styles.navItem}>
               <Link href="/about">About</Link>
             </li>
             <li className={styles.navItem}>
@@ -66,7 +78,7 @@ export default function NavBar() {
               <a href="#">Services</a>
             </li>
             <li className={styles.navItem}>
-              <a href="#">Contact</a>
+              <Link href="/contact">Contact</Link>
             </li>
           </ul>
         </div>
