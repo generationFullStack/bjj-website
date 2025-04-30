@@ -2,7 +2,6 @@ import { revalidatePath } from "next/cache";
 
 async function onDelete(formData) {
   "use server";
-  const videoId = formData.get("video_id");
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/videos`, {
     method: "DELETE",
     body: formData,

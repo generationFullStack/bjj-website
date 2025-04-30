@@ -27,12 +27,10 @@ export async function POST(request) {
     const title = data.get("title");
     const description = data.get("description");
     const youtube_id = data.get("youtube_id");
-    const start_position = data.get("starting_position");
-    const end_position = data.get("ending_position");
     const client = await pool.connect();
     const result = await client.query(
-      `INSERT INTO videos (title, description, youtube_id, starting_position_id, ending_position_id, user_id)
-       VALUES ('${title}', '${description}', '${youtube_id}', ${start_position}, ${end_position}, 1)`
+      `INSERT INTO videos (title, description, youtube_id, user_id)
+       VALUES ('${title}', '${description}', '${youtube_id}', 1)`
     );
     client.release();
 
