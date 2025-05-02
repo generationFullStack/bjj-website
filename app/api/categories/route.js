@@ -9,7 +9,9 @@ const pool = new Pool({
 export async function GET() {
   try {
     const client = await pool.connect();
-    const result = await client.query("SELECT * FROM categories");
+    const result = await client.query(
+      "SELECT * FROM categories ORDER BY id ASC"
+    );
     client.release();
     return NextResponse.json(result.rows, { status: 200 });
   } catch (error) {
