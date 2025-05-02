@@ -4,6 +4,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { FaSearch } from "react-icons/fa";
 import styles from "./NavBar.module.css";
 
 export default function NavBar() {
@@ -13,6 +14,8 @@ export default function NavBar() {
   const [activeDropdown, setActiveDropdown] = useState(null);
   const [hoveredItem, setHoveredItem] = useState(null);
   const [activeSubmenu, setActiveSubmenu] = useState(null);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     setIsClient(true);
@@ -34,21 +37,21 @@ export default function NavBar() {
   }, [isClient]);
 
   useEffect(() => {
-    // 當 hoveredItem 變化時，動態添加或移除模糊類到 mainContent
     const mainContent = document.querySelector(".mainContent");
     if (mainContent) {
-      if (hoveredItem !== null) {
+      if (hoveredItem !== null || isSearchOpen) {
         mainContent.classList.add(styles.blurContent);
       } else {
         mainContent.classList.remove(styles.blurContent);
       }
     }
-  }, [hoveredItem]);
+  }, [hoveredItem, isSearchOpen]);
 
   const handleNavTriggerClick = () => {
     setIsMenuOpen(!isMenuOpen);
     setActiveSubmenu(null);
     setActiveDropdown(null);
+    setIsSearchOpen(false);
   };
 
   const handleDropdownClick = (index) => {
@@ -59,6 +62,25 @@ export default function NavBar() {
   const handleBackToMainMenu = () => {
     setActiveSubmenu(null);
     setActiveDropdown(null);
+  };
+
+  const handleSearchClick = () => {
+    setIsSearchOpen(true);
+    setActiveSubmenu(null);
+    setActiveDropdown(null);
+    setIsMenuOpen(false); // 關閉選單
+  };
+
+  const handleCloseSearch = () => {
+    setIsSearchOpen(false);
+    setSearchQuery("");
+  };
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    console.log("搜尋關鍵字:", searchQuery);
+    // 例如：跳轉到 /search 頁面
+    // router.push(`/search?q=${searchQuery}`);
   };
 
   const handleMouseEnter = (index) => {
@@ -90,10 +112,36 @@ export default function NavBar() {
             isMenuOpen ? styles.show_list : ""
           }`}
         >
+          {/* 搜尋欄（桌面版和行動版） */}
+          {isSearchOpen && (
+            <div className={styles.searchContainer}>
+              <form onSubmit={handleSearchSubmit} className={styles.searchForm}>
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="搜尋..."
+                  className={styles.searchInput}
+                  autoFocus
+                />
+                <button type="submit" className={styles.searchButton}>
+                  <FaSearch />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleCloseSearch}
+                  className={styles.closeSearchButton}
+                >
+                  ✕
+                </button>
+              </form>
+            </div>
+          )}
+
           {/* 主選單 */}
           <div
             className={`${styles.menuContent} ${
-              activeSubmenu !== null ? styles.hidden : ""
+              activeSubmenu !== null || isSearchOpen ? styles.hidden : ""
             }`}
           >
             <ul className={styles.navlinks}>
@@ -164,6 +212,13 @@ export default function NavBar() {
                   <Link href="#">Ankle Pick</Link>
                   <Link href="#">Judo Throws</Link>
                 </div>
+              </li>
+              {/* 搜尋圖標（條件性顯示） */}
+              <li className={`${styles.navItem} ${styles.searchIcon}`}>
+                <span onClick={handleSearchClick} className={styles.searchLink}>
+                  <FaSearch className={styles.searchIconMobile} />
+                  <span className={styles.searchText}>搜尋</span>
+                </span>
               </li>
             </ul>
           </div>
@@ -243,6 +298,15 @@ export default function NavBar() {
             </div>
           )}
         </div>
+        {/* 搜尋圖標（行動版，位於漢堡圖標旁） */}
+        <span
+          className={`${styles.searchIconTop} ${
+            isMenuOpen || isSearchOpen ? styles.hidden : ""
+          }`}
+          onClick={handleSearchClick}
+        >
+          <FaSearch />
+        </span>
         <span
           className={`${styles.navTrigger} ${isMenuOpen ? styles.active : ""}`}
           onClick={handleNavTriggerClick}

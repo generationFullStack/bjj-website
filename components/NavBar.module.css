@@ -71,6 +71,119 @@
   color: #00e676;
 }
 
+/* 搜尋圖標（桌面版，位於 navlinks 內） */
+.searchLink {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: #fff;
+  height: 55px;
+}
+
+.searchIconMobile {
+  font-size: 2.4rem !important;
+  color: #fff;
+  margin-top: 2px; /* 微調垂直對齊 */
+}
+
+.searchLink:hover,
+.searchLink:hover .searchIconMobile {
+  color: #00e676;
+}
+
+.searchText {
+  display: none; /* 桌面版隱藏「搜尋」文字 */
+}
+
+/* 搜尋圖標（行動版，位於漢堡圖標旁） */
+.searchIconTop {
+  position: absolute;
+  right: 70px; /* 與漢堡圖標間距 */
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: 24px;
+  cursor: pointer;
+  font-size: 2.4rem;
+  color: #fff;
+  z-index: 1003;
+  display: none; /* 桌面版隱藏 */
+}
+
+.searchIconTop:hover {
+  color: #00e676;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* 搜尋欄（桌面版和行動版） */
+.searchContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 65px;
+  background-color: #111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1002;
+}
+
+.searchForm {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  max-width: 600px;
+  position: relative;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 10px 50px 10px 20px;
+  font-size: 1.8rem;
+  color: #fff;
+  background-color: #222;
+  border: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+.searchButton {
+  position: absolute;
+  right: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: #888;
+  cursor: pointer;
+}
+
+.searchButton:hover {
+  color: #00e676;
+}
+
+.closeSearchButton {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: #888;
+  cursor: pointer;
+}
+
+.closeSearchButton:hover {
+  color: #00e676;
+}
+
 /* 下拉選單樣式（桌面版） */
 .dropdownContent {
   display: none;
@@ -120,7 +233,7 @@
   right: 30px;
   top: 0;
   bottom: 0;
-  z-index: 1003; /* 確保按鈕始終可見 */
+  z-index: 1003;
 }
 
 .navTrigger i {
@@ -264,7 +377,7 @@
     background-color: #111;
   }
   .menuContent {
-    padding-top: 65px; /* 留出空間給 navTrigger */
+    padding-top: 65px;
   }
   .navlinks {
     flex-direction: column;
@@ -284,12 +397,17 @@
     text-align: left;
     margin: 0;
   }
-  .navlinks li a {
+  .navlinks li a,
+  .navlinks li span {
     text-align: left;
     width: 100%;
     font-size: 3rem;
     padding: 20px 30px;
-    display: block;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    cursor: pointer;
   }
   .dropdownContent {
     position: static;
@@ -316,6 +434,44 @@
     display: block;
   }
 
+  /* 搜尋欄（行動版） */
+  .searchContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #111;
+    z-index: 1002;
+    padding-top: 65px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .searchForm {
+    width: 100%;
+    padding: 20px 30px;
+    position: relative;
+  }
+  .searchInput {
+    font-size: 3rem;
+    padding: 15px 50px 15px 15px;
+    background-color: #222;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .searchButton {
+    right: 50px;
+    font-size: 2.5rem;
+  }
+  .closeSearchButton {
+    right: 30px;
+    font-size: 2.5rem;
+  }
+
   /* 子選單樣式 */
   .submenu {
     position: fixed;
@@ -326,7 +482,7 @@
     background-color: #111;
     z-index: 1002;
     overflow-y: auto;
-    padding-top: 65px; /* 留出空間給 navTrigger */
+    padding-top: 65px;
   }
   .backButton {
     padding: 20px 30px;
@@ -353,5 +509,10 @@
   }
   .submenuList li a:hover {
     color: #00e676;
+  }
+
+  /* 行動版顯示 searchIconTop */
+  .searchIconTop {
+    display: block;
   }
 }
