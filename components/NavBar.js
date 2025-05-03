@@ -16,9 +16,19 @@ export default function NavBar() {
   const [activeSubmenu, setActiveSubmenu] = useState(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isMobile, setIsMobile] = useState(false); // 新增：用於檢測螢幕尺寸
 
   useEffect(() => {
     setIsClient(true);
+
+    // 檢測螢幕尺寸
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    handleResize(); // 初次執行
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   useEffect(() => {
@@ -68,7 +78,7 @@ export default function NavBar() {
     setIsSearchOpen(true);
     setActiveSubmenu(null);
     setActiveDropdown(null);
-    setIsMenuOpen(false); // 關閉選單
+    setIsMenuOpen(false);
   };
 
   const handleCloseSearch = () => {
@@ -79,8 +89,6 @@ export default function NavBar() {
   const handleSearchSubmit = (e) => {
     e.preventDefault();
     console.log("搜尋關鍵字:", searchQuery);
-    // 例如：跳轉到 /search 頁面
-    // router.push(`/search?q=${searchQuery}`);
   };
 
   const handleMouseEnter = (index) => {
@@ -99,8 +107,8 @@ export default function NavBar() {
             <Image
               src="/bjj-letter-logo.png"
               alt="BJJ Logo"
-              width={55}
-              height={55}
+              width={60}
+              height={60}
               style={{ verticalAlign: "middle" }}
             />
             <span className={styles.logoText}>快啲諗名</span>
@@ -213,13 +221,17 @@ export default function NavBar() {
                   <Link href="#">Judo Throws</Link>
                 </div>
               </li>
-              {/* 搜尋圖標（條件性顯示） */}
-              <li className={`${styles.navItem} ${styles.searchIcon}`}>
-                <span onClick={handleSearchClick} className={styles.searchLink}>
-                  <FaSearch className={styles.searchIconMobile} />
-                  <span className={styles.searchText}>搜尋</span>
-                </span>
-              </li>
+              {/* 桌面版搜尋圖標（僅在桌面版顯示） */}
+              {!isMobile && (
+                <li className={`${styles.navItem} ${styles.searchIcon}`}>
+                  <span
+                    onClick={handleSearchClick}
+                    className={styles.searchLink}
+                  >
+                    <FaSearch className={styles.searchIconMobile} />
+                  </span>
+                </li>
+              )}
             </ul>
           </div>
 
@@ -298,15 +310,17 @@ export default function NavBar() {
             </div>
           )}
         </div>
-        {/* 搜尋圖標（行動版，位於漢堡圖標旁） */}
-        <span
-          className={`${styles.searchIconTop} ${
-            isMenuOpen || isSearchOpen ? styles.hidden : ""
-          }`}
-          onClick={handleSearchClick}
-        >
-          <FaSearch />
-        </span>
+        {/* 行動版搜尋圖標（僅在行動版顯示） */}
+        {isMobile && (
+          <span
+            className={`${styles.searchIconTop} ${
+              isMenuOpen || isSearchOpen ? styles.hidden : ""
+            }`}
+            onClick={handleSearchClick}
+          >
+            <FaSearch />
+          </span>
+        )}
         <span
           className={`${styles.navTrigger} ${isMenuOpen ? styles.active : ""}`}
           onClick={handleNavTriggerClick}

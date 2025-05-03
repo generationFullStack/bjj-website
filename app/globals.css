@@ -1,7 +1,6 @@
-@import "tailwindcss";
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
-
 /* app/globals.css */
+@import "tailwindcss";
+
 html,
 body {
   margin: 0;
@@ -24,8 +23,8 @@ body {
 
 .mainContent {
   position: relative;
-  z-index: 1; /* 確保內容在導航欄之下 */
-  transition: filter 0.3s ease; /* 平滑過渡模糊效果 */
+  z-index: 1;
+  transition: filter 0.3s ease;
 }
 
 .myH2 {
