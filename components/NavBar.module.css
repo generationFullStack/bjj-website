@@ -47,7 +47,7 @@
   width: auto;
   height: 65px;
   display: flex;
-  flex-direction: row; /* 桌面版：水平排列 */
+  flex-direction: row;
   list-style: none;
   margin: 0;
   padding: 0;
@@ -85,8 +85,8 @@
 .searchIconMobile {
   font-size: 2.4rem !important;
   color: #fff;
-  position: relative; /* 添加相對定位 */
-  top: -5px; /* 向上移動 5px */
+  position: relative;
+  top: -5px;
 }
 
 .searchLink:hover .searchIconMobile {
@@ -332,9 +332,9 @@
 
   .logo {
     margin-left: 15px;
-    position: absolute; /* 使用絕對定位 */
+    position: absolute;
     left: 0;
-    top: 4px; /* 從頂部 5px 開始，與漢堡圖標和搜尋圖標對齊 */
+    top: 4px;
     width: auto;
     height: auto;
   }
@@ -498,8 +498,7 @@
   .searchIconTop {
     position: absolute;
     right: 70px;
-    top: 20px; /* 從頂部 20px 開始，與漢堡圖標對齊 */
-    /* 移除 bottom 和 margin，使 top 更精確 */
+    top: 20px;
     height: 24px;
     cursor: pointer;
     font-size: 2.4rem;

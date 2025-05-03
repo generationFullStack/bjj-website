@@ -16,17 +16,16 @@ export default function NavBar() {
   const [activeSubmenu, setActiveSubmenu] = useState(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [isMobile, setIsMobile] = useState(false); // 新增：用於檢測螢幕尺寸
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
 
-    // 檢測螢幕尺寸
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
 
-    handleResize(); // 初次執行
+    handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
