@@ -40,7 +40,14 @@
 .main_list {
   height: 65px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
+}
+
+.navContent {
+  display: flex;
+  align-items: center;
+  height: 65px;
+  margin-right: 7rem; /* 與右邊界的距離 */
 }
 
 .navlinks {
@@ -57,7 +64,7 @@
   width: auto;
   height: 65px;
   padding: 0;
-  padding-right: 3rem;
+  padding-right: 4rem; /* 選項之間的間距 */
   position: relative;
 }
 
@@ -72,28 +79,6 @@
   color: #00e676;
 }
 
-/* 搜尋圖標（桌面版） */
-.searchLink {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  height: 65px;
-  line-height: 65px;
-}
-
-.searchIconMobile {
-  font-size: 2.4rem !important;
-  color: #fff;
-  position: relative;
-  top: -5px;
-}
-
-.searchLink:hover .searchIconMobile {
-  color: #00e676;
-}
-
-/* 搜尋欄（桌面版和行動版） */
 .searchContainer {
   position: absolute;
   top: 0;
@@ -319,6 +304,20 @@
   display: none !important;
 }
 
+.searchIconTop {
+  cursor: pointer;
+  font-size: 2.8rem;
+  color: #fff;
+  z-index: 1003;
+  display: block;
+  margin-left: 1rem; /* 與選項的間距 */
+  transform: translateY(-5px); /* 向上微調 2px */
+}
+
+.searchIconTop:hover {
+  color: #00e676;
+}
+
 @media screen and (min-width: 768px) and (max-width: 1024px) {
   .container {
     margin: 0;
@@ -361,11 +360,15 @@
   }
   .menuContent {
     padding-top: 65px;
+    display: block !important;
+  }
+  .navContent {
+    display: none; /* 手機版中隱藏 navContent */
   }
   .navlinks {
     flex-direction: column;
     width: 100%;
-    height: 100vh;
+    height: auto;
     right: 0;
     left: 0;
     top: 0;
@@ -373,7 +376,7 @@
     background-position: center top;
   }
   .navlinks.hidden {
-    display: none;
+    display: none !important;
   }
   .navlinks li {
     width: 100%;
@@ -389,7 +392,7 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    color: #fff;
+    color: #fff !important;
     cursor: pointer;
   }
   .dropdownContent {
@@ -406,6 +409,7 @@
     padding: 10px 50px;
     text-align: left;
     border-top: 1px solid #333;
+    color: #fff !important;
   }
   .dropdownContent a:last-child {
     border-bottom: 1px solid #333;
@@ -417,7 +421,6 @@
     display: block;
   }
 
-  /* 搜尋欄（行動版） */
   .searchContainer {
     position: fixed;
     top: 0;
@@ -455,7 +458,6 @@
     font-size: 2.5rem;
   }
 
-  /* 行動版子選單樣式 */
   .submenu {
     position: fixed;
     top: 0;
@@ -494,20 +496,10 @@
     color: #00e676;
   }
 
-  /* 行動版顯示 searchIconTop */
   .searchIconTop {
     position: absolute;
     right: 70px;
-    top: 20px;
-    height: 24px;
-    cursor: pointer;
-    font-size: 2.4rem;
-    color: #fff;
-    z-index: 1003;
-    display: block;
-  }
-
-  .searchIconTop:hover {
-    color: #00e676;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }

@@ -119,7 +119,6 @@ export default function NavBar() {
             isMenuOpen ? styles.show_list : ""
           }`}
         >
-          {/* 搜尋欄（桌面版和行動版） */}
           {isSearchOpen && (
             <div className={styles.searchContainer}>
               <form onSubmit={handleSearchSubmit} className={styles.searchForm}>
@@ -145,96 +144,97 @@ export default function NavBar() {
             </div>
           )}
 
-          {/* 主選單 */}
           <div
             className={`${styles.menuContent} ${
               activeSubmenu !== null || isSearchOpen ? styles.hidden : ""
             }`}
           >
-            <ul className={styles.navlinks}>
-              <li
-                className={`${styles.navItem} ${
-                  activeDropdown === 0 ? styles.active : ""
+            <div className={styles.navContent}>
+              <ul
+                className={`${styles.navlinks} ${
+                  activeSubmenu !== null || isSearchOpen ? styles.hidden : ""
                 }`}
-                onMouseEnter={() => handleMouseEnter(0)}
-                onMouseLeave={handleMouseLeave}
               >
-                <Link href="#" onClick={() => handleDropdownClick(0)}>
-                  Submissions
-                </Link>
-                <div className={styles.dropdownContent}>
-                  <Link href="#">Armbar</Link>
-                  <Link href="#">Triangle Choke</Link>
-                  <Link href="#">Rear Naked Choke</Link>
-                  <Link href="#">Kimura</Link>
-                </div>
-              </li>
-              <li
-                className={`${styles.navItem} ${
-                  activeDropdown === 1 ? styles.active : ""
-                }`}
-                onMouseEnter={() => handleMouseEnter(1)}
-                onMouseLeave={handleMouseLeave}
-              >
-                <Link href="#" onClick={() => handleDropdownClick(1)}>
-                  Guard Passing
-                </Link>
-                <div className={styles.dropdownContent}>
-                  <Link href="#">Toreando Pass</Link>
-                  <Link href="#">Knee Cut Pass</Link>
-                  <Link href="#">Over-Under Pass</Link>
-                  <Link href="#">Standing Guard Break</Link>
-                </div>
-              </li>
-              <li
-                className={`${styles.navItem} ${
-                  activeDropdown === 2 ? styles.active : ""
-                }`}
-                onMouseEnter={() => handleMouseEnter(2)}
-                onMouseLeave={handleMouseLeave}
-              >
-                <Link href="#" onClick={() => handleDropdownClick(2)}>
-                  Defense
-                </Link>
-                <div className={styles.dropdownContent}>
-                  <Link href="#">Posture Control</Link>
-                  <Link href="#">Submission Escapes</Link>
-                  <Link href="#">Guard Retention</Link>
-                  <Link href="#">Sweeps</Link>
-                </div>
-              </li>
-              <li
-                className={`${styles.navItem} ${
-                  activeDropdown === 3 ? styles.active : ""
-                }`}
-                onMouseEnter={() => handleMouseEnter(3)}
-                onMouseLeave={handleMouseLeave}
-              >
-                <Link href="#" onClick={() => handleDropdownClick(3)}>
-                  Takedown
-                </Link>
-                <div className={styles.dropdownContent}>
-                  <Link href="#">Single Leg Takedown</Link>
-                  <Link href="#">Double Leg Takedown</Link>
-                  <Link href="#">Ankle Pick</Link>
-                  <Link href="#">Judo Throws</Link>
-                </div>
-              </li>
-              {/* 桌面版搜尋圖標（僅在桌面版顯示） */}
-              {!isMobile && (
-                <li className={`${styles.navItem} ${styles.searchIcon}`}>
-                  <span
-                    onClick={handleSearchClick}
-                    className={styles.searchLink}
-                  >
-                    <FaSearch className={styles.searchIconMobile} />
-                  </span>
+                <li
+                  className={`${styles.navItem} ${
+                    activeDropdown === 0 ? styles.active : ""
+                  }`}
+                  onMouseEnter={() => handleMouseEnter(0)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <Link href="#" onClick={() => handleDropdownClick(0)}>
+                    Submissions
+                  </Link>
+                  <div className={styles.dropdownContent}>
+                    <Link href="#">Armbar</Link>
+                    <Link href="#">Triangle Choke</Link>
+                    <Link href="#">Rear Naked Choke</Link>
+                    <Link href="#">Kimura</Link>
+                  </div>
                 </li>
+                <li
+                  className={`${styles.navItem} ${
+                    activeDropdown === 1 ? styles.active : ""
+                  }`}
+                  onMouseEnter={() => handleMouseEnter(1)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <Link href="#" onClick={() => handleDropdownClick(1)}>
+                    Guard Passing
+                  </Link>
+                  <div className={styles.dropdownContent}>
+                    <Link href="#">Toreando Pass</Link>
+                    <Link href="#">Knee Cut Pass</Link>
+                    <Link href="#">Over-Under Pass</Link>
+                    <Link href="#">Standing Guard Break</Link>
+                  </div>
+                </li>
+                <li
+                  className={`${styles.navItem} ${
+                    activeDropdown === 2 ? styles.active : ""
+                  }`}
+                  onMouseEnter={() => handleMouseEnter(2)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <Link href="#" onClick={() => handleDropdownClick(2)}>
+                    Defense
+                  </Link>
+                  <div className={styles.dropdownContent}>
+                    <Link href="#">Posture Control</Link>
+                    <Link href="#">Submission Escapes</Link>
+                    <Link href="#">Guard Retention</Link>
+                    <Link href="#">Sweeps</Link>
+                  </div>
+                </li>
+                <li
+                  className={`${styles.navItem} ${
+                    activeDropdown === 3 ? styles.active : ""
+                  }`}
+                  onMouseEnter={() => handleMouseEnter(3)}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <Link href="#" onClick={() => handleDropdownClick(3)}>
+                    Takedown
+                  </Link>
+                  <div className={styles.dropdownContent}>
+                    <Link href="#">Single Leg Takedown</Link>
+                    <Link href="#">Double Leg Takedown</Link>
+                    <Link href="#">Ankle Pick</Link>
+                    <Link href="#">Judo Throws</Link>
+                  </div>
+                </li>
+              </ul>
+              {!isMobile && (
+                <span
+                  className={styles.searchIconTop}
+                  onClick={handleSearchClick}
+                >
+                  <FaSearch />
+                </span>
               )}
-            </ul>
+            </div>
           </div>
 
-          {/* 子選單 */}
           {activeSubmenu !== null && (
             <div className={styles.submenu}>
               <div className={styles.backButton} onClick={handleBackToMainMenu}>
@@ -309,7 +309,6 @@ export default function NavBar() {
             </div>
           )}
         </div>
-        {/* 行動版搜尋圖標（僅在行動版顯示） */}
         {isMobile && (
           <span
             className={`${styles.searchIconTop} ${
