@@ -64,8 +64,13 @@ export default function NavBar() {
   };
 
   const handleDropdownClick = (index) => {
-    setActiveDropdown(activeDropdown === index ? null : index);
-    setActiveSubmenu(index);
+    if (isMobile) {
+      // 手機版：觸發子選單
+      setActiveSubmenu(activeDropdown === index ? null : index);
+    } else {
+      // 桌面版：只觸發下拉選單
+      setActiveDropdown(activeDropdown === index ? null : index);
+    }
   };
 
   const handleBackToMainMenu = () => {
@@ -235,7 +240,7 @@ export default function NavBar() {
             </div>
           </div>
 
-          {activeSubmenu !== null && (
+          {activeSubmenu !== null && isMobile && (
             <div className={styles.submenu}>
               <div className={styles.backButton} onClick={handleBackToMainMenu}>
                 返回

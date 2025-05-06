@@ -47,7 +47,7 @@
   display: flex;
   align-items: center;
   height: 65px;
-  margin-right: 7rem; /* 與右邊界的距離 */
+  margin-right: 2rem;
 }
 
 .navlinks {
@@ -64,7 +64,7 @@
   width: auto;
   height: 65px;
   padding: 0;
-  padding-right: 4rem; /* 選項之間的間距 */
+  padding-right: 3rem;
   position: relative;
 }
 
@@ -310,8 +310,8 @@
   color: #fff;
   z-index: 1003;
   display: block;
-  margin-left: 1rem; /* 與選項的間距 */
-  transform: translateY(-5px); /* 向上微調 2px */
+  margin-left: 1rem;
+  transform: translateY(-6px);
 }
 
 .searchIconTop:hover {
@@ -363,7 +363,7 @@
     display: block !important;
   }
   .navContent {
-    display: none; /* 手機版中隱藏 navContent */
+    display: block; /* 移除 display: none，確保手機版選單顯示 */
   }
   .navlinks {
     flex-direction: column;
