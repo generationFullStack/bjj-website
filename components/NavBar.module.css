@@ -5,6 +5,7 @@
   width: 100%;
   height: 65px;
   position: fixed;
+  top: 0; /* 明確設置頂部位置 */
   line-height: 65px;
   text-align: center;
   padding-top: 20px;

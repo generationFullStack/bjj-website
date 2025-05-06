@@ -9,7 +9,7 @@ body {
   font-family: "Quicksand", sans-serif;
   font-size: 62.5%;
   font-size: 10px;
-  background-color: #151414;
+  background-color: #111;
   color: #fff;
 }
 
@@ -25,6 +25,7 @@ body {
   position: relative;
   z-index: 1;
   transition: filter 0.3s ease;
+  margin-top: 105px; /* 匹配導航欄總高度 (65px + 20px + 20px) */
 }
 
 .myH2 {
