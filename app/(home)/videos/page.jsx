@@ -22,15 +22,15 @@ export default function Videos() {
           videoId: "3Bp4WzcPJIU", // 占位符，請替換為實際視頻 ID
         },
         {
-          title: "Armbar Tutorial",
-          videoId: "4wiO5H8kSV4", // 占位符，請替換為實際視頻 ID
-        },
-        {
           title: "Triangle Choke Basics",
-          videoId: "3Bp4WzcPJIU", // 占位符，請替換為實際視頻 ID
+          videoId: "5jqgFQe4dls", // 占位符，請替換為實際視頻 ID
         },
         {
           title: "Rear Naked Choke Guide",
+          videoId: "3Bp4WzcPJIU", // 占位符，請替換為實際視頻 ID
+        },
+        {
+          title: "Triangle Choke Basics",
           videoId: "bmSQzxjOaUQ", // 占位符，請替換為實際視頻 ID
         },
       ],
@@ -39,10 +39,6 @@ export default function Videos() {
     {
       title: "Guard Passing",
       videos: [
-        {
-          title: "Armbar Tutorial",
-          videoId: "3Bp4WzcPJIU", // 占位符，請替換為實際視頻 ID
-        },
         {
           title: "Toreando Pass Techniques",
           videoId: "3Bp4WzcPJIU", // 占位符，請替換為實際視頻 ID
@@ -54,6 +50,10 @@ export default function Videos() {
         {
           title: "Over-Under Pass Strategy",
           videoId: "3Bp4WzcPJIU", // 占位符，請替換為實際視頻 ID
+        },
+        {
+          title: "Triangle Choke Basics",
+          videoId: "5jqgFQe4dls", // 占位符，請替換為實際視頻 ID
         },
       ],
       moreLink: "/videos/guard-passing",
@@ -73,14 +73,6 @@ export default function Videos() {
     setVideoStates((prev) => ({
       ...prev,
       [key]: { isHovered: false, isPlaying: false, frame: 1 }, // 回到靜態縮略圖
-    }));
-  };
-
-  // 處理點擊：播放完整視頻
-  const handlePlay = (key) => {
-    setVideoStates((prev) => ({
-      ...prev,
-      [key]: { isHovered: false, isPlaying: true, frame: 1 }, // 播放時重置幀
     }));
   };
 
@@ -120,44 +112,32 @@ export default function Videos() {
                   className={styles.videoCard}
                   onMouseEnter={() => handleMouseEnter(key)}
                   onMouseLeave={() => handleMouseLeave(key)}
-                  onKeyDown={(e) => e.key === "Enter" && handlePlay(key)} // 鍵盤支持
+                  onKeyDown={(e) => e.key === "Enter" && handleMouseLeave(key)} // 鍵盤支持，防止播放
                   tabIndex={0} // 允許鍵盤焦點
                   role="button" // 提高可訪問性
-                  aria-label={`播放 ${video.title}`} // 屏幕閱讀器標籤
+                  aria-label={`查看 ${video.title}`} // 屏幕閱讀器標籤
                 >
-                  {state.isPlaying ? (
-                    // 點擊後：播放完整視頻
-                    <iframe
-                      src={`https://www.youtube.com/embed/${video.videoId}?autoplay=1`}
-                      title={video.title}
-                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                      allowFullScreen
-                      loading="lazy"
-                    ></iframe>
-                  ) : (
-                    // 懸停或初始狀態：顯示縮略圖（懸停時切換序列）
-                    <div
-                      className={styles.thumbnailWrapper}
-                      onClick={() => handlePlay(key)}
-                    >
-                      <img
-                        src={getYouTubeThumbnail(
+                  <Link
+                    href={`/videos/${video.videoId}`}
+                    className={styles.thumbnailWrapper}
+                  >
+                    <img
+                      src={getYouTubeThumbnail(
+                        video.videoId,
+                        state.isHovered ? state.frame : "maxresdefault"
+                      )} // 使用高清靜態圖
+                      alt={video.title}
+                      className={`${styles.thumbnail} ${
+                        state.isHovered ? styles.preview : ""
+                      }`}
+                      onError={(e) =>
+                        (e.target.src = getYouTubeThumbnail(
                           video.videoId,
-                          state.isHovered ? state.frame : "maxresdefault"
-                        )} // 使用高清靜態圖
-                        alt={video.title}
-                        className={`${styles.thumbnail} ${
-                          state.isHovered ? styles.preview : ""
-                        }`}
-                        onError={(e) =>
-                          (e.target.src = getYouTubeThumbnail(
-                            video.videoId,
-                            "hqdefault"
-                          ))
-                        } // 備用縮略圖
-                      />
-                    </div>
-                  )}
+                          "hqdefault"
+                        ))
+                      } // 備用縮略圖
+                    />
+                  </Link>
                   <p>{video.title}</p>
                 </div>
               );

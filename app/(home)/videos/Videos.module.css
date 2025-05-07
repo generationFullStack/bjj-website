@@ -37,6 +37,7 @@
   aspect-ratio: 16 / 9; /* 保持視頻比例 */
   overflow: hidden; /* 防止圖片溢出 */
   border-radius: 20px; /* 圓角效果 */
+  display: block; /* 確保 Link 填充容器 */
 }
 
 /* 縮略圖圖片：填充容器 */
@@ -70,18 +71,27 @@
   }
 }
 
-/* iframe：與縮略圖尺寸一致 */
-.videoCard iframe {
+/* 單一視頻頁面的播放器容器 */
+.videoPlayer {
   width: 100%;
+  max-width: 1280px; /* 限制最大寬度，適應高清視頻 */
+  margin: 20px auto; /* 居中 */
   aspect-ratio: 16 / 9; /* 保持視頻比例 */
-  border-radius: 20px;
+}
+
+/* 嵌入 iframe：填充播放器容器 */
+.videoPlayer iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px; /* 圓角效果 */
   display: block;
 }
 
 /* 視頻標題：居中顯示 */
-.videoCard p {
+.videoCard p,
+.videosPage h1 {
   font-size: 1.6rem;
-  margin: 10px 0 0; /* 修正：從 "令狐冲" 改為 margin */
+  margin: 10px 0 0;
   text-align: center;
 }
 
@@ -95,6 +105,7 @@
   border-radius: 5px;
   font-size: 1.6rem;
   transition: background-color 0.3s ease;
+  margin-top: 20px;
 }
 
 /* “更多”按鈕懸停效果 */
@@ -125,7 +136,8 @@
     font-size: 2rem;
   }
 
-  .videoCard p {
+  .videoCard p,
+  .videosPage h1 {
     font-size: 1.4rem;
   }
 

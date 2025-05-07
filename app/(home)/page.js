@@ -23,7 +23,7 @@ export default function Home() {
           resources. Join us to start your BJJ journey today!
         </p>
         <p className="myP">
-          <Link href="/about" className="learnMoreButton">
+          <Link href="/videos" className="learnMoreButton">
             Learn More
           </Link>
         </p>
