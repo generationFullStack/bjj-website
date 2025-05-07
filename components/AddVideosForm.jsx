@@ -1,6 +1,6 @@
 import { revalidatePath } from "next/cache";
 
-async function onSubmit(formData) {
+async function handleSubmit(formData) {
   "use server";
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/videos`, {
     method: "POST",
@@ -15,7 +15,10 @@ export default function AddVideoForm() {
   return (
     <div className="w-full border-2 text-3xl">
       <h1 className="text-center text-5xl mt-5">Add Video Form</h1>
-      <form action={onSubmit} className="flex flex-col gap-5 items-center p-10">
+      <form
+        action={handleSubmit}
+        className="flex flex-col gap-5 items-center p-10"
+      >
         <div className="border-2 border-white/50">
           <input name="title" placeholder="title" />
         </div>

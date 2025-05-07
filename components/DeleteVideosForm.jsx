@@ -2,11 +2,14 @@ import { revalidatePath } from "next/cache";
 
 async function onDelete(formData) {
   "use server";
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/videos`, {
-    method: "DELETE",
-    body: formData,
-  });
-  const data = await res.json();
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/videos`,
+    {
+      method: "DELETE",
+      body: formData,
+    }
+  );
+  const data = await response.json();
   revalidatePath("/");
 }
 
@@ -30,7 +33,6 @@ export default async function DeleteVideosForm() {
               <div>Title: {element.title}</div>
               <div>Description: {element.description}</div>
               <div>Youtube id: {element.youtube_id}</div>
-              <div>Video categories: {element.video_categories}</div>
             </div>
 
             <form action={onDelete}>
