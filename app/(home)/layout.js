@@ -7,7 +7,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { Geist, Geist_Mono } from "next/font/google";
 
 export const metadata = {
-  title: "BJJ",
+  title: "BJJ.JPG",
   description: "A simple Next.js app with a styled nav bar",
 };
 

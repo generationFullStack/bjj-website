@@ -56,6 +56,7 @@ export default function VideoPage({ params }) {
     return (
       <div className={styles.videosPage}>
         <h2>視頻不存在</h2>
+        <p>簡介</p>
         <Link href="/videos" className={styles.moreButton}>
           返回列表
         </Link>
@@ -75,6 +76,7 @@ export default function VideoPage({ params }) {
           loading="lazy"
         ></iframe>
       </div>
+      <p>簡介</p>
       <Link href="/videos" className={styles.moreButton}>
         返回列表
       </Link>

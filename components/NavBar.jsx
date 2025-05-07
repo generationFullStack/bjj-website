@@ -115,7 +115,7 @@ export default function NavBar() {
               height={60}
               style={{ verticalAlign: "middle" }}
             />
-            <span className={styles.logoText}>快啲諗名</span>
+            <span className={styles.logoText}>BJJ.JPG</span>
           </Link>
         </div>
         <div

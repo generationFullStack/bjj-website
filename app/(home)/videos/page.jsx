@@ -15,7 +15,7 @@ export default function Videos() {
   // 子選單數據：包含視頻標題和 ID
   const submenus = [
     {
-      title: "Submissions",
+      title: "Armbar",
       videos: [
         {
           title: "Armbar Tutorial",
@@ -37,7 +37,51 @@ export default function Videos() {
       moreLink: "/videos/submissions",
     },
     {
-      title: "Guard Passing",
+      title: "Triangle Choke",
+      videos: [
+        {
+          title: "Toreando Pass Techniques",
+          videoId: "3Bp4WzcPJIU", // 占位符，請替換為實際視頻 ID
+        },
+        {
+          title: "Knee Cut Pass Tips",
+          videoId: "3Bp4WzcPJIU", // 占位符，請替換為實際視頻 ID
+        },
+        {
+          title: "Over-Under Pass Strategy",
+          videoId: "3Bp4WzcPJIU", // 占位符，請替換為實際視頻 ID
+        },
+        {
+          title: "Triangle Choke Basics",
+          videoId: "5jqgFQe4dls", // 占位符，請替換為實際視頻 ID
+        },
+      ],
+      moreLink: "/videos/guard-passing",
+    },
+    {
+      title: "Rear Naked Choke",
+      videos: [
+        {
+          title: "Toreando Pass Techniques",
+          videoId: "3Bp4WzcPJIU", // 占位符，請替換為實際視頻 ID
+        },
+        {
+          title: "Knee Cut Pass Tips",
+          videoId: "3Bp4WzcPJIU", // 占位符，請替換為實際視頻 ID
+        },
+        {
+          title: "Over-Under Pass Strategy",
+          videoId: "3Bp4WzcPJIU", // 占位符，請替換為實際視頻 ID
+        },
+        {
+          title: "Triangle Choke Basics",
+          videoId: "5jqgFQe4dls", // 占位符，請替換為實際視頻 ID
+        },
+      ],
+      moreLink: "/videos/guard-passing",
+    },
+    {
+      title: "Kimura",
       videos: [
         {
           title: "Toreando Pass Techniques",

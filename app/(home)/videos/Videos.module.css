@@ -9,23 +9,25 @@
   margin-bottom: 40px;
 }
 
-/* 子選單標題：大字體 */
+/* 子選單標題：靠左對齊 */
 .submenu h2 {
   font-size: 2.4rem;
   margin-bottom: 20px;
+  text-align: left; /* 改為靠左 */
 }
 
-/* 視頻列表：使用 Flexbox 佈局 */
+/* 視頻列表：使用 Flexbox 佈局，靠左對齊 */
 .videoList {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px; /* 卡片間距 */
+  gap: 16px; /* 縮減間距，使佈局更緊湊 */
   margin-bottom: 20px;
+  justify-content: flex-start; /* 靠左對齊視頻卡片 */
 }
 
-/* 視頻卡片：一行 4 條視頻 */
+/* 視頻卡片：一行 5 條視頻，縮小尺寸 */
 .videoCard {
-  flex: 1 1 calc(25% - 20px); /* 25% 寬度，減去間距 */
+  flex: 1 1 calc(20% - 16px); /* 20% 寬度，減去間距，一行 5 條 */
   box-sizing: border-box;
   cursor: pointer; /* 顯示點擊手型 */
 }
@@ -36,7 +38,7 @@
   width: 100%;
   aspect-ratio: 16 / 9; /* 保持視頻比例 */
   overflow: hidden; /* 防止圖片溢出 */
-  border-radius: 20px; /* 圓角效果 */
+  border-radius: 16px; /* 縮減圓角，適應更小尺寸 */
   display: block; /* 確保 Link 填充容器 */
 }
 
@@ -74,8 +76,8 @@
 /* 單一視頻頁面的播放器容器 */
 .videoPlayer {
   width: 100%;
-  max-width: 1280px; /* 限制最大寬度，適應高清視頻 */
-  margin: 20px auto; /* 居中 */
+  max-width: 960px; /* 縮減最大寬度，從 1280px 到 960px */
+  margin: 16px 0; /* 移除 auto，靠左對齊 */
   aspect-ratio: 16 / 9; /* 保持視頻比例 */
 }
 
@@ -83,29 +85,29 @@
 .videoPlayer iframe {
   width: 100%;
   height: 100%;
-  border-radius: 20px; /* 圓角效果 */
+  border-radius: 16px; /* 縮減圓角，與縮略圖一致 */
   display: block;
 }
 
-/* 視頻標題：居中顯示 */
+/* 視頻標題：靠左對齊 */
 .videoCard p,
 .videosPage h1 {
-  font-size: 1.6rem;
-  margin: 10px 0 0;
-  text-align: center;
+  font-size: 1.4rem; /* 縮減字體大小，適應更緊湊佈局 */
+  margin: 8px 0 0;
+  text-align: left; /* 改為靠左 */
 }
 
 /* “更多”按鈕：綠色背景 */
 .moreButton {
   display: inline-block;
-  padding: 10px 20px;
+  padding: 8px 16px; /* 縮減內邊距 */
   background-color: #00e676;
   color: #fff;
   text-decoration: none;
-  border-radius: 5px;
-  font-size: 1.6rem;
+  border-radius: 4px; /* 縮減圓角 */
+  font-size: 1.4rem; /* 縮減字體大小 */
   transition: background-color 0.3s ease;
-  margin-top: 20px;
+  margin-top: 16px; /* 縮減外邊距 */
 }
 
 /* “更多”按鈕懸停效果 */
@@ -119,17 +121,17 @@
   outline-offset: 2px;
 }
 
-/* 響應式：中等螢幕（769px - 1024px），一行 2 條視頻 */
+/* 響應式：中等螢幕（769px - 1024px），一行 3 條視頻 */
 @media screen and (min-width: 769px) and (max-width: 1024px) {
   .videoCard {
-    flex: 1 1 calc(50% - 20px);
+    flex: 1 1 calc(33.333% - 16px); /* 一行 3 條，適應更小卡片 */
   }
 }
 
-/* 響應式：小螢幕（<= 768px），一行 1 條視頻 */
+/* 響應式：小螢幕（<= 768px），一行 2 條視頻 */
 @media screen and (max-width: 768px) {
   .videoCard {
-    flex: 1 1 100%;
+    flex: 1 1 calc(50% - 16px); /* 一行 2 條，縮小間距 */
   }
 
   .submenu h2 {
@@ -138,10 +140,17 @@
 
   .videoCard p,
   .videosPage h1 {
-    font-size: 1.4rem;
+    font-size: 1.2rem; /* 進一步縮減字體 */
   }
 
   .moreButton {
-    font-size: 1.4rem;
+    font-size: 1.2rem;
+  }
+}
+
+/* 超小螢幕（<= 480px），一行 1 條視頻 */
+@media screen and (max-width: 480px) {
+  .videoCard {
+    flex: 1 1 100%; /* 一行 1 條 */
   }
 }
