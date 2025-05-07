@@ -1,43 +1,91 @@
+/* 頁面主容器：設置內邊距和最小高度 */
 .videosPage {
   padding: 20px;
-  min-height: calc(100vh - 105px); /* 調整最小高度，考慮導航欄高度 */
+  min-height: calc(100vh - 105px); /* 減去導航欄高度 */
 }
 
+/* 子選單容器：分隔不同類別 */
 .submenu {
   margin-bottom: 40px;
 }
 
+/* 子選單標題：大字體 */
 .submenu h2 {
   font-size: 2.4rem;
   margin-bottom: 20px;
 }
 
+/* 視頻列表：使用 Flexbox 佈局 */
 .videoList {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
+  gap: 20px; /* 卡片間距 */
   margin-bottom: 20px;
 }
 
+/* 視頻卡片：一行 4 條視頻 */
 .videoCard {
-  flex: 1 1 calc(33.333% - 20px);
+  flex: 1 1 calc(25% - 20px); /* 25% 寬度，減去間距 */
   box-sizing: border-box;
+  cursor: pointer; /* 顯示點擊手型 */
 }
 
-.videoCard img,
+/* 縮略圖容器：包含圖片 */
+.thumbnailWrapper {
+  position: relative; /* 為未來擴展保留定位 */
+  width: 100%;
+  aspect-ratio: 16 / 9; /* 保持視頻比例 */
+  overflow: hidden; /* 防止圖片溢出 */
+  border-radius: 20px; /* 圓角效果 */
+}
+
+/* 縮略圖圖片：填充容器 */
+.thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 確保圖片適應容器 */
+  transition: transform 0.3s ease, opacity 0.3s ease; /* 放大和淡入動畫 */
+}
+
+/* 懸停效果：放大縮略圖 */
+.thumbnailWrapper:hover .thumbnail {
+  transform: scale(1.1); /* 放大 */
+  opacity: 0.8; /* 輕微淡出，增強動態感 */
+}
+
+/* 預覽動畫：懸停時應用淡入淡出效果 */
+.preview {
+  animation: previewFade 1s infinite; /* 每秒淡入淡出，與圖片切換同步 */
+}
+
+@keyframes previewFade {
+  0% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+/* iframe：與縮略圖尺寸一致 */
 .videoCard iframe {
   width: 100%;
-  height: 170px;
+  aspect-ratio: 16 / 9; /* 保持視頻比例 */
   border-radius: 20px;
   display: block;
 }
 
+/* 視頻標題：居中顯示 */
 .videoCard p {
   font-size: 1.6rem;
-  margin: 10px 0 0;
+  margin: 10px 0 0; /* 修正：從 "令狐冲" 改為 margin */
   text-align: center;
 }
 
+/* “更多”按鈕：綠色背景 */
 .moreButton {
   display: inline-block;
   padding: 10px 20px;
@@ -49,10 +97,25 @@
   transition: background-color 0.3s ease;
 }
 
+/* “更多”按鈕懸停效果 */
 .moreButton:hover {
   background-color: #00c853;
 }
 
+/* “更多”按鈕鍵盤焦點效果 */
+.moreButton:focus {
+  outline: 2px solid #00e676;
+  outline-offset: 2px;
+}
+
+/* 響應式：中等螢幕（769px - 1024px），一行 2 條視頻 */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .videoCard {
+    flex: 1 1 calc(50% - 20px);
+  }
+}
+
+/* 響應式：小螢幕（<= 768px），一行 1 條視頻 */
 @media screen and (max-width: 768px) {
   .videoCard {
     flex: 1 1 100%;
