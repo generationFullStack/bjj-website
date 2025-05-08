@@ -113,8 +113,15 @@ const categories = {
 };
 
 export default function CategoryClient({ category }) {
+  // 手動解碼 category，將 %20 轉換為空格
+  const decodedCategory = decodeURIComponent(category);
+
+  // 調試：打印原始和解碼後的 category 值
+  console.log("Received category (raw):", category);
+  console.log("Decoded category:", decodedCategory);
+
   // 檢查類別是否存在
-  if (!categories[category]) {
+  if (!categories[decodedCategory]) {
     return <div>Category not found</div>;
   }
 
@@ -127,9 +134,9 @@ export default function CategoryClient({ category }) {
   useEffect(() => {
     const fetchVideoTitles = async () => {
       const allVideoIds = Object.keys(
-        categories[category].subcategories
+        categories[decodedCategory].subcategories
       ).flatMap((subcategory) =>
-        categories[category].subcategories[subcategory].map(
+        categories[decodedCategory].subcategories[subcategory].map(
           (video) => video.videoId
         )
       );
@@ -155,7 +162,7 @@ export default function CategoryClient({ category }) {
     };
 
     fetchVideoTitles();
-  }, [category]);
+  }, [decodedCategory]);
 
   // 處理懸停開始：觸發預覽動畫
   const handleMouseEnter = (key) => {
@@ -190,11 +197,16 @@ export default function CategoryClient({ category }) {
   }, []);
 
   // 準備子選單數據
-  const submenus = Object.keys(categories[category].subcategories).map(
+  const submenus = Object.keys(categories[decodedCategory].subcategories).map(
     (subcategory) => ({
       title: subcategory,
-      videos: categories[category].subcategories[subcategory].slice(0, 3), // 每類顯示 3 個影片
-      moreLink: `/${category}/${subcategory}`,
+      videos: categories[decodedCategory].subcategories[subcategory].slice(
+        0,
+        3
+      ), // 每類顯示 3 個影片
+      moreLink: `/${encodeURIComponent(decodedCategory)}/${encodeURIComponent(
+        subcategory
+      )}`,
     })
   );
 
@@ -226,7 +238,9 @@ export default function CategoryClient({ category }) {
                   aria-label={`查看 ${title}`} // 屏幕閱讀器標籤
                 >
                   <Link
-                    href={`/${category}/${submenu.title}/${video.videoId}`}
+                    href={`/${encodeURIComponent(
+                      decodedCategory
+                    )}/${encodeURIComponent(submenu.title)}/${video.videoId}`}
                     className={styles.thumbnailWrapper}
                   >
                     <img

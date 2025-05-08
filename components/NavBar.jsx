@@ -101,6 +101,41 @@ export default function NavBar() {
     setHoveredItem(null);
   };
 
+  // 定義類別和子類別數據
+  const navItems = [
+    {
+      category: "Submissions",
+      subcategories: ["Armbar", "Triangle Choke", "Rear Naked Choke", "Kimura"],
+    },
+    {
+      category: "Guard Passing",
+      subcategories: [
+        "Toreando Pass",
+        "Knee Cut Pass",
+        "Over-Under Pass",
+        "Standing Guard Break",
+      ],
+    },
+    {
+      category: "Defense",
+      subcategories: [
+        "Posture Control",
+        "Submission Escapes",
+        "Guard Retention",
+        "Sweeps",
+      ],
+    },
+    {
+      category: "Takedown",
+      subcategories: [
+        "Single Leg Takedown",
+        "Double Leg Takedown",
+        "Ankle Pick",
+        "Judo Throws",
+      ],
+    },
+  ];
+
   return (
     <nav className={`${styles.nav} ${isScrolled ? styles.affix : ""}`}>
       <div className={styles.container}>
@@ -113,7 +148,7 @@ export default function NavBar() {
               height={60}
               style={{ verticalAlign: "middle" }}
             />
-            <span className={styles.logoText}>快啲諗名</span>
+            <span className={styles.logoText}>BJJ.JPG</span>
           </Link>
         </div>
         <div
@@ -158,98 +193,35 @@ export default function NavBar() {
                   activeSubmenu !== null || isSearchOpen ? styles.hidden : ""
                 }`}
               >
-                <li
-                  className={`${styles.navItem} ${
-                    activeDropdown === 0 ? styles.active : ""
-                  }`}
-                  onMouseEnter={() => handleMouseEnter(0)}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <Link
-                    href="/Submissions"
-                    onClick={() => handleDropdownClick(0)}
+                {navItems.map((item, index) => (
+                  <li
+                    key={item.category}
+                    className={`${styles.navItem} ${
+                      activeDropdown === index ? styles.active : ""
+                    }`}
+                    onMouseEnter={() => handleMouseEnter(index)}
+                    onMouseLeave={handleMouseLeave}
                   >
-                    Submissions
-                  </Link>
-                  <div className={styles.dropdownContent}>
-                    <Link href="/Submissions/Armbar">Armbar</Link>
-                    <Link href="/Submissions/Triangle Choke">
-                      Triangle Choke
+                    <Link
+                      href={`/${encodeURIComponent(item.category)}`} // 對類別名稱進行 URL 編碼
+                      onClick={() => handleDropdownClick(index)}
+                    >
+                      {item.category}
                     </Link>
-                    <Link href="/Submissions/Rear Naked Choke">
-                      Rear Naked Choke
-                    </Link>
-                    <Link href="/Submissions/Kimura">Kimura</Link>
-                  </div>
-                </li>
-                <li
-                  className={`${styles.navItem} ${
-                    activeDropdown === 1 ? styles.active : ""
-                  }`}
-                  onMouseEnter={() => handleMouseEnter(1)}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <Link
-                    href="/Guard Passing"
-                    onClick={() => handleDropdownClick(1)}
-                  >
-                    Guard Passing
-                  </Link>
-                  <div className={styles.dropdownContent}>
-                    <Link href="/Guard Passing/Toreando Pass">
-                      Toreando Pass
-                    </Link>
-                    <Link href="/Guard Passing/Knee Cut Pass">
-                      Knee Cut Pass
-                    </Link>
-                    <Link href="/Guard Passing/Over-Under Pass">
-                      Over-Under Pass
-                    </Link>
-                    <Link href="/Guard Passing/Standing Guard Break">
-                      Standing Guard Break
-                    </Link>
-                  </div>
-                </li>
-                <li
-                  className={`${styles.navItem} ${
-                    activeDropdown === 2 ? styles.active : ""
-                  }`}
-                  onMouseEnter={() => handleMouseEnter(2)}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <Link href="/Defense" onClick={() => handleDropdownClick(2)}>
-                    Defense
-                  </Link>
-                  <div className={styles.dropdownContent}>
-                    <Link href="/Defense/Posture Control">Posture Control</Link>
-                    <Link href="/Defense/Submission Escapes">
-                      Submission Escapes
-                    </Link>
-                    <Link href="/Defense/Guard Retention">Guard Retention</Link>
-                    <Link href="/Defense/Sweeps">Sweeps</Link>
-                  </div>
-                </li>
-                <li
-                  className={`${styles.navItem} ${
-                    activeDropdown === 3 ? styles.active : ""
-                  }`}
-                  onMouseEnter={() => handleMouseEnter(3)}
-                  onMouseLeave={handleMouseLeave}
-                >
-                  <Link href="/Takedown" onClick={() => handleDropdownClick(3)}>
-                    Takedown
-                  </Link>
-                  <div className={styles.dropdownContent}>
-                    <Link href="/Takedown/Single Leg Takedown">
-                      Single Leg Takedown
-                    </Link>
-                    <Link href="/Takedown/Double Leg Takedown">
-                      Double Leg Takedown
-                    </Link>
-                    <Link href="/Takedown/Ankle Pick">Ankle Pick</Link>
-                    <Link href="/Takedown/Judo Throws">Judo Throws</Link>
-                  </div>
-                </li>
+                    <div className={styles.dropdownContent}>
+                      {item.subcategories.map((subcategory) => (
+                        <Link
+                          key={subcategory}
+                          href={`/${encodeURIComponent(
+                            item.category
+                          )}/${encodeURIComponent(subcategory)}`} // 對子類別名稱進行 URL 編碼
+                        >
+                          {subcategory}
+                        </Link>
+                      ))}
+                    </div>
+                  </li>
+                ))}
               </ul>
               {!isMobile && (
                 <span
@@ -268,92 +240,17 @@ export default function NavBar() {
                 返回
               </div>
               <ul className={styles.submenuList}>
-                {activeSubmenu === 0 && (
-                  <>
-                    <li>
-                      <Link href="/Submissions/Armbar">Armbar</Link>
-                    </li>
-                    <li>
-                      <Link href="/Submissions/Triangle Choke">
-                        Triangle Choke
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/Submissions/Rear Naked Choke">
-                        Rear Naked Choke
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/Submissions/Kimura">Kimura</Link>
-                    </li>
-                  </>
-                )}
-                {activeSubmenu === 1 && (
-                  <>
-                    <li>
-                      <Link href="/Guard Passing/Toreando Pass">
-                        Toreando Pass
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/Guard Passing/Knee Cut Pass">
-                        Knee Cut Pass
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/Guard Passing/Over-Under Pass">
-                        Over-Under Pass
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/Guard Passing/Standing Guard Break">
-                        Standing Guard Break
-                      </Link>
-                    </li>
-                  </>
-                )}
-                {activeSubmenu === 2 && (
-                  <>
-                    <li>
-                      <Link href="/Defense/Posture Control">
-                        Posture Control
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/Defense/Submission Escapes">
-                        Submission Escapes
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/Defense/Guard Retention">
-                        Guard Retention
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/Defense/Sweeps">Sweeps</Link>
-                    </li>
-                  </>
-                )}
-                {activeSubmenu === 3 && (
-                  <>
-                    <li>
-                      <Link href="/Takedown/Single Leg Takedown">
-                        Single Leg Takedown
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/Takedown/Double Leg Takedown">
-                        Double Leg Takedown
-                      </Link>
-                    </li>
-                    <li>
-                      <Link href="/Takedown/Ankle Pick">Ankle Pick</Link>
-                    </li>
-                    <li>
-                      <Link href="/Takedown/Judo Throws">Judo Throws</Link>
-                    </li>
-                  </>
-                )}
+                {navItems[activeSubmenu].subcategories.map((subcategory) => (
+                  <li key={subcategory}>
+                    <Link
+                      href={`/${encodeURIComponent(
+                        navItems[activeSubmenu].category
+                      )}/${encodeURIComponent(subcategory)}`} // 對類別和子類別名稱進行 URL 編碼
+                    >
+                      {subcategory}
+                    </Link>
+                  </li>
+                ))}
               </ul>
             </div>
           )}

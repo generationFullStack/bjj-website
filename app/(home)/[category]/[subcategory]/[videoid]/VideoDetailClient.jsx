@@ -108,17 +108,28 @@ const categories = {
 };
 
 export default function VideoDetailClient({ category, subcategory, videoid }) {
+  // 手動解碼 category 和 subcategory
+  const decodedCategory = decodeURIComponent(category);
+  const decodedSubcategory = decodeURIComponent(subcategory);
+
+  // 調試：打印解碼後的值
+  console.log("Received category (raw):", category);
+  console.log("Decoded category:", decodedCategory);
+  console.log("Received subcategory (raw):", subcategory);
+  console.log("Decoded subcategory:", decodedSubcategory);
+  console.log("Received videoid:", videoid);
+
   // 檢查類別、子類別和影片 ID 是否存在
   if (
-    !categories[category] ||
-    !categories[category].subcategories[subcategory]
+    !categories[decodedCategory] ||
+    !categories[decodedCategory].subcategories[decodedSubcategory]
   ) {
     return <div>Video not found</div>;
   }
 
-  const video = categories[category].subcategories[subcategory].find(
-    (v) => v.videoId === videoid
-  );
+  const video = categories[decodedCategory].subcategories[
+    decodedSubcategory
+  ].find((v) => v.videoId === videoid);
 
   if (!video) {
     return <div>Video not found</div>;

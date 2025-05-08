@@ -113,15 +113,25 @@ const categories = {
 };
 
 export default function SubcategoryClient({ category, subcategory }) {
+  // 手動解碼 category 和 subcategory
+  const decodedCategory = decodeURIComponent(category);
+  const decodedSubcategory = decodeURIComponent(subcategory);
+
+  // 調試：打印解碼後的值
+  console.log("Received category (raw):", category);
+  console.log("Decoded category:", decodedCategory);
+  console.log("Received subcategory (raw):", subcategory);
+  console.log("Decoded subcategory:", decodedSubcategory);
+
   // 檢查類別和子類別是否存在
   if (
-    !categories[category] ||
-    !categories[category].subcategories[subcategory]
+    !categories[decodedCategory] ||
+    !categories[decodedCategory].subcategories[decodedSubcategory]
   ) {
     return <div>Subcategory not found</div>;
   }
 
-  const videos = categories[category].subcategories[subcategory];
+  const videos = categories[decodedCategory].subcategories[decodedSubcategory];
 
   // 狀態管理：追蹤每個視頻的懸停、播放和當前幀（縮略圖序列）
   const [videoStates, setVideoStates] = useState({});
@@ -154,7 +164,7 @@ export default function SubcategoryClient({ category, subcategory }) {
     };
 
     fetchVideoTitles();
-  }, [category, subcategory]);
+  }, [decodedCategory, decodedSubcategory]);
 
   // 處理懸停開始：觸發預覽動畫
   const handleMouseEnter = (key) => {
@@ -190,7 +200,7 @@ export default function SubcategoryClient({ category, subcategory }) {
 
   return (
     <div className={styles.videosPage}>
-      <h1>{subcategory}</h1>
+      <h1>{decodedSubcategory}</h1>
       <div className={styles.videoList}>
         {videos.map((video, index) => {
           const key = `${index}`; // 每個視頻的唯一鍵
@@ -214,7 +224,9 @@ export default function SubcategoryClient({ category, subcategory }) {
               aria-label={`查看 ${title}`} // 屏幕閱讀器標籤
             >
               <Link
-                href={`/${category}/${subcategory}/${video.videoId}`}
+                href={`/${encodeURIComponent(
+                  decodedCategory
+                )}/${encodeURIComponent(decodedSubcategory)}/${video.videoId}`}
                 className={styles.thumbnailWrapper}
               >
                 <img

@@ -46,7 +46,7 @@
   width: 100%; /* 填充卡片 */
   aspect-ratio: 16 / 9; /* 保持視頻比例 */
   overflow: hidden; /* 防止圖片溢出，確保圓角生效 */
-  border-radius: 20px; /* 縮略圖容器圓角（桌面版） */
+  border-radius: 30px; /* 縮略圖容器圓角（桌面版） */
   /* 微調建議：可改為 10px（更直角）或 20px（更圓潤） */
   display: block; /* 確保 Link 填充容器 */
 }
@@ -119,7 +119,7 @@
   display: inline-block;
   padding: 8px 16px; /* 按鈕內邊距，控制大小 */
   /* 微調建議：可改為 6px 12px（較小）或 10px 20px（較大） */
-  background-color: #94c850; /* 按鈕背景色 */
+  background-color: #8bd80f; /* 按鈕背景色 */
   /* 微調建議：可改為 #00c853（較深）或 #33ff99（較淺） */
   color: #fff; /* 按鈕文字顏色 */
   text-decoration: none; /* 移除下劃線 */
