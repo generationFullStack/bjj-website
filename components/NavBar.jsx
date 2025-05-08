@@ -65,10 +65,8 @@ export default function NavBar() {
 
   const handleDropdownClick = (index) => {
     if (isMobile) {
-      // 手機版：觸發子選單
       setActiveSubmenu(activeDropdown === index ? null : index);
     } else {
-      // 桌面版：只觸發下拉選單
       setActiveDropdown(activeDropdown === index ? null : index);
     }
   };
@@ -115,7 +113,7 @@ export default function NavBar() {
               height={60}
               style={{ verticalAlign: "middle" }}
             />
-            <span className={styles.logoText}>BJJ.JPG</span>
+            <span className={styles.logoText}>快啲諗名</span>
           </Link>
         </div>
         <div
@@ -167,14 +165,21 @@ export default function NavBar() {
                   onMouseEnter={() => handleMouseEnter(0)}
                   onMouseLeave={handleMouseLeave}
                 >
-                  <Link href="#" onClick={() => handleDropdownClick(0)}>
+                  <Link
+                    href="/Submissions"
+                    onClick={() => handleDropdownClick(0)}
+                  >
                     Submissions
                   </Link>
                   <div className={styles.dropdownContent}>
-                    <Link href="#">Armbar</Link>
-                    <Link href="#">Triangle Choke</Link>
-                    <Link href="#">Rear Naked Choke</Link>
-                    <Link href="#">Kimura</Link>
+                    <Link href="/Submissions/Armbar">Armbar</Link>
+                    <Link href="/Submissions/Triangle Choke">
+                      Triangle Choke
+                    </Link>
+                    <Link href="/Submissions/Rear Naked Choke">
+                      Rear Naked Choke
+                    </Link>
+                    <Link href="/Submissions/Kimura">Kimura</Link>
                   </div>
                 </li>
                 <li
@@ -184,14 +189,25 @@ export default function NavBar() {
                   onMouseEnter={() => handleMouseEnter(1)}
                   onMouseLeave={handleMouseLeave}
                 >
-                  <Link href="#" onClick={() => handleDropdownClick(1)}>
+                  <Link
+                    href="/Guard Passing"
+                    onClick={() => handleDropdownClick(1)}
+                  >
                     Guard Passing
                   </Link>
                   <div className={styles.dropdownContent}>
-                    <Link href="#">Toreando Pass</Link>
-                    <Link href="#">Knee Cut Pass</Link>
-                    <Link href="#">Over-Under Pass</Link>
-                    <Link href="#">Standing Guard Break</Link>
+                    <Link href="/Guard Passing/Toreando Pass">
+                      Toreando Pass
+                    </Link>
+                    <Link href="/Guard Passing/Knee Cut Pass">
+                      Knee Cut Pass
+                    </Link>
+                    <Link href="/Guard Passing/Over-Under Pass">
+                      Over-Under Pass
+                    </Link>
+                    <Link href="/Guard Passing/Standing Guard Break">
+                      Standing Guard Break
+                    </Link>
                   </div>
                 </li>
                 <li
@@ -201,14 +217,16 @@ export default function NavBar() {
                   onMouseEnter={() => handleMouseEnter(2)}
                   onMouseLeave={handleMouseLeave}
                 >
-                  <Link href="#" onClick={() => handleDropdownClick(2)}>
+                  <Link href="/Defense" onClick={() => handleDropdownClick(2)}>
                     Defense
                   </Link>
                   <div className={styles.dropdownContent}>
-                    <Link href="#">Posture Control</Link>
-                    <Link href="#">Submission Escapes</Link>
-                    <Link href="#">Guard Retention</Link>
-                    <Link href="#">Sweeps</Link>
+                    <Link href="/Defense/Posture Control">Posture Control</Link>
+                    <Link href="/Defense/Submission Escapes">
+                      Submission Escapes
+                    </Link>
+                    <Link href="/Defense/Guard Retention">Guard Retention</Link>
+                    <Link href="/Defense/Sweeps">Sweeps</Link>
                   </div>
                 </li>
                 <li
@@ -218,14 +236,18 @@ export default function NavBar() {
                   onMouseEnter={() => handleMouseEnter(3)}
                   onMouseLeave={handleMouseLeave}
                 >
-                  <Link href="#" onClick={() => handleDropdownClick(3)}>
+                  <Link href="/Takedown" onClick={() => handleDropdownClick(3)}>
                     Takedown
                   </Link>
                   <div className={styles.dropdownContent}>
-                    <Link href="#">Single Leg Takedown</Link>
-                    <Link href="#">Double Leg Takedown</Link>
-                    <Link href="#">Ankle Pick</Link>
-                    <Link href="#">Judo Throws</Link>
+                    <Link href="/Takedown/Single Leg Takedown">
+                      Single Leg Takedown
+                    </Link>
+                    <Link href="/Takedown/Double Leg Takedown">
+                      Double Leg Takedown
+                    </Link>
+                    <Link href="/Takedown/Ankle Pick">Ankle Pick</Link>
+                    <Link href="/Takedown/Judo Throws">Judo Throws</Link>
                   </div>
                 </li>
               </ul>
@@ -249,64 +271,86 @@ export default function NavBar() {
                 {activeSubmenu === 0 && (
                   <>
                     <li>
-                      <Link href="#">Armbar</Link>
+                      <Link href="/Submissions/Armbar">Armbar</Link>
                     </li>
                     <li>
-                      <Link href="#">Triangle Choke</Link>
+                      <Link href="/Submissions/Triangle Choke">
+                        Triangle Choke
+                      </Link>
                     </li>
                     <li>
-                      <Link href="#">Rear Naked Choke</Link>
+                      <Link href="/Submissions/Rear Naked Choke">
+                        Rear Naked Choke
+                      </Link>
                     </li>
                     <li>
-                      <Link href="#">Kimura</Link>
+                      <Link href="/Submissions/Kimura">Kimura</Link>
                     </li>
                   </>
                 )}
                 {activeSubmenu === 1 && (
                   <>
                     <li>
-                      <Link href="#">Toreando Pass</Link>
+                      <Link href="/Guard Passing/Toreando Pass">
+                        Toreando Pass
+                      </Link>
                     </li>
                     <li>
-                      <Link href="#">Knee Cut Pass</Link>
+                      <Link href="/Guard Passing/Knee Cut Pass">
+                        Knee Cut Pass
+                      </Link>
                     </li>
                     <li>
-                      <Link href="#">Over-Under Pass</Link>
+                      <Link href="/Guard Passing/Over-Under Pass">
+                        Over-Under Pass
+                      </Link>
                     </li>
                     <li>
-                      <Link href="#">Standing Guard Break</Link>
+                      <Link href="/Guard Passing/Standing Guard Break">
+                        Standing Guard Break
+                      </Link>
                     </li>
                   </>
                 )}
                 {activeSubmenu === 2 && (
                   <>
                     <li>
-                      <Link href="#">Posture Control</Link>
+                      <Link href="/Defense/Posture Control">
+                        Posture Control
+                      </Link>
                     </li>
                     <li>
-                      <Link href="#">Submission Escapes</Link>
+                      <Link href="/Defense/Submission Escapes">
+                        Submission Escapes
+                      </Link>
                     </li>
                     <li>
-                      <Link href="#">Guard Retention</Link>
+                      <Link href="/Defense/Guard Retention">
+                        Guard Retention
+                      </Link>
                     </li>
                     <li>
-                      <Link href="#">Sweeps</Link>
+                      <Link href="/Defense/Sweeps">Sweeps</Link>
                     </li>
                   </>
                 )}
                 {activeSubmenu === 3 && (
                   <>
                     <li>
-                      <Link href="#">Single Leg Takedown</Link>
+                      <Link href="/Takedown/Single Leg Takedown">
+                        Single Leg Takedown
+                      </Link>
                     </li>
                     <li>
-                      <Link href="#">Double Leg Takedown</Link>
+                      <Link href="/Takedown/Double Leg Takedown">
+                        Double Leg Takedown
+                      </Link>
                     </li>
                     <li>
-                      <Link href="#">Ankle Pick</Link>
+                      <Link href="/Takedown/Ankle Pick">Ankle Pick</Link>
                     </li>
                     <li>
-                      <Link href="#">Judo Throws</Link>
+                      <Link href="/Takedown/Judo Throws">Judo Throws</Link>
                     </li>
                   </>
                 )}

@@ -1,0 +1,156 @@
+/* 頁面主容器：設置內邊距和最小高度 */
+.videosPage {
+  padding: 20px;
+  min-height: calc(100vh - 105px); /* 減去導航欄高度 */
+}
+
+/* 子選單容器：分隔不同類別 */
+.submenu {
+  margin-bottom: 40px;
+}
+
+/* 子選單標題：靠左對齊 */
+.submenu h2 {
+  font-size: 2.4rem;
+  margin-bottom: 20px;
+  text-align: left; /* 改為靠左 */
+}
+
+/* 視頻列表：使用 Flexbox 佈局，靠左對齊 */
+.videoList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px; /* 縮減間距，使佈局更緊湊 */
+  margin-bottom: 20px;
+  justify-content: flex-start; /* 靠左對齊視頻卡片 */
+}
+
+/* 視頻卡片：一行 5 條視頻，縮小尺寸 */
+.videoCard {
+  flex: 1 1 calc(25% - 16px); /* 20% 寬度，減去間距，一行 5 條 */
+  box-sizing: border-box;
+  cursor: pointer; /* 顯示點擊手型 */
+}
+
+/* 縮略圖容器：包含圖片 */
+.thumbnailWrapper {
+  position: relative; /* 為未來擴展保留定位 */
+  width: 100%;
+  aspect-ratio: 16 / 9; /* 保持視頻比例 */
+  overflow: hidden; /* 防止圖片溢出 */
+  border-radius: 20px; /* 縮減圓角，適應更小尺寸 */
+  display: block; /* 確保 Link 填充容器 */
+}
+
+/* 縮略圖圖片：填充容器 */
+.thumbnail {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 確保圖片適應容器 */
+  transition: transform 0.3s ease, opacity 0.3s ease; /* 放大和淡入動畫 */
+}
+
+/* 懸停效果：放大縮略圖 */
+.thumbnailWrapper:hover .thumbnail {
+  transform: scale(1.1); /* 放大 */
+  opacity: 0.8; /* 輕微淡出，增強動態感 */
+}
+
+/* 預覽動畫：懸停時應用淡入淡出效果 */
+.preview {
+  animation: previewFade 1s infinite; /* 每秒淡入淡出，與圖片切換同步 */
+}
+
+@keyframes previewFade {
+  0% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.8;
+  }
+}
+
+/* 單一視頻頁面的播放器容器 */
+.videoPlayer {
+  width: 100%;
+  max-width: 960px; /* 縮減最大寬度，從 1280px 到 960px */
+  margin: 16px 0; /* 移除 auto，靠左對齊 */
+  aspect-ratio: 16 / 9; /* 保持視頻比例 */
+}
+
+/* 嵌入 iframe：填充播放器容器 */
+.videoPlayer iframe {
+  width: 100%;
+  height: 100%;
+  border-radius: 20px; /* 縮減圓角，與縮略圖一致 */
+  display: block;
+}
+
+/* 視頻標題：靠左對齊 */
+.videoCard p,
+.videosPage h1 {
+  font-size: 1.4rem; /* 縮減字體大小，適應更緊湊佈局 */
+  margin: 8px 0 0;
+  text-align: left; /* 改為靠左 */
+}
+
+/* “更多”按鈕：綠色背景 */
+.moreButton {
+  display: inline-block;
+  padding: 8px 16px; /* 縮減內邊距 */
+  background-color: #00e676;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 20px; /* 縮減圓角 */
+  font-size: 1.4rem; /* 縮減字體大小 */
+  transition: background-color 0.3s ease;
+  margin-top: 16px; /* 縮減外邊距 */
+}
+
+/* “更多”按鈕懸停效果 */
+.moreButton:hover {
+  background-color: #00c853;
+}
+
+/* “更多”按鈕鍵盤焦點效果 */
+.moreButton:focus {
+  outline: 2px solid #00e676;
+  outline-offset: 2px;
+}
+
+/* 響應式：中等螢幕（769px - 1024px），一行 3 條視頻 */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  .videoCard {
+    flex: 1 1 calc(33.333% - 16px); /* 一行 3 條，適應更小卡片 */
+  }
+}
+
+/* 響應式：小螢幕（<= 768px），一行 2 條視頻 */
+@media screen and (max-width: 768px) {
+  .videoCard {
+    flex: 1 1 calc(50% - 16px); /* 一行 2 條，縮小間距 */
+  }
+
+  .submenu h2 {
+    font-size: 2rem;
+  }
+
+  .videoCard p,
+  .videosPage h1 {
+    font-size: 1.2rem; /* 進一步縮減字體 */
+  }
+
+  .moreButton {
+    font-size: 1.2rem;
+  }
+}
+
+/* 超小螢幕（<= 480px），一行 1 條視頻 */
+@media screen and (max-width: 480px) {
+  .videoCard {
+    flex: 1 1 100%; /* 一行 1 條 */
+  }
+}
