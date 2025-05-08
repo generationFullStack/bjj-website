@@ -4,46 +4,65 @@ import { createSession } from "@/lib/session";
 import { Pool } from "pg";
 import { redirect } from "next/navigation";
 import { deleteSession } from "@/lib/session";
+import bcrypt from "bcryptjs";
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false },
 });
 
-export async function signUp(formData) {
-  try {
-  } catch (error) {
-    console.error("Error createing user: ", error);
-
-    return {
-      success: false,
-      messgae: "Failed to create an account",
-    };
-  }
-}
-
-export async function submitLoginForm(previousState, formData) {
+export async function signup(previousState, formData) {
   const email = formData.get("email");
   const password = formData.get("password");
 
-  const client = await pool.connect();
-  const result = await client.query(
-    `SELECT id FROM users WHERE email = '${email}' AND password_hash = '${password}'`
-  );
-  client.release();
+  const hashedPassword = await bcrypt.hash(password, 10);
 
-  const userId = result.rows[0]["id"];
-  console.log(userId);
-
-  if (result.rows.length === 0) {
-    return {
-      error: "Login failed",
-    };
+  try {
+    const client = await pool.connect();
+    const result = await client.query(
+      `INSERT INTO users (email, password_hash) VALUES ('${email}', '${hashedPassword}')`
+    );
+    client.release();
+    console.log(result.rows);
+  } catch (error) {
+    console.error(error);
   }
+}
 
-  await createSession(userId);
+export async function login(previousState, formData) {
+  const email = formData.get("email");
+  const password = formData.get("password");
 
-  console.log("login successful");
+  try {
+    const client = await pool.connect();
+    const result = await client.query(
+      `SELECT id, password_hash FROM users WHERE email = '${email}'`
+    );
+
+    client.release();
+
+    if (result.rows.length === 0) {
+      return {
+        error: "User doesn't exist",
+      };
+    }
+
+    const isPasswordMatch = await bcrypt.compare(
+      password,
+      result.rows[0]["password_hash"]
+    );
+
+    if (!isPasswordMatch) {
+      return {
+        error: "incorrect password",
+      };
+    }
+
+    await createSession(result.rows[0]["id"]);
+  } catch (error) {
+    console.error(error);
+    return;
+  }
 
   redirect("/dashboard");
 }

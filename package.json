@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
+    "bcryptjs": "^3.0.2",
     "jose": "^6.0.11",
     "next": "15.3.1",
     "pg": "^8.15.6",

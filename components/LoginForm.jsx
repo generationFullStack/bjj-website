@@ -1,10 +1,10 @@
 "use client";
-import { submitLoginForm } from "@/actions/action";
+import { login } from "@/actions/action";
 import Form from "next/form";
 import { useActionState } from "react";
 
 export default function LoginForm() {
-  const [state, action, pending] = useActionState(submitLoginForm, "");
+  const [state, action, pending] = useActionState(login, "");
 
   return (
     <div className="w-full border-2 text-3xl">
@@ -14,7 +14,7 @@ export default function LoginForm() {
           <input name="email" placeholder="email" />
         </div>
         <div className="border-2 border-white/50">
-          <input name="password" placeholder="password" />
+          <input type="password" name="password" placeholder="password" />
         </div>
         <button type="submit" className="border-2 border-white/50 p-1">
           {pending ? "Logging in" : "Login"}
