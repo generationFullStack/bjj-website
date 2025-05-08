@@ -33,12 +33,17 @@ export default function NavBar() {
   useEffect(() => {
     if (!isClient) return;
 
+    // 客戶端加載時滾動到頂部並檢查初始滾動位置
+    window.scrollTo(0, 0);
+    setIsScrolled(window.scrollY > 50);
+    console.log("Initial scrollY:", window.scrollY);
+    console.log("Initial isScrolled:", window.scrollY > 50);
+
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      const newScrolled = window.scrollY > 50;
+      setIsScrolled(newScrolled);
+      console.log("ScrollY:", window.scrollY);
+      console.log("isScrolled:", newScrolled);
     };
 
     window.addEventListener("scroll", handleScroll);

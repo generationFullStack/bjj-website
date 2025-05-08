@@ -9,10 +9,11 @@ body {
   font-family: "Quicksand", sans-serif;
   font-size: 62.5%;
   font-size: 10px;
-  background-color: #151414;
+  background-color: #151414; /* 默認背景色 */
   color: #fff;
 }
 
+/* 首頁背景 */
 .home {
   width: 100%;
   height: 100vh;
@@ -21,11 +22,17 @@ body {
   background-size: cover;
 }
 
+/* 類別頁面背景 */
+.videosPage {
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), #111);
+  background-size: cover;
+}
+
 .mainContent {
   position: relative;
   z-index: 1;
   transition: filter 0.3s ease;
-  margin-top: 105px; /* 匹配導航欄總高度 (65px + 20px + 20px) */
+  margin-top: 105px;
 }
 
 .myH2 {
