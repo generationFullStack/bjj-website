@@ -343,11 +343,13 @@
   .logoText {
     display: none !important;
   }
+
   .main_list {
     width: 100%;
     height: 0;
     overflow: hidden;
   }
+
   .show_list {
     height: 100vh;
     display: block !important;
@@ -360,13 +362,16 @@
     background-color: #111;
     background-position: center top;
   }
+
   .menuContent {
     padding-top: 65px;
     display: block !important;
   }
+
   .navContent {
     display: block; /* 移除 display: none，確保手機版選單顯示 */
   }
+
   .navlinks {
     flex-direction: column;
     width: 100%;
@@ -377,14 +382,17 @@
     background-color: #111;
     background-position: center top;
   }
+
   .navlinks.hidden {
     display: none !important;
   }
+
   .navlinks li {
     width: 100%;
     text-align: left;
     margin: 0;
   }
+
   .navlinks li a,
   .navlinks li span {
     text-align: left;
@@ -397,6 +405,7 @@
     color: #fff !important;
     cursor: pointer;
   }
+
   .dropdownContent {
     position: static;
     display: none;
@@ -406,6 +415,7 @@
     width: 100%;
     box-shadow: none;
   }
+
   .dropdownContent a {
     font-size: 2rem;
     padding: 10px 50px;
@@ -413,12 +423,15 @@
     border-top: 1px solid #333;
     color: #fff !important;
   }
+
   .dropdownContent a:last-child {
     border-bottom: 1px solid #333;
   }
+
   .navItem:hover .dropdownContent {
     display: none;
   }
+
   .navItem.active .dropdownContent {
     display: block;
   }
@@ -436,11 +449,13 @@
     align-items: flex-start;
     justify-content: flex-start;
   }
+
   .searchForm {
     width: 100%;
     padding: 20px 30px;
     position: relative;
   }
+
   .searchInput {
     font-size: 3rem;
     padding: 15px 50px 15px 15px;
@@ -451,10 +466,12 @@
     width: 100%;
     box-sizing: border-box;
   }
+
   .searchButton {
     right: 50px;
     font-size: 2.5rem;
   }
+
   .closeSearchButton {
     right: 30px;
     font-size: 2.5rem;
@@ -471,6 +488,7 @@
     overflow-y: auto;
     padding-top: 65px;
   }
+
   .backButton {
     padding: 20px 30px;
     font-size: 2rem;
@@ -478,14 +496,17 @@
     cursor: pointer;
     border-bottom: 1px solid #333;
   }
+
   .submenuList {
     list-style: none;
     padding: 0;
     margin: 0;
   }
+
   .submenuList li {
     width: 100%;
   }
+
   .submenuList li a {
     display: block;
     font-size: 3rem;
@@ -494,6 +515,7 @@
     color: #fff;
     text-decoration: none;
   }
+
   .submenuList li a:hover {
     color: #00e676;
   }
