@@ -4,7 +4,7 @@ import Form from "next/form";
 import { useActionState } from "react";
 
 export default function LoginForm() {
-  const [error, action, pending] = useActionState(submitLoginForm, "");
+  const [state, action, pending] = useActionState(submitLoginForm, "");
 
   return (
     <div className="w-full border-2 text-3xl">
@@ -17,9 +17,9 @@ export default function LoginForm() {
           <input name="password" placeholder="password" />
         </div>
         <button type="submit" className="border-2 border-white/50 p-1">
-          {pending ? "submitting" : "submit"}
+          {pending ? "Logging in" : "Login"}
         </button>
-        {error && <p>{error}</p>}
+        {state && <p>{state.error}</p>}
       </Form>
     </div>
   );

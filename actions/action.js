@@ -2,6 +2,8 @@
 
 import { createSession } from "@/lib/session";
 import { Pool } from "pg";
+import { redirect } from "next/navigation";
+import { deleteSession } from "@/lib/session";
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -24,21 +26,29 @@ export async function submitLoginForm(previousState, formData) {
   const email = formData.get("email");
   const password = formData.get("password");
 
-  try {
-    const client = await pool.connect();
-    const result = await client.query(
-      `SELECT * FROM users WHERE email = '${email}' AND password_hash = '${password}'`
-    );
-    client.release();
+  const client = await pool.connect();
+  const result = await client.query(
+    `SELECT id FROM users WHERE email = '${email}' AND password_hash = '${password}'`
+  );
+  client.release();
 
-    if (result.rows.length === 0) {
-      console.log("login failed");
-      return;
-    }
-  } catch (error) {}
+  const userId = result.rows[0]["id"];
+  console.log(userId);
 
-  //await createSession(email);
+  if (result.rows.length === 0) {
+    return {
+      error: "Login failed",
+    };
+  }
+
+  await createSession(userId);
+
   console.log("login successful");
 
-  return "error!";
+  redirect("/dashboard");
+}
+
+export async function logout() {
+  await deleteSession();
+  redirect("/login");
 }
