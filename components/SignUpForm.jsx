@@ -8,8 +8,8 @@ export default function SignupForm() {
   const [state, action, pending] = useActionState(signup, "");
   return (
     <div className="text-3xl p-5 border-2 w-full">
-      <h1 className="mb-5 text-center">SignUp Form</h1>
-      <Form className="flex flex-col gap-5" action={action}>
+      <h1 className="mb-5 text-center text-5xl">SignUp Form</h1>
+      <Form className="flex flex-col gap-5 items-center" action={action}>
         <input
           className="p-2 bg-white/10 rounded-xl"
           required
@@ -24,9 +24,15 @@ export default function SignupForm() {
           name="password"
           placeholder="password"
         />
-        <button type="submit" className="border-2">
+        <button type="submit" className="border-2 p-1">
           {pending ? "submitting..." : "signup"}
         </button>
+        <a
+          href="http://localhost:3000/login"
+          className="no-underline hover:underline"
+        >
+          Already have an account?
+        </a>
       </Form>
     </div>
   );
