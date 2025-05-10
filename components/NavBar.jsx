@@ -18,6 +18,25 @@ export default function NavBar() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isMobile, setIsMobile] = useState(false);
 
+  const [categories, setCategories] = useState([]); // manage the categories fetched from the db --Gavin
+
+  //-------------------------------------- fetch categories from the db --Gavin-----
+  async function fetchCategories() {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`
+      );
+      const body = await response.json();
+      setCategories(body);
+    } catch (error) {}
+  }
+
+  useEffect(() => {
+    // fetch categories from database to show on the navbar --Gavin
+    fetchCategories();
+  }, []);
+  //--------------------------------------------------------------------------------
+
   useEffect(() => {
     setIsClient(true);
 
@@ -106,38 +125,49 @@ export default function NavBar() {
     setHoveredItem(null);
   };
 
+  const SubmissionSubcategories = []; // category_id of submission is 20
+  const GuardPassingSubcategories = []; // category_id of guard passing is 19
+  const DefenseSubcategories = []; // category_id of defense is 22
+  const TakeDownSubcategories = []; // category_id of takedown is 33
+
+  // push the subcategory into the main category
+  for (let i = 0; i < categories.length; i++) {
+    switch (categories[i]["parent_id"]) {
+      case 20:
+        SubmissionSubcategories.push(categories[i]["name"]);
+        break;
+
+      case 19:
+        GuardPassingSubcategories.push(categories[i]["name"]);
+        break;
+
+      case 22:
+        DefenseSubcategories.push(categories[i]["name"]);
+        break;
+
+      case 33:
+        TakeDownSubcategories.push(categories[i]["name"]);
+        break;
+    }
+  }
+
   // 定義類別和子類別數據
   const navItems = [
     {
       category: "Submissions",
-      subcategories: ["Armbar", "Triangle Choke", "Rear Naked Choke", "Kimura"],
+      subcategories: SubmissionSubcategories,
     },
     {
       category: "Guard Passing",
-      subcategories: [
-        "Toreando Pass",
-        "Knee Cut Pass",
-        "Over-Under Pass",
-        "Standing Guard Break",
-      ],
+      subcategories: GuardPassingSubcategories,
     },
     {
       category: "Defense",
-      subcategories: [
-        "Posture Control",
-        "Submission Escapes",
-        "Guard Retention",
-        "Sweeps",
-      ],
+      subcategories: DefenseSubcategories,
     },
     {
       category: "Takedown",
-      subcategories: [
-        "Single Leg Takedown",
-        "Double Leg Takedown",
-        "Ankle Pick",
-        "Judo Throws",
-      ],
+      subcategories: TakeDownSubcategories,
     },
   ];
 
