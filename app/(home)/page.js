@@ -1,4 +1,5 @@
 // src/app/page.js
+import BjjGymBanner from "@/components/BjjGymBanner";
 import Image from "next/image";
 import Link from "next/link"; // 引入 Link 組件，用於跳轉
 
@@ -6,7 +7,7 @@ export default function Home() {
   return (
     <>
       <section className="home"></section>
-      <div style={{ height: "1000px" }}>
+      <div style={{ height: "500px" }}>
         <h2 className="myH2">Discover Brazilian Jiu-Jitsu (BJJ)</h2>
         <p className="myP">
           Brazilian Jiu-Jitsu (BJJ) is a martial art and combat sport that
@@ -27,15 +28,8 @@ export default function Home() {
             Learn More
           </Link>
         </p>
-        <p className="myP">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-          ratione facere animi impedit rem labore sint repellendus ipsa sapiente
-          voluptatem aut excepturi quo itaque, ab earum cumque. Voluptatem
-          beatae id inventore quod voluptate qui deserunt, quis placeat, tempora
-          ex totam, dolore sequi harum eos voluptatibus animi labore officiis
-          minus laboriosam...
-        </p>
       </div>
+      <BjjGymBanner />
     </>
   );
 }
