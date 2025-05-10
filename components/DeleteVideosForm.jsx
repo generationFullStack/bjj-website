@@ -14,10 +14,13 @@ async function onDelete(formData) {
 }
 
 export default async function DeleteVideosForm() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/videos`, {
-    cache: "no-cache",
-  });
-  const data = await res.json();
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}/api/videos`,
+    {
+      cache: "no-cache",
+    }
+  );
+  const data = await response.json();
 
   return (
     <div className="w-full text-3xl">

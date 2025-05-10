@@ -12,11 +12,14 @@ export default function SignupForm() {
       <Form className="flex flex-col gap-5" action={action}>
         <input
           className="p-2 bg-white/10 rounded-xl"
+          required
+          type="email"
           name="email"
           placeholder="email"
         />
         <input
           className="p-2 bg-white/10 rounded-xl"
+          required
           type="password"
           name="password"
           placeholder="password"

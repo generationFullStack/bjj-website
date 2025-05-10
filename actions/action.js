@@ -23,7 +23,6 @@ export async function signup(previousState, formData) {
       `INSERT INTO users (email, password_hash) VALUES ('${email}', '${hashedPassword}')`
     );
     client.release();
-    console.log(result.rows);
   } catch (error) {
     console.error(error);
   }
@@ -36,7 +35,7 @@ export async function login(previousState, formData) {
   try {
     const client = await pool.connect();
     const result = await client.query(
-      `SELECT id, password_hash FROM users WHERE email = '${email}'`
+      `SELECT id, password_hash, role FROM users WHERE email = '${email}'`
     );
 
     client.release();
@@ -54,11 +53,11 @@ export async function login(previousState, formData) {
 
     if (!isPasswordMatch) {
       return {
-        error: "incorrect password",
+        error: "Incorrect password",
       };
     }
 
-    await createSession(result.rows[0]["id"]);
+    await createSession(result.rows[0]["id"], result.rows[0]["role"]);
   } catch (error) {
     console.error(error);
     return;

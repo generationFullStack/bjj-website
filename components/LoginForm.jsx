@@ -11,10 +11,15 @@ export default function LoginForm() {
       <h1 className="text-center text-5xl mt-5">Login page</h1>
       <Form action={action} className="flex flex-col gap-5 items-center p-10">
         <div className="border-2 border-white/50">
-          <input name="email" placeholder="email" />
+          <input required type="email" name="email" placeholder="email" />
         </div>
         <div className="border-2 border-white/50">
-          <input type="password" name="password" placeholder="password" />
+          <input
+            required
+            type="password"
+            name="password"
+            placeholder="password"
+          />
         </div>
         <button type="submit" className="border-2 border-white/50 p-1">
           {pending ? "Logging in" : "Login"}
