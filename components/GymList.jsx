@@ -9,23 +9,25 @@ export default function GymList() {
           key={index}
           className="border-2 flex flex-col-reverse sm:flex-row w-full justify-between gap-5"
         >
-          <div className="flex flex-col justify-around items-start gap-5 p-5">
-            <h1>{element.name}</h1>
+          <div className="flex flex-col justify-around items-start p-5">
+            <h1 className="mb-10">{element.name}</h1>
+            <div className="text-2xl font-bold">WEBSITE</div>
             <a
               href={element.website}
               target="_blank"
-              className="text-blue-400 hover:text-blue-700 underline text-3xl wrap-anywhere"
+              className="text-blue-400 hover:text-blue-700 underline text-3xl wrap-anywhere mb-10"
             >
               {element.website}
             </a>
-            <div>{element.address}</div>
+            <div className="text-2xl font-bold">ADDRESS</div>
+            <div className="text-2xl">{element.address}</div>
           </div>
-          <Image
+          <img
             src={element.imgSrc}
+            alt="Logo of the gym"
             width={200}
             height={200}
-            alt="Logo of the gym"
-            className="self-center bg-white"
+            className="self-center bg-white object-contain"
           />
         </li>
       ))}
