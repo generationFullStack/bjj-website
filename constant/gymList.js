@@ -19,4 +19,10 @@ export const gymList = [
       "佐敦尖沙咀柯士甸道118-120號業廣商業中心16樓1604室 到15樓行一層樓梯上",
     imgSrc: "/jja.png",
   },
+  {
+    name: "Kowloon Jiu Jitsu (Tsim Sha Tsui)",
+    website: "https://www.klnbjj.com",
+    address: "2/F, Pacific Mansion, 172-174 Nathan Rd Tsim Sha Tsui, Hong Kong",
+    imgSrc: "/klbjjtst.jpg",
+  },
 ];

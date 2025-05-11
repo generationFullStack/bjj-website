@@ -1,13 +1,13 @@
-import Image from "next/image";
 import { gymList } from "@/constant/gymList";
 
 export default function GymList() {
   return (
-    <ul className="flex flex-col text-5xl gap-10 items-center">
+    <ul className="flex flex-col text-5xl gap-50 items-center">
+      <h1 className="text-5xl font-bold">GYMS IN HONG KONG</h1>
       {gymList.map((element, index) => (
         <li
           key={index}
-          className="border-2 flex flex-col-reverse sm:flex-row w-full justify-between gap-5"
+          className="flex flex-col-reverse sm:flex-row w-full justify-between gap-5"
         >
           <div className="flex flex-col justify-around items-start p-5">
             <h1 className="mb-10">{element.name}</h1>
