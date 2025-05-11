@@ -1,0 +1,125 @@
+// app/components/SearchBar.jsx
+"use client";
+
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { FaSearch } from "react-icons/fa";
+
+export default function SearchBar({ isSearchOpen, setIsSearchOpen, navItems }) {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]); // 儲存搜尋結果
+
+  // 搜尋邏輯：過濾類別和子類別
+  useEffect(() => {
+    if (!searchQuery) {
+      setSearchResults([]); // 如果搜尋框為空，清空結果
+      return;
+    }
+
+    const results = [];
+    const query = searchQuery.toLowerCase();
+
+    navItems.forEach((item) => {
+      // 檢查類別是否匹配
+      if (item.category.toLowerCase().includes(query)) {
+        results.push({ type: "category", value: item.category });
+      }
+      // 檢查子類別是否匹配
+      item.subcategories.forEach((subcategory) => {
+        if (subcategory.toLowerCase().includes(query)) {
+          results.push({
+            type: "subcategory",
+            value: subcategory,
+            category: item.category,
+          });
+        }
+      });
+    });
+
+    setSearchResults(results);
+  }, [searchQuery, navItems]); // 當 searchQuery 或 navItems 變化時更新搜尋結果
+
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    console.log("搜尋關鍵字:", searchQuery);
+  };
+
+  const handleCloseSearch = () => {
+    setIsSearchOpen(false);
+    setSearchQuery("");
+  };
+
+  if (!isSearchOpen) return null;
+
+  return (
+    <div
+      className={`absolute top-0 left-0 w-full h-[65px] bg-[#111] flex items-center justify-center z-[1002] max-[900px]:fixed max-[900px]:h-screen max-[900px]:pt-[65px] max-[900px]:items-start max-[900px]:justify-start`}
+    >
+      <form
+        onSubmit={handleSearchSubmit}
+        className={`flex items-center w-1/2 max-w-[600px] relative max-[900px]:w-full max-[900px]:p-5`}
+      >
+        <input
+          type="text"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="SEARCH..."
+          className={`w-full px-5 py-2.5 text-white bg-[#222] border-none rounded-md outline-none text-[1.8rem] max-[900px]:text-[3rem] max-[900px]:py-3.5 max-[900px]:px-5 max-[900px]:box-border`}
+          autoFocus
+        />
+        <button
+          type="submit"
+          className={`absolute right-10 top-1/2 -translate-y-1/2 bg-none border-none text-[1.8rem] text-[#888] cursor-pointer hover:text-[#00e676] max-[900px]:right-12 max-[900px]:text-[2.5rem]`}
+        >
+          <FaSearch />
+        </button>
+        <button
+          type="button"
+          onClick={handleCloseSearch}
+          className={`absolute right-2.5 top-1/2 -translate-y-1/2 bg-none border-none text-[1.8rem] text-[#888] cursor-pointer hover:text-[#00e676] max-[900px]:right-7 max-[900px]:text-[2.5rem]`}
+        >
+          ✕
+        </button>
+      </form>
+      {/* 搜尋結果顯示 */}
+      {searchResults.length > 0 && (
+        <div className="absolute top-[65px] left-1/2 -translate-x-1/2 w-1/2 max-w-[600px] bg-[#222] z-[1002] rounded-md shadow-lg max-[900px]:top-[130px] max-[900px]:w-full max-[900px]:left-0 max-[900px]:translate-x-0 max-[900px]:p-5">
+          <ul className="list-none p-0 m-0">
+            {searchResults.map((result, index) => (
+              <li
+                key={index}
+                className="border-b border-[#333] last:border-b-0"
+              >
+                <Link
+                  href={
+                    result.type === "category"
+                      ? `/${encodeURIComponent(result.value)}`
+                      : `/${encodeURIComponent(
+                          result.category
+                        )}/${encodeURIComponent(result.value)}`
+                  }
+                  className="block text-white text-[1.6rem] px-4 py-3 hover:bg-[#333] hover:text-[#00e676]"
+                  onClick={() => {
+                    setIsSearchOpen(false); // 點擊結果後關閉搜尋框
+                    setSearchQuery(""); // 清空搜尋框
+                  }}
+                >
+                  {result.type === "category" ? (
+                    <span>{result.value}</span>
+                  ) : (
+                    <span>
+                      {result.value}{" "}
+                      <span className="text-gray-400">
+                        in {result.category}
+                      </span>
+                    </span>
+                  )}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+}

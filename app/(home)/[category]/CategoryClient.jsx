@@ -14,7 +14,7 @@ const YOUTUBE_API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
 export default function CategoryClient({ category }) {
   let categoryId;
   switch (category) {
-    case "Submissions":
+    case "SUBMISSIONS":
       categoryId = 20;
       break;
 
@@ -38,7 +38,7 @@ export default function CategoryClient({ category }) {
 
   // 定義類別和子類別數據，僅包含 videoId，標題將從 API 獲取
   const categories = {
-    Submissions: {
+    SUBMISSIONS: {
       subcategories: {
         Armbar: [
           { videoId: "3Bp4WzcPJIU" },

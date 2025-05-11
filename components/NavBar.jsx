@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaSearch } from "react-icons/fa";
 import styles from "./NavBar.module.css";
+import SearchBar from "./SearchBar"; // 引入 SearchBar 組件
 
 export default function NavBar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -15,36 +16,53 @@ export default function NavBar() {
   const [hoveredItem, setHoveredItem] = useState(null);
   const [activeSubmenu, setActiveSubmenu] = useState(null);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" && window.innerWidth <= 900
+  ); // 同步初始值，根據螢幕寬度設置 isMobile
 
   const [categories, setCategories] = useState([]); // manage the categories fetched from the db --Gavin
 
+  //-------------------------------------- fetch categories from the db --Gavin-----
+  async function fetchCategories() {
+    try {
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`
+      );
+      const body = await response.json();
+      setCategories(body);
+    } catch (error) {}
+  }
+
   useEffect(() => {
     // fetch categories from database to show on the navbar --Gavin
-    async function fetchCategories() {
-      try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`
-        );
-        const body = await response.json();
-        setCategories(body);
-      } catch (error) {}
-    }
     fetchCategories();
   }, []);
+  //--------------------------------------------------------------------------------
 
   useEffect(() => {
     setIsClient(true);
 
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 900); // 統一斷點為 900px
+      const newIsMobile = window.innerWidth <= 900;
+      if (newIsMobile !== isMobile) {
+        // 檢查 isMobile 是否變化
+        setIsMobile(newIsMobile);
+        if (!newIsMobile) {
+          setIsMenuOpen(false); // 當從手機版切換到桌面版時，重置 isMenuOpen
+          setActiveSubmenu(null); // 同時重置子選單狀態
+          setActiveDropdown(null); // 重置下拉選單狀態
+        } else if (newIsMobile) {
+          setIsMenuOpen(false); // 當從桌面版縮小到手機版時，確保 isMenuOpen 為 false，關閉選單
+          setActiveSubmenu(null); // 同時重置子選單狀態
+          setActiveDropdown(null); // 重置下拉選單狀態
+        }
+      }
     };
 
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [isMobile, isMenuOpen]); // 依賴 isMobile 和 isMenuOpen 以確保狀態同步
 
   useEffect(() => {
     if (!isClient) return;
@@ -107,16 +125,6 @@ export default function NavBar() {
     setIsMenuOpen(false);
   };
 
-  const handleCloseSearch = () => {
-    setIsSearchOpen(false);
-    setSearchQuery("");
-  };
-
-  const handleSearchSubmit = (e) => {
-    e.preventDefault();
-    console.log("搜尋關鍵字:", searchQuery);
-  };
-
   const handleMouseEnter = (index) => {
     setHoveredItem(index);
   };
@@ -175,15 +183,17 @@ export default function NavBar() {
     <nav
       className={`w-full h-[65px] fixed top-0 text-center pt-5 pb-5 transition-all duration-400 ease-in-out bg-transparent z-[1000] ${
         isScrolled ? "p-0 bg-[#111]" : ""
-      } ${styles.nav}`}
+      }`}
     >
       <div
-        className={`max-w-[1300px] mx-auto flex items-center justify-between ${styles.container}`}
+        className={`max-w-[1300px] mx-auto flex items-center justify-between`}
       >
-        <div className={`w-auto h-auto pl-12 ${styles.logo}`}>
+        <div
+          className={`w-auto h-auto pl-12 max-[900px]:ml-[15px] max-[900px]:absolute max-[900px]:left-0 max-[900px]:top-1 max-[900px]:w-auto max-[900px]:h-auto`}
+        >
           <Link
             href="/"
-            className={`flex items-center no-underline text-white text-[2.5rem] hover:text-[#00e676] ${styles.logoLink}`}
+            className={`flex items-center no-underline text-white text-[2.5rem] hover:text-[#00e676]`}
           >
             <Image
               src="/bjj-letter-logo.png"
@@ -192,74 +202,55 @@ export default function NavBar() {
               height={60}
               style={{ verticalAlign: "middle" }}
             />
-            <span className={`ml-2.5 ${styles.logoText}`}>BJJ.JPG</span>
+            <span className={`ml-2.5 max-[900px]:hidden`}>BJJ.JPG</span>
           </Link>
         </div>
         <div
           id="mainListDiv"
-          className={`h-[65px] flex items-center justify-end ${
-            styles.main_list
-          } ${isMenuOpen ? styles.show_list : ""}`}
+          className={`h-[65px] flex items-center justify-end max-[900px]:w-full max-[900px]:h-0 max-[900px]:overflow-hidden ${
+            isMenuOpen
+              ? "max-[900px]:h-screen max-[900px]:block max-[900px]:overflow-y-auto max-[900px]:fixed max-[900px]:top-0 max-[900px]:left-0 max-[900px]:w-full max-[900px]:z-[1001] max-[900px]:bg-[#111] max-[900px]:bg-center-top"
+              : ""
+          }`}
         >
-          {isSearchOpen && (
-            <div
-              className={`absolute top-0 left-0 w-full h-[65px] bg-[#111] flex items-center justify-center z-[1002] ${styles.searchContainer}`}
-            >
-              <form
-                onSubmit={handleSearchSubmit}
-                className={`flex items-center w-1/2 max-w-[600px] relative ${styles.searchForm}`}
-              >
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="SEARCH..."
-                  className={`w-full px-5 py-2.5 text-white bg-[#222] border-none rounded-md outline-none text-[1.8rem] ${styles.searchInput}`}
-                  autoFocus
-                />
-                <button
-                  type="submit"
-                  className={`absolute right-10 top-1/2 -translate-y-1/2 bg-none border-none text-[1.8rem] text-[#888] cursor-pointer hover:text-[#00e676] ${styles.searchButton}`}
-                >
-                  <FaSearch />
-                </button>
-                <button
-                  type="button"
-                  onClick={handleCloseSearch}
-                  className={`absolute right-2.5 top-1/2 -translate-y-1/2 bg-none border-none text-[1.8rem] text-[#888] cursor-pointer hover:text-[#00e676] ${styles.closeSearchButton}`}
-                >
-                  ✕
-                </button>
-              </form>
-            </div>
-          )}
-
+          <SearchBar
+            isSearchOpen={isSearchOpen}
+            setIsSearchOpen={setIsSearchOpen}
+            navItems={navItems}
+          />{" "}
+          {/* 使用 SearchBar 組件顯示搜尋框和結果 */}
           <div
-            className={`pt-[65px] block ${
-              activeSubmenu !== null || isSearchOpen ? "hidden" : ""
-            } ${styles.menuContent}`}
+            className={`pt-[65px] ${
+              isMobile ? (isMenuOpen ? "block" : "hidden") : "block"
+            } ${
+              isSearchOpen ? "hidden" : ""
+            } max-[900px]:pt-[65px] max-[900px]:w-full max-[900px]:min-h-screen max-[900px]:bg-[#111] max-[900px]:absolute max-[900px]:top-0 max-[900px]:left-0`} // 移除 activeSubmenu 條件，確保手機版選單展開時顯示，添加定位屬性確保內容可見，調整顯示條件以同步 isMenuOpen 狀態
           >
             <div
-              className={`flex items-center h-[65px] mr-8 ${styles.navContent}`}
+              className={`flex items-center h-[65px] mr-8 max-[900px]:block`}
             >
               <ul
                 className={`w-auto h-[65px] flex flex-row list-none m-0 p-0 ${
-                  activeSubmenu !== null || isSearchOpen ? "hidden" : ""
-                } ${styles.navlinks}`}
+                  isMobile ? (isMenuOpen ? "block" : "hidden") : "block"
+                } ${
+                  isSearchOpen ? "hidden" : ""
+                } max-[900px]:flex-col max-[900px]:w-full max-[900px]:min-h-screen max-[900px]:bg-[#111]`} // 移除 activeSubmenu 條件，確保手機版選單展開時導航項顯示，調整高度確保內容可見，調整顯示條件以同步 isMenuOpen 狀態
               >
                 {navItems.map((item, index) => (
                   <li
                     key={item.category}
                     className={`w-auto h-[65px] p-0 pr-12 relative ${
                       activeDropdown === index ? "active" : ""
-                    } ${styles.navItem}`}
+                    } max-[900px]:w-full max-[900px]:text-left max-[900px]:m-0 ${
+                      styles.navItem
+                    }`}
                     onMouseEnter={() => handleMouseEnter(index)}
                     onMouseLeave={handleMouseLeave}
                   >
                     <Link
                       href={`/${encodeURIComponent(item.category)}`} // 對類別名稱進行 URL 編碼
                       onClick={() => handleDropdownClick(index)}
-                      className={`no-underline text-white leading-[65px] text-[2.4rem] hover:text-[#00e676]`}
+                      className={`no-underline text-white leading-[65px] text-[2.4rem] hover:text-[#00e676] max-[900px]:text-left max-[900px]:w-full max-[900px]:text-[3rem] max-[900px]:px-7 max-[900px]:py-5 max-[900px]:flex max-[900px]:items-center max-[900px]:gap-2.5 max-[900px]:text-white! max-[900px]:cursor-pointer`}
                     >
                       {item.category}
                     </Link>
@@ -268,7 +259,7 @@ export default function NavBar() {
                         styles.dropdownContent
                       } ${hoveredItem === index ? "block" : "hidden"} ${
                         activeDropdown === index ? "block" : "hidden"
-                      }`}
+                      } max-[900px]:w-full max-[900px]:shadow-none`}
                     >
                       {item.subcategories.map((subcategory) => (
                         <Link
@@ -276,7 +267,7 @@ export default function NavBar() {
                           href={`/${encodeURIComponent(
                             item.category
                           )}/${encodeURIComponent(subcategory)}`} // 對子類別名稱進行 URL 編碼
-                          className={`block text-white text-[1.6rem] px-4 py-3 text-left leading-normal hover:bg-[#333] hover:text-[#00e676]`}
+                          className={`block text-white text-[1.6rem] px-4 py-3 text-left leading-normal hover:bg-[#333] hover:text-[#00e676] max-[900px]:text-[2rem] max-[900px]:px-[50px] max-[900px]:text-left max-[900px]:border-t border-[#333] max-[900px]:text-white! last:border-b last:border-[#333]`}
                         >
                           {subcategory}
                         </Link>
@@ -287,7 +278,7 @@ export default function NavBar() {
               </ul>
               {!isMobile && (
                 <span
-                  className={`cursor-pointer text-[2.8rem] text-white z-[1003] block ml-4 -translate-y-1.5 hover:text-[#00e676] ${styles.searchIconTop}`}
+                  className={`cursor-pointer text-[2.8rem] text-white z-[1003] block ml-4 -translate-y-1.5 hover:text-[#00e676]`}
                   onClick={handleSearchClick}
                 >
                   <FaSearch />
@@ -295,18 +286,17 @@ export default function NavBar() {
               )}
             </div>
           </div>
-
           {activeSubmenu !== null && isMobile && (
             <div
-              className={`fixed top-0 left-0 w-full h-screen bg-[#111] z-[1002] overflow-y-auto pt-[65px] ${styles.submenu}`}
+              className={`fixed top-0 left-0 w-full h-screen bg-[#111] z-[1002] overflow-y-auto pt-[65px]`} // 子選單顯示條件：activeSubmenu 不為 null 且為手機版
             >
               <div
-                className={`px-5 py-5 text-[2rem] text-[#00e676] cursor-pointer border-b border-[#333] ${styles.backButton}`}
+                className={`px-5 py-5 text-[2rem] text-[#00e676] cursor-pointer border-b border-[#333]`}
                 onClick={handleBackToMainMenu}
               >
                 BACK
               </div>
-              <ul className={`list-none p-0 m-0 ${styles.submenuList}`}>
+              <ul className={`list-none p-0 m-0`}>
                 {navItems[activeSubmenu].subcategories.map((subcategory) => (
                   <li key={subcategory} className="w-full">
                     <Link
@@ -323,11 +313,9 @@ export default function NavBar() {
             </div>
           )}
         </div>
-        {isMobile && (
+        {isMobile && !isSearchOpen && (
           <span
-            className={`cursor-pointer text-[2.8rem] text-white z-[1003] block ${
-              isMenuOpen || isSearchOpen ? "hidden" : ""
-            } ${styles.searchIconTop}`}
+            className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[70px] top-1/2 -translate-y-1/2`}
             onClick={handleSearchClick}
           >
             {console.log(
@@ -341,9 +329,11 @@ export default function NavBar() {
             {/* 調試 */}
             <FaSearch />
           </span>
-        )}
+        )}{" "}
         <span
-          className={`${styles.navTrigger} ${isMenuOpen ? "active" : ""}`}
+          className={`hidden max-[900px]:block ${styles.navTrigger} ${
+            isMenuOpen ? "active" : ""
+          }`}
           onClick={handleNavTriggerClick}
         >
           <i></i>
