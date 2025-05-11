@@ -134,39 +134,39 @@ export default function NavBar() {
   for (let i = 0; i < categories.length; i++) {
     switch (categories[i]["parent_id"]) {
       case 20:
-        SubmissionSubcategories.push(categories[i]["name"]);
+        SubmissionSubcategories.push(categories[i]["name"].toUpperCase()); // 轉為大寫
         break;
 
       case 19:
-        GuardPassingSubcategories.push(categories[i]["name"]);
+        GuardPassingSubcategories.push(categories[i]["name"].toUpperCase()); // 轉為大寫
         break;
 
       case 22:
-        DefenseSubcategories.push(categories[i]["name"]);
+        DefenseSubcategories.push(categories[i]["name"].toUpperCase()); // 轉為大寫
         break;
 
       case 33:
-        TakeDownSubcategories.push(categories[i]["name"]);
+        TakeDownSubcategories.push(categories[i]["name"].toUpperCase()); // 轉為大寫
         break;
     }
   }
 
-  // 定義類別和子類別數據
+  // 定義類別和子類別數據，並轉為大寫
   const navItems = [
     {
-      category: "Submissions",
+      category: "SUBMISSIONS", // 直接設置為大寫
       subcategories: SubmissionSubcategories,
     },
     {
-      category: "Guard Passing",
+      category: "GUARD PASSING", // 直接設置為大寫
       subcategories: GuardPassingSubcategories,
     },
     {
-      category: "Defense",
+      category: "DEFENSE", // 直接設置為大寫
       subcategories: DefenseSubcategories,
     },
     {
-      category: "Takedown",
+      category: "TAKEDOWN", // 直接設置為大寫
       subcategories: TakeDownSubcategories,
     },
   ];
@@ -199,7 +199,7 @@ export default function NavBar() {
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="搜尋..."
+                  placeholder="SEARCH..." // 改為英文全大寫
                   className={styles.searchInput}
                   autoFocus
                 />
@@ -241,7 +241,7 @@ export default function NavBar() {
                       href={`/${encodeURIComponent(item.category)}`} // 對類別名稱進行 URL 編碼
                       onClick={() => handleDropdownClick(index)}
                     >
-                      {item.category}
+                      {item.category} {/* 已為大寫 */}
                     </Link>
                     <div className={styles.dropdownContent}>
                       {item.subcategories.map((subcategory) => (
@@ -251,7 +251,7 @@ export default function NavBar() {
                             item.category
                           )}/${encodeURIComponent(subcategory)}`} // 對子類別名稱進行 URL 編碼
                         >
-                          {subcategory}
+                          {subcategory} {/* 已為大寫 */}
                         </Link>
                       ))}
                     </div>
@@ -272,7 +272,7 @@ export default function NavBar() {
           {activeSubmenu !== null && isMobile && (
             <div className={styles.submenu}>
               <div className={styles.backButton} onClick={handleBackToMainMenu}>
-                返回
+                BACK {/* 改為英文全大寫 */}
               </div>
               <ul className={styles.submenuList}>
                 {navItems[activeSubmenu].subcategories.map((subcategory) => (
@@ -280,9 +280,9 @@ export default function NavBar() {
                     <Link
                       href={`/${encodeURIComponent(
                         navItems[activeSubmenu].category
-                      )}/${encodeURIComponent(subcategory)}`} // 對類別和子類別名稱進行 URL 編碼
+                      )}/${encodeURIComponent(subcategory)}`} // 對子類別名稱進行 URL 編碼
                     >
-                      {subcategory}
+                      {subcategory} {/* 已為大寫 */}
                     </Link>
                   </li>
                 ))}

@@ -20,7 +20,7 @@ export default function Footer() {
               className="mr-2.5"
             />
             <span className="hover:text-[#757575] transition-colors duration-600">
-              BJJ
+              BJJ.JPG
             </span>
           </Link>
         </div>
