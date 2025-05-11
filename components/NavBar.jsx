@@ -20,22 +20,19 @@ export default function NavBar() {
 
   const [categories, setCategories] = useState([]); // manage the categories fetched from the db --Gavin
 
-  //-------------------------------------- fetch categories from the db --Gavin-----
-  async function fetchCategories() {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`
-      );
-      const body = await response.json();
-      setCategories(body);
-    } catch (error) {}
-  }
-
   useEffect(() => {
     // fetch categories from database to show on the navbar --Gavin
+    async function fetchCategories() {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`
+        );
+        const body = await response.json();
+        setCategories(body);
+      } catch (error) {}
+    }
     fetchCategories();
   }, []);
-  //--------------------------------------------------------------------------------
 
   useEffect(() => {
     setIsClient(true);

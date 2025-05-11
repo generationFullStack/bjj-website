@@ -11,108 +11,127 @@ const getYouTubeThumbnail = (videoId, index = "maxresdefault") =>
 // 從環境變量中獲取 API 密鑰
 const YOUTUBE_API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
 
-// 定義類別和子類別數據，僅包含 videoId，標題將從 API 獲取
-const categories = {
-  Submissions: {
-    subcategories: {
-      Armbar: [
-        { videoId: "3Bp4WzcPJIU" },
-        { videoId: "5jqgFQe4dls" },
-        { videoId: "bmSQzxjOaUQ" },
-        { videoId: "3Bp4WzcPJIU" },
-      ],
-      "Triangle Choke": [
-        { videoId: "5jqgFQe4dls" },
-        { videoId: "bmSQzxjOaUQ" },
-        { videoId: "3Bp4WzcPJIU" },
-      ],
-      "Rear Naked Choke": [
-        { videoId: "3Bp4WzcPJIU" },
-        { videoId: "5jqgFQe4dls" },
-        { videoId: "bmSQzxjOaUQ" },
-      ],
-      Kimura: [
-        { videoId: "5jqgFQe4dls" },
-        { videoId: "bmSQzxjOaUQ" },
-        { videoId: "3Bp4WzcPJIU" },
-      ],
-    },
-  },
-  "Guard Passing": {
-    subcategories: {
-      "Toreando Pass": [
-        { videoId: "3Bp4WzcPJIU" },
-        { videoId: "5jqgFQe4dls" },
-        { videoId: "bmSQzxjOaUQ" },
-      ],
-      "Knee Cut Pass": [
-        { videoId: "3Bp4WzcPJIU" },
-        { videoId: "5jqgFQe4dls" },
-        { videoId: "bmSQzxjOaUQ" },
-      ],
-      "Over-Under Pass": [
-        { videoId: "3Bp4WzcPJIU" },
-        { videoId: "5jqgFQe4dls" },
-        { videoId: "bmSQzxjOaUQ" },
-      ],
-      "Standing Guard Break": [
-        { videoId: "3Bp4WzcPJIU" },
-        { videoId: "5jqgFQe4dls" },
-        { videoId: "bmSQzxjOaUQ" },
-      ],
-    },
-  },
-  Defense: {
-    subcategories: {
-      "Posture Control": [
-        { videoId: "3Bp4WzcPJIU" },
-        { videoId: "5jqgFQe4dls" },
-        { videoId: "bmSQzxjOaUQ" },
-      ],
-      "Submission Escapes": [
-        { videoId: "3Bp4WzcPJIU" },
-        { videoId: "5jqgFQe4dls" },
-        { videoId: "bmSQzxjOaUQ" },
-      ],
-      "Guard Retention": [
-        { videoId: "3Bp4WzcPJIU" },
-        { videoId: "5jqgFQe4dls" },
-        { videoId: "bmSQzxjOaUQ" },
-      ],
-      Sweeps: [
-        { videoId: "3Bp4WzcPJIU" },
-        { videoId: "5jqgFQe4dls" },
-        { videoId: "bmSQzxjOaUQ" },
-      ],
-    },
-  },
-  Takedown: {
-    subcategories: {
-      "Single Leg Takedown": [
-        { videoId: "3Bp4WzcPJIU" },
-        { videoId: "5jqgFQe4dls" },
-        { videoId: "bmSQzxjOaUQ" },
-      ],
-      "Double Leg Takedown": [
-        { videoId: "3Bp4WzcPJIU" },
-        { videoId: "5jqgFQe4dls" },
-        { videoId: "bmSQzxjOaUQ" },
-      ],
-      "Ankle Pick": [
-        { videoId: "3Bp4WzcPJIU" },
-        { videoId: "5jqgFQe4dls" },
-        { videoId: "bmSQzxjOaUQ" },
-      ],
-      "Judo Throws": [
-        { videoId: "3Bp4WzcPJIU" },
-        { videoId: "5jqgFQe4dls" },
-        { videoId: "bmSQzxjOaUQ" },
-      ],
-    },
-  },
-};
-
 export default function CategoryClient({ category }) {
+  let categoryId;
+  switch (category) {
+    case "Submissions":
+      categoryId = 20;
+      break;
+
+    case "Guard%20Passing":
+      categoryId = 19;
+      break;
+
+    case "Defense":
+      categoryId = 22;
+      break;
+
+    case "Takedown":
+      categoryId = 33;
+      break;
+  }
+
+  const submissionSubcategories = {};
+  const guardPassingSubcategories = {};
+  const defenseSubcategories = {};
+  const takeDownSubcategories = {};
+
+  // 定義類別和子類別數據，僅包含 videoId，標題將從 API 獲取
+  const categories = {
+    Submissions: {
+      subcategories: {
+        Armbar: [
+          { videoId: "3Bp4WzcPJIU" },
+          { videoId: "5jqgFQe4dls" },
+          { videoId: "bmSQzxjOaUQ" },
+          { videoId: "3Bp4WzcPJIU" },
+        ],
+        "Triangle Choke": [
+          { videoId: "5jqgFQe4dls" },
+          { videoId: "bmSQzxjOaUQ" },
+          { videoId: "3Bp4WzcPJIU" },
+        ],
+        "Rear Naked Choke": [
+          { videoId: "3Bp4WzcPJIU" },
+          { videoId: "5jqgFQe4dls" },
+          { videoId: "bmSQzxjOaUQ" },
+        ],
+        Kimura: [
+          { videoId: "5jqgFQe4dls" },
+          { videoId: "bmSQzxjOaUQ" },
+          { videoId: "3Bp4WzcPJIU" },
+        ],
+      },
+    },
+    "Guard Passing": {
+      subcategories: {
+        "Toreando Pass": [
+          { videoId: "3Bp4WzcPJIU" },
+          { videoId: "5jqgFQe4dls" },
+          { videoId: "bmSQzxjOaUQ" },
+        ],
+        "Knee Cut Pass": [
+          { videoId: "3Bp4WzcPJIU" },
+          { videoId: "5jqgFQe4dls" },
+          { videoId: "bmSQzxjOaUQ" },
+        ],
+        "Over-Under Pass": [
+          { videoId: "3Bp4WzcPJIU" },
+          { videoId: "5jqgFQe4dls" },
+          { videoId: "bmSQzxjOaUQ" },
+        ],
+        "Standing Guard Break": [
+          { videoId: "3Bp4WzcPJIU" },
+          { videoId: "5jqgFQe4dls" },
+          { videoId: "bmSQzxjOaUQ" },
+        ],
+      },
+    },
+    Defense: {
+      subcategories: {
+        "Posture Control": [
+          { videoId: "3Bp4WzcPJIU" },
+          { videoId: "5jqgFQe4dls" },
+          { videoId: "bmSQzxjOaUQ" },
+        ],
+        "Submission Escapes": [
+          { videoId: "3Bp4WzcPJIU" },
+          { videoId: "5jqgFQe4dls" },
+          { videoId: "bmSQzxjOaUQ" },
+        ],
+        "Guard Retention": [
+          { videoId: "3Bp4WzcPJIU" },
+          { videoId: "5jqgFQe4dls" },
+          { videoId: "bmSQzxjOaUQ" },
+        ],
+        Sweeps: [
+          { videoId: "3Bp4WzcPJIU" },
+          { videoId: "5jqgFQe4dls" },
+          { videoId: "bmSQzxjOaUQ" },
+        ],
+      },
+    },
+    Takedown: {
+      subcategories: {
+        "Single Leg Takedown": [
+          { videoId: "3Bp4WzcPJIU" },
+          { videoId: "5jqgFQe4dls" },
+          { videoId: "bmSQzxjOaUQ" },
+        ],
+        "Double Leg Takedown": [
+          { videoId: "3Bp4WzcPJIU" },
+          { videoId: "5jqgFQe4dls" },
+          { videoId: "bmSQzxjOaUQ" },
+        ],
+        "Ankle Pick": [
+          { videoId: "3Bp4WzcPJIU" },
+          { videoId: "5jqgFQe4dls" },
+          { videoId: "bmSQzxjOaUQ" },
+        ],
+      },
+    },
+  };
+
   // 手動解碼 category，將 %20 轉換為空格
   const decodedCategory = decodeURIComponent(category);
 
@@ -125,10 +144,27 @@ export default function CategoryClient({ category }) {
     return <div>Category not found</div>;
   }
 
+  // store array of videos in videoList after fetching
+  const [videoList, setVideoList] = useState([]);
+
   // 狀態管理：追蹤每個視頻的懸停、播放和當前幀（縮略圖序列）
   const [videoStates, setVideoStates] = useState({});
   // 狀態管理：儲存影片標題
   const [videoTitles, setVideoTitles] = useState({});
+
+  // fetch video's youtube_id from the db
+  useEffect(() => {
+    async function fetchVideoList() {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/videos/${categoryId}`
+        );
+        const body = await response.json();
+        setVideoList(body);
+      } catch (error) {}
+    }
+    fetchVideoList();
+  }, []);
 
   // 從 YouTube API 獲取影片標題
   useEffect(() => {
