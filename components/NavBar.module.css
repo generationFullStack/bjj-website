@@ -1,187 +1,7 @@
 /* app/components/NavBar.module.css */
 @import url("https://fonts.googleapis.com/css?family=Quicksand:400,500,700");
 
-.nav {
-  width: 100%;
-  height: 65px;
-  position: fixed;
-  top: 0; /* 確保固定在頁面頂部 */
-  line-height: 65px;
-  text-align: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  transition: all 0.4s ease; /* 過渡效果，應用於背景色變化 */
-  background-color: transparent; /* 初始透明效果 */
-  z-index: 1000; /* 確保導航欄在最上層 */
-}
-
-.logo {
-  float: left;
-  width: auto;
-  height: auto;
-  padding-left: 3rem;
-}
-
-.logoLink {
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #fff;
-  font-size: 2.5rem;
-}
-
-.logoText {
-  margin-left: 10px;
-}
-
-.logoLink:hover {
-  color: #00e676;
-}
-
-.main_list {
-  height: 65px;
-  display: flex;
-  justify-content: flex-end;
-}
-
-.navContent {
-  display: flex;
-  align-items: center;
-  height: 65px;
-  margin-right: 2rem;
-}
-
-.navlinks {
-  width: auto;
-  height: 65px;
-  display: flex;
-  flex-direction: row;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.navItem {
-  width: auto;
-  height: 65px;
-  padding: 0;
-  padding-right: 3rem;
-  position: relative;
-}
-
-.navItem a {
-  text-decoration: none;
-  color: #fff;
-  line-height: 65px;
-  font-size: 2.4rem;
-}
-
-.navItem a:hover {
-  color: #00e676;
-}
-
-.searchContainer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 65px;
-  background-color: #111;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1002;
-}
-
-.searchForm {
-  display: flex;
-  align-items: center;
-  width: 50%;
-  max-width: 600px;
-  position: relative;
-}
-
-.searchInput {
-  width: 100%;
-  padding: 10px 50px 10px 20px;
-  font-size: 1.8rem;
-  color: #fff;
-  background-color: #222;
-  border: none;
-  border-radius: 5px;
-  outline: none;
-}
-
-.searchButton {
-  position: absolute;
-  right: 40px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  font-size: 1.8rem;
-  color: #888;
-  cursor: pointer;
-}
-
-.searchButton:hover {
-  color: #00e676;
-}
-
-.closeSearchButton {
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  font-size: 1.8rem;
-  color: #888;
-  cursor: pointer;
-}
-
-.closeSearchButton:hover {
-  color: #00e676;
-}
-
-.dropdownContent {
-  display: none;
-  position: absolute;
-  top: 65px;
-  left: 0;
-  background-color: rgba(17, 17, 17, 0.9);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  min-width: 200px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-  z-index: 1001;
-}
-
-.dropdownContent a {
-  display: block;
-  color: #fff;
-  font-size: 1.6rem;
-  padding: 12px 16px;
-  text-align: left;
-  line-height: normal;
-}
-
-.dropdownContent a:hover {
-  background-color: #333;
-  color: #00e676;
-}
-
-.navItem:hover .dropdownContent {
-  display: block;
-}
-
-.blurContent {
-  filter: blur(5px);
-  transition: filter 0.3s ease;
-}
-
 .navTrigger {
-  display: none;
   cursor: pointer;
   width: 30px;
   height: 25px;
@@ -191,6 +11,7 @@
   top: 0;
   bottom: 0;
   z-index: 1003;
+  display: none; /* 初始隱藏，手機版顯示 */
 }
 
 .navTrigger i {
@@ -203,31 +24,31 @@
 }
 
 .navTrigger i:nth-child(1) {
-  animation: outT 0.8s backwards;
-  animation-direction: reverse;
+  transform: translateY(0px) rotate(0deg); /* 初始狀態 */
 }
 
 .navTrigger i:nth-child(2) {
   margin: 5px 0;
-  animation: outM 0.8s backwards;
-  animation-direction: reverse;
+  transform: rotate(0deg); /* 初始狀態 */
 }
 
 .navTrigger i:nth-child(3) {
-  animation: outBtm 0.8s backwards;
-  animation-direction: reverse;
+  transform: translateY(0px) rotate(0deg); /* 初始狀態 */
 }
 
 .navTrigger.active i:nth-child(1) {
-  animation: inT 0.8s forwards;
+  animation: inT 0.8s forwards !important;
+  transform: translateY(9px) rotate(135deg) !important; /* 最終狀態 */
 }
 
 .navTrigger.active i:nth-child(2) {
-  animation: inM 0.8s forwards;
+  animation: inM 0.8s forwards !important;
+  transform: rotate(45deg) !important; /* 最終狀態 */
 }
 
 .navTrigger.active i:nth-child(3) {
-  animation: inBtm 0.8s forwards;
+  animation: inBtm 0.8s forwards !important;
+  transform: translateY(-9px) rotate(135deg) !important; /* 最終狀態 */
 }
 
 @keyframes inM {
@@ -239,28 +60,7 @@
   }
 }
 
-@keyframes outM {
-  50% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(45deg);
-  }
-}
-
 @keyframes inT {
-  0% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(9px) rotate(0deg);
-  }
-  100% {
-    transform: translateY(9px) rotate(135deg);
-  }
-}
-
-@keyframes outT {
   0% {
     transform: translateY(0px) rotate(0deg);
   }
@@ -284,48 +84,33 @@
   }
 }
 
-@keyframes outBtm {
-  0% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-9px) rotate(0deg);
-  }
-  100% {
-    transform: translateY(-9px) rotate(135deg);
-  }
+.blurContent {
+  filter: blur(5px);
+  transition: filter 0.3s ease;
 }
 
-.affix {
-  padding: 0;
-  background-color: #111; /* 滾動時的背景色，深色不透明 */
-  /* 微調建議：可改為 rgba(17, 17, 17, 0.9)（略透明）或 #000（純黑） */
+/* 下拉選單的模糊背景效果，Tailwind CSS 無法直接實現 */
+.dropdownContent {
+  background-color: rgba(17, 17, 17, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* 懸停效果 */
+.navItem:hover .dropdownContent {
+  display: block !important;
 }
 
 .hidden {
+  display: none !important; /* 提高優先級 */
+}
+
+/* 當選單展開時，確保搜尋圖示隱藏 */
+.show_list ~ .searchIconTop {
   display: none !important;
 }
 
-.searchIconTop {
-  cursor: pointer;
-  font-size: 2.8rem;
-  color: #fff;
-  z-index: 1003;
-  display: block;
-  margin-left: 1rem;
-  transform: translateY(-6px);
-}
-
-.searchIconTop:hover {
-  color: #00e676;
-}
-
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-  .container {
-    margin: 0;
-  }
-}
-
+/* 手機版樣式 */
 @media screen and (max-width: 900px) {
   .navTrigger {
     display: block;
@@ -369,7 +154,7 @@
   }
 
   .navContent {
-    display: block; /* 移除 display: none，確保手機版選單顯示 */
+    display: block;
   }
 
   .navlinks {
@@ -408,7 +193,6 @@
 
   .dropdownContent {
     position: static;
-    display: none;
     background-color: #222;
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
@@ -426,14 +210,6 @@
 
   .dropdownContent a:last-child {
     border-bottom: 1px solid #333;
-  }
-
-  .navItem:hover .dropdownContent {
-    display: none;
-  }
-
-  .navItem.active .dropdownContent {
-    display: block;
   }
 
   .searchContainer {
@@ -475,49 +251,6 @@
   .closeSearchButton {
     right: 30px;
     font-size: 2.5rem;
-  }
-
-  .submenu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: #111;
-    z-index: 1002;
-    overflow-y: auto;
-    padding-top: 65px;
-  }
-
-  .backButton {
-    padding: 20px 30px;
-    font-size: 2rem;
-    color: #00e676;
-    cursor: pointer;
-    border-bottom: 1px solid #333;
-  }
-
-  .submenuList {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .submenuList li {
-    width: 100%;
-  }
-
-  .submenuList li a {
-    display: block;
-    font-size: 3rem;
-    padding: 20px 50px;
-    text-align: left;
-    color: #fff;
-    text-decoration: none;
-  }
-
-  .submenuList li a:hover {
-    color: #00e676;
   }
 
   .searchIconTop {

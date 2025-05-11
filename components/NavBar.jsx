@@ -38,7 +38,7 @@ export default function NavBar() {
     setIsClient(true);
 
     const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
+      setIsMobile(window.innerWidth <= 900); // 統一斷點為 900px
     };
 
     handleResize();
@@ -50,7 +50,8 @@ export default function NavBar() {
     if (!isClient) return;
 
     // 客戶端加載時滾動到頂部並檢查初始滾動位置
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: "instant" });
+    console.log("Initial scrollY after scrollTo:", window.scrollY);
     setIsScrolled(window.scrollY > 50);
     console.log("Initial scrollY:", window.scrollY);
     console.log("Initial isScrolled:", window.scrollY > 50);
@@ -78,10 +79,12 @@ export default function NavBar() {
   }, [hoveredItem, isSearchOpen]);
 
   const handleNavTriggerClick = () => {
+    console.log("Before click, isMenuOpen:", isMenuOpen); // 調試
     setIsMenuOpen(!isMenuOpen);
     setActiveSubmenu(null);
     setActiveDropdown(null);
     setIsSearchOpen(false);
+    console.log("After click, isMenuOpen:", !isMenuOpen); // 調試
   };
 
   const handleDropdownClick = (index) => {
@@ -169,10 +172,19 @@ export default function NavBar() {
   ];
 
   return (
-    <nav className={`${styles.nav} ${isScrolled ? styles.affix : ""}`}>
-      <div className={styles.container}>
-        <div className={styles.logo}>
-          <Link href="/" className={styles.logoLink}>
+    <nav
+      className={`w-full h-[65px] fixed top-0 text-center pt-5 pb-5 transition-all duration-400 ease-in-out bg-transparent z-[1000] ${
+        isScrolled ? "p-0 bg-[#111]" : ""
+      } ${styles.nav}`}
+    >
+      <div
+        className={`max-w-[1300px] mx-auto flex items-center justify-between ${styles.container}`}
+      >
+        <div className={`w-auto h-auto pl-12 ${styles.logo}`}>
+          <Link
+            href="/"
+            className={`flex items-center no-underline text-white text-[2.5rem] hover:text-[#00e676] ${styles.logoLink}`}
+          >
             <Image
               src="/bjj-letter-logo.png"
               alt="BJJ Logo"
@@ -180,33 +192,41 @@ export default function NavBar() {
               height={60}
               style={{ verticalAlign: "middle" }}
             />
-            <span className={styles.logoText}>BJJ.JPG</span>
+            <span className={`ml-2.5 ${styles.logoText}`}>BJJ.JPG</span>
           </Link>
         </div>
         <div
           id="mainListDiv"
-          className={`${styles.main_list} ${
-            isMenuOpen ? styles.show_list : ""
-          }`}
+          className={`h-[65px] flex items-center justify-end ${
+            styles.main_list
+          } ${isMenuOpen ? styles.show_list : ""}`}
         >
           {isSearchOpen && (
-            <div className={styles.searchContainer}>
-              <form onSubmit={handleSearchSubmit} className={styles.searchForm}>
+            <div
+              className={`absolute top-0 left-0 w-full h-[65px] bg-[#111] flex items-center justify-center z-[1002] ${styles.searchContainer}`}
+            >
+              <form
+                onSubmit={handleSearchSubmit}
+                className={`flex items-center w-1/2 max-w-[600px] relative ${styles.searchForm}`}
+              >
                 <input
                   type="text"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="SEARCH..." // 改為英文全大寫
-                  className={styles.searchInput}
+                  placeholder="SEARCH..."
+                  className={`w-full px-5 py-2.5 text-white bg-[#222] border-none rounded-md outline-none text-[1.8rem] ${styles.searchInput}`}
                   autoFocus
                 />
-                <button type="submit" className={styles.searchButton}>
+                <button
+                  type="submit"
+                  className={`absolute right-10 top-1/2 -translate-y-1/2 bg-none border-none text-[1.8rem] text-[#888] cursor-pointer hover:text-[#00e676] ${styles.searchButton}`}
+                >
                   <FaSearch />
                 </button>
                 <button
                   type="button"
                   onClick={handleCloseSearch}
-                  className={styles.closeSearchButton}
+                  className={`absolute right-2.5 top-1/2 -translate-y-1/2 bg-none border-none text-[1.8rem] text-[#888] cursor-pointer hover:text-[#00e676] ${styles.closeSearchButton}`}
                 >
                   ✕
                 </button>
@@ -215,40 +235,50 @@ export default function NavBar() {
           )}
 
           <div
-            className={`${styles.menuContent} ${
-              activeSubmenu !== null || isSearchOpen ? styles.hidden : ""
-            }`}
+            className={`pt-[65px] block ${
+              activeSubmenu !== null || isSearchOpen ? "hidden" : ""
+            } ${styles.menuContent}`}
           >
-            <div className={styles.navContent}>
+            <div
+              className={`flex items-center h-[65px] mr-8 ${styles.navContent}`}
+            >
               <ul
-                className={`${styles.navlinks} ${
-                  activeSubmenu !== null || isSearchOpen ? styles.hidden : ""
-                }`}
+                className={`w-auto h-[65px] flex flex-row list-none m-0 p-0 ${
+                  activeSubmenu !== null || isSearchOpen ? "hidden" : ""
+                } ${styles.navlinks}`}
               >
                 {navItems.map((item, index) => (
                   <li
                     key={item.category}
-                    className={`${styles.navItem} ${
-                      activeDropdown === index ? styles.active : ""
-                    }`}
+                    className={`w-auto h-[65px] p-0 pr-12 relative ${
+                      activeDropdown === index ? "active" : ""
+                    } ${styles.navItem}`}
                     onMouseEnter={() => handleMouseEnter(index)}
                     onMouseLeave={handleMouseLeave}
                   >
                     <Link
                       href={`/${encodeURIComponent(item.category)}`} // 對類別名稱進行 URL 編碼
                       onClick={() => handleDropdownClick(index)}
+                      className={`no-underline text-white leading-[65px] text-[2.4rem] hover:text-[#00e676]`}
                     >
-                      {item.category} {/* 已為大寫 */}
+                      {item.category}
                     </Link>
-                    <div className={styles.dropdownContent}>
+                    <div
+                      className={`absolute top-[65px] left-0 min-w-[200px] shadow-[0_8px_16px_rgba(0,0,0,0.2)] z-[1001] ${
+                        styles.dropdownContent
+                      } ${hoveredItem === index ? "block" : "hidden"} ${
+                        activeDropdown === index ? "block" : "hidden"
+                      }`}
+                    >
                       {item.subcategories.map((subcategory) => (
                         <Link
                           key={subcategory}
                           href={`/${encodeURIComponent(
                             item.category
                           )}/${encodeURIComponent(subcategory)}`} // 對子類別名稱進行 URL 編碼
+                          className={`block text-white text-[1.6rem] px-4 py-3 text-left leading-normal hover:bg-[#333] hover:text-[#00e676]`}
                         >
-                          {subcategory} {/* 已為大寫 */}
+                          {subcategory}
                         </Link>
                       ))}
                     </div>
@@ -257,7 +287,7 @@ export default function NavBar() {
               </ul>
               {!isMobile && (
                 <span
-                  className={styles.searchIconTop}
+                  className={`cursor-pointer text-[2.8rem] text-white z-[1003] block ml-4 -translate-y-1.5 hover:text-[#00e676] ${styles.searchIconTop}`}
                   onClick={handleSearchClick}
                 >
                   <FaSearch />
@@ -267,19 +297,25 @@ export default function NavBar() {
           </div>
 
           {activeSubmenu !== null && isMobile && (
-            <div className={styles.submenu}>
-              <div className={styles.backButton} onClick={handleBackToMainMenu}>
-                BACK {/* 改為英文全大寫 */}
+            <div
+              className={`fixed top-0 left-0 w-full h-screen bg-[#111] z-[1002] overflow-y-auto pt-[65px] ${styles.submenu}`}
+            >
+              <div
+                className={`px-5 py-5 text-[2rem] text-[#00e676] cursor-pointer border-b border-[#333] ${styles.backButton}`}
+                onClick={handleBackToMainMenu}
+              >
+                BACK
               </div>
-              <ul className={styles.submenuList}>
+              <ul className={`list-none p-0 m-0 ${styles.submenuList}`}>
                 {navItems[activeSubmenu].subcategories.map((subcategory) => (
-                  <li key={subcategory}>
+                  <li key={subcategory} className="w-full">
                     <Link
                       href={`/${encodeURIComponent(
                         navItems[activeSubmenu].category
                       )}/${encodeURIComponent(subcategory)}`} // 對子類別名稱進行 URL 編碼
+                      className={`block text-[3rem] px-12 py-5 text-left text-white no-underline hover:text-[#00e676]`}
                     >
-                      {subcategory} {/* 已為大寫 */}
+                      {subcategory}
                     </Link>
                   </li>
                 ))}
@@ -289,16 +325,25 @@ export default function NavBar() {
         </div>
         {isMobile && (
           <span
-            className={`${styles.searchIconTop} ${
-              isMenuOpen || isSearchOpen ? styles.hidden : ""
-            }`}
+            className={`cursor-pointer text-[2.8rem] text-white z-[1003] block ${
+              isMenuOpen || isSearchOpen ? "hidden" : ""
+            } ${styles.searchIconTop}`}
             onClick={handleSearchClick}
           >
+            {console.log(
+              "isMobile:",
+              isMobile,
+              "isMenuOpen:",
+              isMenuOpen,
+              "isSearchOpen:",
+              isSearchOpen
+            )}{" "}
+            {/* 調試 */}
             <FaSearch />
           </span>
         )}
         <span
-          className={`${styles.navTrigger} ${isMenuOpen ? styles.active : ""}`}
+          className={`${styles.navTrigger} ${isMenuOpen ? "active" : ""}`}
           onClick={handleNavTriggerClick}
         >
           <i></i>
