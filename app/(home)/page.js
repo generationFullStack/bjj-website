@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <>
       <section className="home"></section>
-      <div style={{ height: "500px" }}>
+      <div>
         <h2 className="myH2">Discover Brazilian Jiu-Jitsu (BJJ)</h2>
         <p className="myP">
           Brazilian Jiu-Jitsu (BJJ) is a martial art and combat sport that
@@ -24,7 +24,7 @@ export default function Home() {
           resources. Join us to start your BJJ journey today!
         </p>
         <p className="myP">
-          <Link href="/videos" className="learnMoreButton">
+          <Link href="/videos" className="learnMoreButton mb-5">
             Learn More
           </Link>
         </p>
