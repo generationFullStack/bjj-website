@@ -34,7 +34,7 @@ export default function AboutUsPage() {
               <h2 className="text-center text-2xl nunito">Nikita Costa</h2>
               <p className="text-gray-500 text-center title">CEO & Founder</p>
               <p>
-                Nikita is the founder of Palavah. She's super passionate about
+                Nikita is the founder of Palavah. Shes super passionate about
                 music and considers herself a music nerd.
               </p>
               <p>nikita7@gmail.com</p>
