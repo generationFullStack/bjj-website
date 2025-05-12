@@ -69,7 +69,7 @@ export default function SignUpForm() {
             className="w-full p-[12px_20px] bg-gradient-to-r from-[#ff357a] to-[#fff172] border-none rounded-[40px] text-2xl text-white cursor-pointer share-tech-regular"
             disabled={pending}
           >
-            {pending ? "submitting..." : "signup"}
+            {pending ? "Submitting..." : "Signup"}
           </button>
         </div>
         <Link
