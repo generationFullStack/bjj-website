@@ -12,7 +12,7 @@ export async function GET(request, { params }) {
   try {
     const client = await pool.connect();
     const result1 = await client.query(
-      `SELECT categories.id FROM categories WHERE name = '${slug}'`
+      `SELECT categories.id FROM categories WHERE name = '${decodeURI(slug)}'` // decode %20 to ' ' e.g. guard%20pass --> guard pass
     );
     const result2 = await client.query(
       `SELECT videos.id, videos.youtube_id, video_categories.category_id, categories.parent_id, categories.name
