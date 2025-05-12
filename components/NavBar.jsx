@@ -221,7 +221,11 @@ export default function NavBar() {
           />{" "}
           {/* 使用 SearchBar 組件顯示搜尋框和結果 */}
           <div
+<<<<<<< HEAD
             className={`${
+=======
+            className={` ${
+>>>>>>> 0587c3d (update login page by pan)
               isMobile ? (isMenuOpen ? "block" : "hidden") : "block"
             } ${
               isSearchOpen ? "hidden" : ""

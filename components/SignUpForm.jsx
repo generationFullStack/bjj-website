@@ -3,6 +3,7 @@
 import { signup } from "@/actions/action";
 import Form from "next/form";
 import { useActionState } from "react";
+import Link from "next/link";
 
 export default function SignupForm() {
   const [state, action, pending] = useActionState(signup, "");
@@ -27,12 +28,12 @@ export default function SignupForm() {
         <button type="submit" className="border-2 p-1">
           {pending ? "submitting..." : "signup"}
         </button>
-        <a
+        <Link
           href="http://localhost:3000/login"
           className="no-underline hover:underline"
         >
           Already have an account?
-        </a>
+        </Link>
       </Form>
     </div>
   );

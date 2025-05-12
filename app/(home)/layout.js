@@ -7,7 +7,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 
 export const metadata = {
   title: "BJJ.JPG",
-  description: "A simple Next.js app with a styled nav bar",
+  description: "J for Jason, P for Pan and G for Gavin",
 };
 
 export default function RootLayout({ children }) {

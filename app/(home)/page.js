@@ -23,11 +23,6 @@ export default function Home() {
           expert guidance, a supportive community, and world-class training
           resources. Join us to start your BJJ journey today!
         </p>
-        <p className="myP">
-          <Link href="/videos" className="learnMoreButton mb-5">
-            Learn More
-          </Link>
-        </p>
       </div>
       <BjjGymBanner />
     </>
