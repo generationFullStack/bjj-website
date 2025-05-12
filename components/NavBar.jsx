@@ -221,11 +221,11 @@ export default function NavBar() {
           />{" "}
           {/* 使用 SearchBar 組件顯示搜尋框和結果 */}
           <div
-            className={`pt-[65px] ${
+            className={`${
               isMobile ? (isMenuOpen ? "block" : "hidden") : "block"
             } ${
               isSearchOpen ? "hidden" : ""
-            } max-[900px]:pt-[65px] max-[900px]:w-full max-[900px]:min-h-screen max-[900px]:bg-[#111] max-[900px]:absolute max-[900px]:top-0 max-[900px]:left-0`} // 移除 activeSubmenu 條件，確保手機版選單展開時顯示，添加定位屬性確保內容可見，調整顯示條件以同步 isMenuOpen 狀態
+            } max-[900px]: max-[900px]:w-full max-[900px]:min-h-screen max-[900px]:bg-[#111] max-[900px]:absolute max-[900px]:top-0 max-[900px]:left-0`} // 移除 activeSubmenu 條件，確保手機版選單展開時顯示，添加定位屬性確保內容可見，調整顯示條件以同步 isMenuOpen 狀態
           >
             <div
               className={`flex items-center h-[65px] mr-8 max-[900px]:block`}
