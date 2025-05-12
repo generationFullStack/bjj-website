@@ -57,7 +57,9 @@ export default function Category({ category }) {
           key={element.videoId}
           className="p-5 rounded-2xl bg-white/10 shadow-sm shadow-white/60 transition duration-200 ease-in-out hover:scale-103"
         >
-          <a href={``}>
+          <a
+            href={`${process.env.NEXT_PUBLIC_BASE_URL}/video/${element.videoId}`}
+          >
             <h1 className="text-center text-2xl md:text-3xl font-bold w-full h-25 mb-5 text-clip">
               {element.title}
             </h1>
