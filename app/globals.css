@@ -37,6 +37,7 @@ body {
 }
 
 .mainContent {
+  margin-top: 105px;
   position: relative;
   z-index: 1;
   transition: filter 0.3s ease;
