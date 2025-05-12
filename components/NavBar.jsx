@@ -75,10 +75,10 @@ export default function NavBar() {
     console.log("Initial isScrolled:", window.scrollY > 50);
 
     const handleScroll = () => {
-      const newScrolled = window.scrollY > 50;
-      setIsScrolled(newScrolled);
+      const newIsScrolled = window.scrollY > 50;
+      setIsScrolled(newIsScrolled);
       console.log("ScrollY:", window.scrollY);
-      console.log("isScrolled:", newScrolled);
+      console.log("isScrolled:", newIsScrolled);
     };
 
     window.addEventListener("scroll", handleScroll);
@@ -202,7 +202,10 @@ export default function NavBar() {
               height={60}
               style={{ verticalAlign: "middle" }}
             />
-            <span className={`ml-2.5 max-[900px]:hidden`}>BJJ.JPG</span>
+            <span className={`ml-2.5 max-[900px]:hidden share-tech-regular`}>
+              BJJ.JPG
+            </span>{" "}
+            {/* 應用 Share Tech 字體到 Logo 文字 */}
           </Link>
         </div>
         <div
@@ -234,7 +237,7 @@ export default function NavBar() {
                   isMobile ? (isMenuOpen ? "block" : "hidden") : "block"
                 } ${
                   isSearchOpen ? "hidden" : ""
-                } max-[900px]:flex-col max-[900px]:w-full max-[900px]:min-h-screen max-[900px]:bg-[#111]`} // 移除 activeSubmenu 條件，確保手機版選單展開時導航項顯示，調整高度確保內容可見，調整顯示條件以同步 isMenuOpen 狀態
+                } max-[900px]:flex-col max-[900px]:w-full max-[900px]:min-h-screen max-[900px]:bg-[#111] share-tech-regular`} // 移除 activeSubmenu 條件，確保手機版選單展開時導航項顯示，調整高度確保內容可見，調整顯示條件以同步 isMenuOpen 狀態，應用 Share Tech 字體到導航項
               >
                 {navItems.map((item, index) => (
                   <li
@@ -291,12 +294,14 @@ export default function NavBar() {
               className={`fixed top-0 left-0 w-full h-screen bg-[#111] z-[1002] overflow-y-auto pt-[65px]`} // 子選單顯示條件：activeSubmenu 不為 null 且為手機版
             >
               <div
-                className={`px-5 py-5 text-[2rem] text-[#00e676] cursor-pointer border-b border-[#333]`}
+                className={`px-5 py-5 text-[2rem] text-[#00e676] cursor-pointer border-b border-[#333] share-tech-regular`}
                 onClick={handleBackToMainMenu}
               >
-                BACK
+                BACK {/* 應用 Share Tech 字體到子選單的返回按鈕 */}
               </div>
-              <ul className={`list-none p-0 m-0`}>
+              <ul className={`list-none p-0 m-0 share-tech-regular`}>
+                {" "}
+                {/* 應用 Share Tech 字體到子選單項 */}
                 {navItems[activeSubmenu].subcategories.map((subcategory) => (
                   <li key={subcategory} className="w-full">
                     <Link
@@ -315,7 +320,7 @@ export default function NavBar() {
         </div>
         {isMobile && !isSearchOpen && (
           <span
-            className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[70px] top-1/2 -translate-y-1/2`}
+            className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[70px] top-1/2 -translate-y-1/2 share-tech-regular`} // 應用 Share Tech 字體到搜尋圖示
             onClick={handleSearchClick}
           >
             {console.log(

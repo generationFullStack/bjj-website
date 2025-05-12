@@ -43,7 +43,6 @@ export default function TestClient({ videos }) {
     }, 500); // 每秒切換一次，3 秒完成一輪
     return () => clearInterval(interval); // 清除計時器
   }, []);
-
   return (
     <div className={`${styles.videosPage} testPage`}>
       <h1>Test Page: Videos from Database</h1>
