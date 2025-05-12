@@ -4,7 +4,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaUser } from "react-icons/fa"; // 引入 Font Awesome 的搜尋和使用者圖示
 import styles from "./NavBar.module.css";
 import SearchBar from "./SearchBar"; // 引入 SearchBar 組件
 
@@ -162,7 +162,7 @@ export default function NavBar() {
   // 定義類別和子類別數據，並轉為大寫
   const navItems = [
     {
-      category: "SUBMISSIONS", // 直接設置為大寫
+      category: "SUBMISSION", // 直接設置為大寫
       subcategories: SubmissionSubcategories,
     },
     {
@@ -202,6 +202,9 @@ export default function NavBar() {
               height={60}
               style={{ verticalAlign: "middle" }}
             />
+            <span className={`ml-2.5 max-[900px]:hidden share-tech-regular`}>
+              BJJ.JPG
+            </span>{" "}
             {/* 應用 Share Tech 字體到 Logo 文字 */}
           </Link>
         </div>
@@ -220,11 +223,11 @@ export default function NavBar() {
           />{" "}
           {/* 使用 SearchBar 組件顯示搜尋框和結果 */}
           <div
-            className={` ${
+            className={`${
               isMobile ? (isMenuOpen ? "block" : "hidden") : "block"
             } ${
               isSearchOpen ? "hidden" : ""
-            } max-[900px]: max-[900px]:w-full max-[900px]:min-h-screen max-[900px]:bg-[#111] max-[900px]:absolute max-[900px]:top-0 max-[900px]:left-0`} // 移除 activeSubmenu 條件，確保手機版選單展開時顯示，添加定位屬性確保內容可見，調整顯示條件以同步 isMenuOpen 狀態
+            } max-[900px]:w-full max-[900px]:min-h-screen max-[900px]:bg-[#111] max-[900px]:absolute max-[900px]:top-0 max-[900px]:left-0`} // 移除 activeSubmenu 條件，確保手機版選單展開時顯示，添加定位屬性確保內容可見，調整顯示條件以同步 isMenuOpen 狀態
           >
             <div
               className={`flex items-center h-[65px] mr-8 max-[900px]:block`}
@@ -234,7 +237,7 @@ export default function NavBar() {
                   isMobile ? (isMenuOpen ? "block" : "hidden") : "block"
                 } ${
                   isSearchOpen ? "hidden" : ""
-                } max-[900px]:flex-col max-[900px]:w-full max-[900px]:min-h-screen max-[900px]:bg-[#111] `} // 移除 activeSubmenu 條件，確保手機版選單展開時導航項顯示，調整高度確保內容可見，調整顯示條件以同步 isMenuOpen 狀態，應用 Share Tech 字體到導航項
+                } max-[900px]:flex-col max-[900px]:w-full max-[900px]:min-h-screen max-[900px]:bg-[#111] league-spartan`} // 移除 activeSubmenu 條件，確保手機版選單展開時導航項顯示，調整高度確保內容可見，調整顯示條件以同步 isMenuOpen 狀態，應用 League Spartan 字體到導航項
               >
                 {navItems.map((item, index) => (
                   <li
@@ -248,7 +251,9 @@ export default function NavBar() {
                     onMouseLeave={handleMouseLeave}
                   >
                     <Link
-                      href={`/${encodeURIComponent(item.category)}`} // 對類別名稱進行 URL 編碼
+                      href={`/${encodeURIComponent(
+                        item.category.toLowerCase()
+                      )}`} // 對類別名稱進行 URL 編碼
                       onClick={() => handleDropdownClick(index)}
                       className={`no-underline text-white leading-[65px] text-[2.4rem] hover:text-[#00e676] max-[900px]:text-left max-[900px]:w-full max-[900px]:text-[3rem] max-[900px]:px-7 max-[900px]:py-5 max-[900px]:flex max-[900px]:items-center max-[900px]:gap-2.5 max-[900px]:text-white! max-[900px]:cursor-pointer`}
                     >
@@ -265,8 +270,8 @@ export default function NavBar() {
                         <Link
                           key={subcategory}
                           href={`/${encodeURIComponent(
-                            item.category
-                          )}/${encodeURIComponent(subcategory)}`} // 對子類別名稱進行 URL 編碼
+                            subcategory
+                          ).toLowerCase()}`} // 對子類別名稱進行 URL 編碼
                           className={`block text-white text-[1.6rem] px-4 py-3 text-left leading-normal hover:bg-[#333] hover:text-[#00e676] max-[900px]:text-[2rem] max-[900px]:px-[50px] max-[900px]:text-left max-[900px]:border-t border-[#333] max-[900px]:text-white! last:border-b last:border-[#333]`}
                         >
                           {subcategory}
@@ -277,12 +282,20 @@ export default function NavBar() {
                 ))}
               </ul>
               {!isMobile && (
-                <span
-                  className={`cursor-pointer text-[2.8rem] text-white z-[1003] block ml-4 -translate-y-1.5 hover:text-[#00e676]`}
-                  onClick={handleSearchClick}
-                >
-                  <FaSearch />
-                </span>
+                <div className="flex items-center gap-10">
+                  <span
+                    className={`cursor-pointer text-[2.8rem] text-white z-[1003] block -translate-y-1.5 hover:text-[#00e676]`}
+                    onClick={handleSearchClick}
+                  >
+                    <FaSearch />
+                  </span>
+                  <Link
+                    href="/login"
+                    className={`cursor-pointer text-[2.8rem] text-white z-[1003] block -translate-y-1.5 hover:text-[#00e676]`}
+                  >
+                    <FaUser />
+                  </Link>
+                </div>
               )}
             </div>
           </div>
@@ -291,12 +304,12 @@ export default function NavBar() {
               className={`fixed top-0 left-0 w-full h-screen bg-[#111] z-[1002] overflow-y-auto pt-[65px]`} // 子選單顯示條件：activeSubmenu 不為 null 且為手機版
             >
               <div
-                className={`px-5 py-5 text-[2rem] text-[#00e676] cursor-pointer border-b border-[#333] `}
+                className={`px-5 py-5 text-[2rem] text-[#00e676] cursor-pointer border-b border-[#333] share-tech-regular`}
                 onClick={handleBackToMainMenu}
               >
                 BACK {/* 應用 Share Tech 字體到子選單的返回按鈕 */}
               </div>
-              <ul className={`list-none p-0 m-0 `}>
+              <ul className={`list-none p-0 m-0 share-tech-regular`}>
                 {" "}
                 {/* 應用 Share Tech 字體到子選單項 */}
                 {navItems[activeSubmenu].subcategories.map((subcategory) => (
@@ -316,22 +329,30 @@ export default function NavBar() {
           )}
         </div>
         {isMobile && !isSearchOpen && (
-          <span
-            className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[70px] top-1/2 -translate-y-1/2 `} // 應用 Share Tech 字體到搜尋圖示
-            onClick={handleSearchClick}
-          >
-            {console.log(
-              "isMobile:",
-              isMobile,
-              "isMenuOpen:",
-              isMenuOpen,
-              "isSearchOpen:",
-              isSearchOpen
-            )}{" "}
-            {/* 調試 */}
-            <FaSearch />
-          </span>
-        )}{" "}
+          <div className="flex items-center gap-4">
+            <span
+              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[100px] top-1/2 -translate-y-1/2 share-tech-regular`} // 調整 right 位置以容納 FaUser 圖標
+              onClick={handleSearchClick}
+            >
+              {console.log(
+                "isMobile:",
+                isMobile,
+                "isMenuOpen:",
+                isMenuOpen,
+                "isSearchOpen:",
+                isSearchOpen
+              )}{" "}
+              {/* 調試 */}
+              <FaSearch />
+            </span>
+            <Link
+              href="/login"
+              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[60px] top-1/2 -translate-y-1/2 share-tech-regular`} // 放置在 FaSearch 旁邊
+            >
+              <FaUser />
+            </Link>
+          </div>
+        )}
         <span
           className={`hidden max-[900px]:block ${styles.navTrigger} ${
             isMenuOpen ? "active" : ""
