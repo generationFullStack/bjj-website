@@ -64,7 +64,7 @@ export default function SearchBar({ isSearchOpen, setIsSearchOpen, navItems }) {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="SEARCH..."
-          className={`w-full px-5 py-2.5 text-white bg-[#222] border-none rounded-md outline-none text-[1.8rem] max-[900px]:text-[3rem] max-[900px]:py-3.5 max-[900px]:px-5 max-[900px]:box-border share-tech-regular`} // 應用 Share Tech 字體到搜尋框
+          className={`w-full px-5 py-2.5 text-white bg-[#222] border-none rounded-md outline-none text-[1.8rem] max-[900px]:text-[3rem] max-[900px]:py-3.5 max-[900px]:px-5 max-[900px]:box-border `} // 應用 Share Tech 字體到搜尋框
           autoFocus
         />
         <button
@@ -84,7 +84,7 @@ export default function SearchBar({ isSearchOpen, setIsSearchOpen, navItems }) {
       {/* 搜尋結果顯示 */}
       {searchResults.length > 0 && (
         <div className="absolute top-[65px] left-1/2 -translate-x-1/2 w-1/2 max-w-[600px] bg-[#222] z-[1002] rounded-md shadow-lg max-[900px]:top-[130px] max-[900px]:w-full max-[900px]:left-0 max-[900px]:translate-x-0 max-[900px]:p-5">
-          <ul className="list-none p-0 m-0 share-tech-regular">
+          <ul className="list-none p-0 m-0 ">
             {" "}
             {/* 應用 Share Tech 字體到搜尋結果 */}
             {searchResults.map((result, index) => (
