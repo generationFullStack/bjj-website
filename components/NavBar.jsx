@@ -202,7 +202,6 @@ export default function NavBar() {
               height={60}
               style={{ verticalAlign: "middle" }}
             />
-            <span className={`ml-2.5 max-[900px]:hidden `}>BJJ.JPG</span>{" "}
             {/* 應用 Share Tech 字體到 Logo 文字 */}
           </Link>
         </div>
@@ -221,11 +220,7 @@ export default function NavBar() {
           />{" "}
           {/* 使用 SearchBar 組件顯示搜尋框和結果 */}
           <div
-<<<<<<< HEAD
-            className={`${
-=======
             className={` ${
->>>>>>> 0587c3d (update login page by pan)
               isMobile ? (isMenuOpen ? "block" : "hidden") : "block"
             } ${
               isSearchOpen ? "hidden" : ""
