@@ -162,7 +162,7 @@ export default function NavBar() {
   // 定義類別和子類別數據，並轉為大寫
   const navItems = [
     {
-      category: "SUBMISSIONS", // 直接設置為大寫
+      category: "SUBMISSION", // 直接設置為大寫
       subcategories: SubmissionSubcategories,
     },
     {
@@ -270,8 +270,8 @@ export default function NavBar() {
                         <Link
                           key={subcategory}
                           href={`/${encodeURIComponent(
-                            item.category
-                          )}/${encodeURIComponent(subcategory)}`} // 對子類別名稱進行 URL 編碼
+                            subcategory
+                          ).toLowerCase()}`} // 對子類別名稱進行 URL 編碼
                           className={`block text-white text-[1.6rem] px-4 py-3 text-left leading-normal hover:bg-[#333] hover:text-[#00e676] max-[900px]:text-[2rem] max-[900px]:px-[50px] max-[900px]:text-left max-[900px]:border-t border-[#333] max-[900px]:text-white! last:border-b last:border-[#333]`}
                         >
                           {subcategory}
