@@ -37,7 +37,7 @@ export default function CategoryClient({ category }) {
 
   // 定義類別和子類別數據，僅包含 videoId，標題將從 API 獲取
   const categories = {
-    SUBMISSIONS: {
+    submissions: {
       subcategories: {
         Armbar: [
           { videoId: "3Bp4WzcPJIU" },
@@ -62,7 +62,7 @@ export default function CategoryClient({ category }) {
         ],
       },
     },
-    "GUARD PASSING": {
+    "guard passing": {
       subcategories: {
         "Toreando Pass": [
           { videoId: "3Bp4WzcPJIU" },
@@ -86,7 +86,7 @@ export default function CategoryClient({ category }) {
         ],
       },
     },
-    DEFENSE: {
+    defense: {
       subcategories: {
         "Posture Control": [
           { videoId: "3Bp4WzcPJIU" },
@@ -110,7 +110,7 @@ export default function CategoryClient({ category }) {
         ],
       },
     },
-    TAKEDOWN: {
+    takedown: {
       subcategories: {
         "Single Leg Takedown": [
           { videoId: "3Bp4WzcPJIU" },

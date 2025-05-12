@@ -251,7 +251,9 @@ export default function NavBar() {
                     onMouseLeave={handleMouseLeave}
                   >
                     <Link
-                      href={`/${encodeURIComponent(item.category)}`} // 對類別名稱進行 URL 編碼
+                      href={`/${encodeURIComponent(
+                        item.category.toLowerCase()
+                      )}`} // 對類別名稱進行 URL 編碼
                       onClick={() => handleDropdownClick(index)}
                       className={`no-underline text-white leading-[65px] text-[2.4rem] hover:text-[#00e676] max-[900px]:text-left max-[900px]:w-full max-[900px]:text-[3rem] max-[900px]:px-7 max-[900px]:py-5 max-[900px]:flex max-[900px]:items-center max-[900px]:gap-2.5 max-[900px]:text-white! max-[900px]:cursor-pointer`}
                     >

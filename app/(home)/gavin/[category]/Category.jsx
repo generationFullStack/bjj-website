@@ -8,7 +8,6 @@ export default function Category({ category }) {
   const [videosData, setVideosData] = useState([]);
 
   useEffect(() => {
-    // fetch categories from database to show on the navbar --Gavin
     async function fetchVideoIds() {
       try {
         const response = await fetch(
