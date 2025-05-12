@@ -2,12 +2,12 @@ import { gymList } from "@/constant/gymList";
 
 export default function GymList() {
   return (
-    <ul className="flex flex-col text-5xl gap-50 items-center">
+    <ul className="flex flex-col text-5xl gap-30 items-center mt-50">
       <h1 className="text-5xl font-bold">GYMS IN HONG KONG</h1>
       {gymList.map((element, index) => (
         <li
           key={index}
-          className="flex flex-col-reverse sm:flex-row w-full justify-between gap-5"
+          className="flex flex-col-reverse sm:flex-row w-full justify-between gap-30 bg-white/10"
         >
           <div className="flex flex-col justify-around items-start p-5">
             <h1 className="mb-10">{element.name}</h1>

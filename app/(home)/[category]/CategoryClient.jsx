@@ -18,19 +18,18 @@ export default function CategoryClient({ category }) {
       categoryId = 20;
       break;
 
-    case "Guard%20Passing":
+    case "GUARD%20PASSING":
       categoryId = 19;
       break;
 
-    case "Defense":
+    case "DEFENSE":
       categoryId = 22;
       break;
 
-    case "Takedown":
+    case "TAKEDOWN":
       categoryId = 33;
       break;
   }
-
   const submissionSubcategories = {};
   const guardPassingSubcategories = {};
   const defenseSubcategories = {};
@@ -63,7 +62,7 @@ export default function CategoryClient({ category }) {
         ],
       },
     },
-    "Guard Passing": {
+    "GUARD PASSING": {
       subcategories: {
         "Toreando Pass": [
           { videoId: "3Bp4WzcPJIU" },
@@ -87,7 +86,7 @@ export default function CategoryClient({ category }) {
         ],
       },
     },
-    Defense: {
+    DEFENSE: {
       subcategories: {
         "Posture Control": [
           { videoId: "3Bp4WzcPJIU" },
@@ -111,7 +110,7 @@ export default function CategoryClient({ category }) {
         ],
       },
     },
-    Takedown: {
+    TAKEDOWN: {
       subcategories: {
         "Single Leg Takedown": [
           { videoId: "3Bp4WzcPJIU" },
