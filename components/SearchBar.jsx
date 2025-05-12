@@ -69,14 +69,14 @@ export default function SearchBar({ isSearchOpen, setIsSearchOpen, navItems }) {
         />
         <button
           type="submit"
-          className={`absolute right-10 top-1/2 -translate-y-1/2 bg-none border-none text-[1.8rem] text-[#888] cursor-pointer hover:text-[#00e676] max-[900px]:right-12 max-[900px]:text-[2.5rem]`}
+          className={`absolute right-10 top-1/2 -translate-y-1/2 bg-none border-none text-[1.8rem] text-[#888] cursor-pointer hover:text-[#1e90ff] max-[900px]:right-12 max-[900px]:text-[2.5rem]`}
         >
           <FaSearch />
         </button>
         <button
           type="button"
           onClick={handleCloseSearch}
-          className={`absolute right-2.5 top-1/2 -translate-y-1/2 bg-none border-none text-[1.8rem] text-[#888] cursor-pointer hover:text-[#00e676] max-[900px]:right-7 max-[900px]:text-[2.5rem]`}
+          className={`absolute right-2.5 top-1/2 -translate-y-1/2 bg-none border-none text-[1.8rem] text-[#888] cursor-pointer hover:text-[#1e90ff] max-[900px]:right-7 max-[900px]:text-[2.5rem]`}
         >
           ✕
         </button>
@@ -100,7 +100,7 @@ export default function SearchBar({ isSearchOpen, setIsSearchOpen, navItems }) {
                           result.category
                         )}/${encodeURIComponent(result.value)}`
                   }
-                  className="block text-white text-[1.6rem] px-4 py-3 hover:bg-[#333] hover:text-[#00e676]"
+                  className="block text-white text-[1.6rem] px-4 py-3 hover:bg-[#333] hover:text-[#1e90ff]"
                   onClick={() => {
                     setIsSearchOpen(false); // 點擊結果後關閉搜尋框
                     setSearchQuery(""); // 清空搜尋框

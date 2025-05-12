@@ -193,7 +193,7 @@ export default function NavBar() {
         >
           <Link
             href="/"
-            className={`flex items-center no-underline text-white text-[2.5rem] hover:text-[#00e676]`}
+            className={`flex items-center no-underline text-white text-[2.5rem] hover:text-[#1e90ff]`}
           >
             <Image
               src="/bjj-letter-logo.png"
@@ -202,9 +202,6 @@ export default function NavBar() {
               height={60}
               style={{ verticalAlign: "middle" }}
             />
-            <span className={`ml-2.5 max-[900px]:hidden share-tech-regular`}>
-              BJJ.JPG
-            </span>{" "}
             {/* 應用 Share Tech 字體到 Logo 文字 */}
           </Link>
         </div>
@@ -255,7 +252,7 @@ export default function NavBar() {
                         item.category.toLowerCase()
                       )}`} // 對類別名稱進行 URL 編碼
                       onClick={() => handleDropdownClick(index)}
-                      className={`no-underline text-white leading-[65px] text-[2.4rem] hover:text-[#00e676] max-[900px]:text-left max-[900px]:w-full max-[900px]:text-[3rem] max-[900px]:px-7 max-[900px]:py-5 max-[900px]:flex max-[900px]:items-center max-[900px]:gap-2.5 max-[900px]:text-white! max-[900px]:cursor-pointer`}
+                      className={`no-underline text-white leading-[65px] text-[2.4rem] hover:text-[#1e90ff] max-[900px]:text-left max-[900px]:w-full max-[900px]:text-[3rem] max-[900px]:px-7 max-[900px]:py-5 max-[900px]:flex max-[900px]:items-center max-[900px]:gap-2.5 max-[900px]:text-white! max-[900px]:cursor-pointer`}
                     >
                       {item.category}
                     </Link>
@@ -270,9 +267,9 @@ export default function NavBar() {
                         <Link
                           key={subcategory}
                           href={`/${encodeURIComponent(
-                            subcategory
-                          ).toLowerCase()}`} // 對子類別名稱進行 URL 編碼
-                          className={`block text-white text-[1.6rem] px-4 py-3 text-left leading-normal hover:bg-[#333] hover:text-[#00e676] max-[900px]:text-[2rem] max-[900px]:px-[50px] max-[900px]:text-left max-[900px]:border-t border-[#333] max-[900px]:text-white! last:border-b last:border-[#333]`}
+                            item.category
+                          )}/${encodeURIComponent(subcategory)}`} // 對子類別名稱進行 URL 編碼
+                          className={`block text-white text-[1.6rem] px-4 py-3 text-left leading-normal hover:bg-[#333] hover:text-[#1e90ff] max-[900px]:text-[2rem] max-[900px]:px-[50px] max-[900px]:text-left max-[900px]:border-t border-[#333] max-[900px]:text-white! last:border-b last:border-[#333]`}
                         >
                           {subcategory}
                         </Link>
@@ -284,14 +281,14 @@ export default function NavBar() {
               {!isMobile && (
                 <div className="flex items-center gap-10">
                   <span
-                    className={`cursor-pointer text-[2.8rem] text-white z-[1003] block -translate-y-1.5 hover:text-[#00e676]`}
+                    className={`cursor-pointer text-[2.8rem] text-white z-[1003] block -translate-y-1.5 hover:text-[#1e90ff]`}
                     onClick={handleSearchClick}
                   >
                     <FaSearch />
                   </span>
                   <Link
                     href="/login"
-                    className={`cursor-pointer text-[2.8rem] text-white z-[1003] block -translate-y-1.5 hover:text-[#00e676]`}
+                    className={`cursor-pointer text-[2.8rem] text-white z-[1003] block -translate-y-1.5 hover:text-[#1e90ff]`}
                   >
                     <FaUser />
                   </Link>
@@ -304,7 +301,7 @@ export default function NavBar() {
               className={`fixed top-0 left-0 w-full h-screen bg-[#111] z-[1002] overflow-y-auto pt-[65px]`} // 子選單顯示條件：activeSubmenu 不為 null 且為手機版
             >
               <div
-                className={`px-5 py-5 text-[2rem] text-[#00e676] cursor-pointer border-b border-[#333] share-tech-regular`}
+                className={`px-5 py-5 text-[2rem] text-[#1e90ff] cursor-pointer border-b border-[#333] share-tech-regular`}
                 onClick={handleBackToMainMenu}
               >
                 BACK {/* 應用 Share Tech 字體到子選單的返回按鈕 */}
@@ -318,7 +315,7 @@ export default function NavBar() {
                       href={`/${encodeURIComponent(
                         navItems[activeSubmenu].category
                       )}/${encodeURIComponent(subcategory)}`} // 對子類別名稱進行 URL 編碼
-                      className={`block text-[3rem] px-12 py-5 text-left text-white no-underline hover:text-[#00e676]`}
+                      className={`block text-[3rem] px-12 py-5 text-left text-white no-underline hover:text-[#8df2f2]`}
                     >
                       {subcategory}
                     </Link>
