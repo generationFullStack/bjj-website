@@ -8,7 +8,7 @@ export default function Home() {
     <>
       <section className="home flex items-center justify-center">
         <h1 className="text-5xl md:text-6xl font-bold text-center">
-          Welcome to <br /> Brazilian Jiu-Jitsu
+          Welcome to <br /> BJJ.JPG
         </h1>
       </section>
       <div></div>

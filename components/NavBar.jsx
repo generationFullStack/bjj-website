@@ -86,15 +86,22 @@ export default function NavBar() {
   }, [isClient]);
 
   useEffect(() => {
+    // 獲取主內容區域的元素，用於添加或移除模糊效果
     const mainContent = document.querySelector(".mainContent");
+    // 檢查 mainContent 是否存在，防止 DOM 未渲染完成時操作導致錯誤
     if (mainContent) {
       if (hoveredItem !== null || isSearchOpen) {
-        mainContent.classList.add(styles.blurContent);
+        // 當滑鼠懸停在導航項或搜尋框打開時，添加模糊效果
+        mainContent.classList.add(styles.blurContent); // 修正：classNameList 改為 classList，classList 是 DOM 元素的標準屬性，用於操作 CSS 類名
       } else {
-        mainContent.classList.remove(styles.blurContent);
+        // 當滑鼠離開導航項且搜尋框關閉時，移除模糊效果
+        mainContent.classList.remove(styles.blurContent); // 修正：classNameList 改為 classList
       }
+    } else {
+      // 如果 mainContent 不存在，記錄警告（可選）
+      console.warn("mainContent element not found in the DOM.");
     }
-  }, [hoveredItem, isSearchOpen]);
+  }, [hoveredItem, isSearchOpen]); // 依賴 hoveredItem 和 isSearchOpen，當這些狀態變化時觸發效果
 
   const handleNavTriggerClick = () => {
     console.log("Before click, isMenuOpen:", isMenuOpen); // 調試
@@ -193,7 +200,7 @@ export default function NavBar() {
         >
           <Link
             href="/"
-            className={`flex items-center no-underline text-white text-[2.5rem] hover:text-[#1e90ff]`}
+            className={`flex items-center no-underline text-white text-[2.5rem] hover:text-[#1e90ff]`} // hover 效果由 CSS 控制，手機版通過 @media (hover: none) 禁用
           >
             <Image
               src="/bjj-letter-logo.png"
@@ -202,6 +209,7 @@ export default function NavBar() {
               height={60}
               style={{ verticalAlign: "middle" }}
             />
+            <span> BJJ.JPG</span>
             {/* 應用 Share Tech 字體到 Logo 文字 */}
           </Link>
         </div>
@@ -252,7 +260,7 @@ export default function NavBar() {
                         item.category
                       ).toLowerCase()}`} // 對類別名稱進行 URL 編碼
                       onClick={() => handleDropdownClick(index)}
-                      className={`no-underline text-white leading-[65px] text-[2.4rem] hover:text-[#1e90ff] max-[900px]:text-left max-[900px]:w-full max-[900px]:text-[3rem] max-[900px]:px-7 max-[900px]:py-5 max-[900px]:flex max-[900px]:items-center max-[900px]:gap-2.5 max-[900px]:text-white! max-[900px]:cursor-pointer`}
+                      className={`no-underline text-white leading-[65px] text-[2.4rem] hover:text-[#1e90ff] max-[900px]:text-left max-[900px]:w-full max-[900px]:text-[3rem] max-[900px]:px-7 max-[900px]:py-5 max-[900px]:flex max-[900px]:items-center max-[900px]:gap-2.5 max-[900px]:text-white! max-[900px]:cursor-pointer`} // hover 效果由 CSS 控制，手機版通過 @media (hover: none) 禁用
                     >
                       {item.category}
                     </Link>
@@ -269,7 +277,7 @@ export default function NavBar() {
                           href={`/${encodeURIComponent(
                             subcategory
                           ).toLowerCase()}`} // 對子類別名稱進行 URL 編碼
-                          className={`block text-white text-[1.6rem] px-4 py-3 text-left leading-normal hover:bg-[#333] hover:text-[#1e90ff] max-[900px]:text-[2rem] max-[900px]:px-[50px] max-[900px]:text-left max-[900px]:border-t border-[#333] max-[900px]:text-white! last:border-b last:border-[#333]`}
+                          className={`block text-white text-[1.6rem] px-4 py-3 text-left leading-normal hover:bg-[#333] hover:text-[#1e90ff] max-[900px]:text-[2rem] max-[900px]:px-[50px] max-[900px]:text-left max-[900px]:border-t border-[#333] max-[900px]:text-white! last:border-b last:border-[#333]`} // hover 效果由 CSS 控制，手機版通過 @media (hover: none) 禁用
                         >
                           {subcategory}
                         </Link>
@@ -281,14 +289,14 @@ export default function NavBar() {
               {!isMobile && (
                 <div className="flex items-center gap-10">
                   <span
-                    className={`cursor-pointer text-[2.8rem] text-white z-[1003] block -translate-y-1.5 hover:text-[#1e90ff]`}
+                    className={`cursor-pointer text-[2.8rem] text-white z-[1003] block -translate-y-1.5 hover:text-[#1e90ff]`} // 桌面版保留 hover 效果：hover:text-[#1e90ff]
                     onClick={handleSearchClick}
                   >
                     <FaSearch />
                   </span>
                   <Link
                     href="/login"
-                    className={`cursor-pointer text-[2.8rem] text-white z-[1003] block -translate-y-1.5 hover:text-[#1e90ff]`}
+                    className={`cursor-pointer text-[2.8rem] text-white z-[1003] block -translate-y-1.5 hover:text-[#1e90ff]`} // 桌面版保留 hover 效果：hover:text-[#1e90ff]
                   >
                     <FaUser />
                   </Link>
@@ -301,7 +309,7 @@ export default function NavBar() {
               className={`fixed top-0 left-0 w-full h-screen bg-[#111] z-[1002] overflow-y-auto pt-[65px]`} // 子選單顯示條件：activeSubmenu 不為 null 且為手機版
             >
               <div
-                className={`px-5 py-5 text-[2rem] text-[#1e90ff] cursor-pointer border-b border-[#333] share-tech-regular`}
+                className={`px-5 py-5 text-[2rem] text-[#1e90ff] cursor-pointer border-b border-[#333] share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
                 onClick={handleBackToMainMenu}
               >
                 BACK {/* 應用 Share Tech 字體到子選單的返回按鈕 */}
@@ -315,7 +323,7 @@ export default function NavBar() {
                       href={`/${encodeURIComponent(
                         navItems[activeSubmenu].category
                       )}/${encodeURIComponent(subcategory)}`} // 對子類別名稱進行 URL 編碼
-                      className={`block text-[3rem] px-12 py-5 text-left text-white no-underline hover:text-[#8df2f2]`}
+                      className={`block text-[3rem] px-12 py-5 text-left text-white no-underline`} // 手機版移除 hover 效果：移除 hover:text-[#8df2f2]，確保懸停時顏色不變
                     >
                       {subcategory}
                     </Link>
@@ -328,7 +336,7 @@ export default function NavBar() {
         {isMobile && !isSearchOpen && (
           <div className="flex items-center gap-4">
             <span
-              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[100px] top-1/2 -translate-y-1/2 share-tech-regular`} // 調整 right 位置以容納 FaUser 圖標
+              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[100px] top-1/2 -translate-y-1/2 share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
               onClick={handleSearchClick}
             >
               {console.log(
@@ -344,7 +352,7 @@ export default function NavBar() {
             </span>
             <Link
               href="/login"
-              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[60px] top-1/2 -translate-y-1/2 share-tech-regular`} // 放置在 FaSearch 旁邊
+              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[60px] top-1/2 -translate-y-1/2 share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
             >
               <FaUser />
             </Link>
