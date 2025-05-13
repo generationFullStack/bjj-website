@@ -220,14 +220,14 @@
     height: 100vh;
     background-color: #111;
     z-index: 1002;
-    padding-top: 65px; /* 保留：確保搜尋框距離頂部 65px，以考慮導航欄高度 */
+    padding-top: 65px;
     display: flex;
-    align-items: flex-start; /* 保留：確保搜尋框靠近頂部 */
-    justify-content: center; /* 修改：將 justify-content 從 flex-start 改為 center，確保搜尋框水平居中 */
+    align-items: flex-start;
+    justify-content: flex-start;
   }
 
   .searchForm {
-    width: 90%; /* 修改：將 width 從 100% 改為 90%，確保搜尋框有適當的邊距 */
+    width: 100%;
     padding: 20px 30px;
     position: relative;
   }

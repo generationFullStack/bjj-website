@@ -1,9 +1,3 @@
-/**
- * Category.jsx
- * 顯示指定類別的 YouTube 影片列表。
- * 當加載條顯示時，對背景內容應用模糊效果。
- */
-
 "use client";
 import { useEffect, useState } from "react";
 import CategoryLoadingbar from "@/components/CategoryLoadingbar"; // 引入加載條組件
@@ -11,72 +5,9 @@ import CategoryLoadingbar from "@/components/CategoryLoadingbar"; // 引入加�
 const YOUTUBE_API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
 
 export default function Category({ category }) {
-  const [videoIds, setVideoIds] = useState([]); // 儲存影片 ID 列表
-  const [videosData, setVideosData] = useState([]); // 儲存影片資料
-  const [loadingProgress, setLoadingProgress] = useState(0); // 儲存加載進度（0-100）
-  const [isLoading, setIsLoading] = useState(true); // 控制加載條是否顯示
-  const [startTime, setStartTime] = useState(null); // 記錄 fetch 開始時間
-  const [estimatedDuration, setEstimatedDuration] = useState(3000); // 估計 fetch 時長（默認 3 秒）
-  const [isFetchComplete, setIsFetchComplete] = useState(false); // 標記 fetch 是否完成
+  const [videoIds, setVideoIds] = useState([]);
+  const [videosData, setVideosData] = useState([]);
 
-  // 模擬加載進度的效果，根據 fetch 時間動態更新
-  useEffect(() => {
-    if (!isLoading || !startTime) return; // 如果加載完成或未開始，停止模擬進度
-
-    // 每 50ms 計算進度，根據當前時間和估計時長
-    const interval = setInterval(() => {
-      if (isFetchComplete) {
-        // 如果 fetch 已完成，確保進度平滑到 100%
-        setLoadingProgress((prev) => {
-          if (prev >= 100) {
-            clearInterval(interval);
-            // 等待進度動畫完成（500ms，與 transition-all duration-500 一致）後隱藏加載條
-            setTimeout(() => {
-              setIsLoading(false);
-            }, 500);
-            return 100;
-          }
-          return prev + 5; // 快速增加到 100%
-        });
-      } else {
-        // 如果 fetch 未完成，根據時間比例計算進度
-        const elapsedTime = Date.now() - startTime; // 計算已過去的時間
-        const progress = Math.min(
-          (elapsedTime / estimatedDuration) * 100, // 根據時間比例計算進度
-          90 // 最大進度 90%，避免提前到 100%
-        );
-
-        setLoadingProgress(progress);
-
-        if (progress >= 90) {
-          clearInterval(interval); // 達到 90% 時停止計時，等待 fetch 完成
-        }
-      }
-    }, 50);
-
-    return () => clearInterval(interval); // 清除計時器
-  }, [isLoading, startTime, estimatedDuration, isFetchComplete]);
-
-  // 當加載條顯示時，對背景內容應用模糊效果
-  useEffect(() => {
-    // 獲取主內容區域的元素，用於添加或移除模糊效果
-    const mainContent = document.querySelector(".mainContent");
-    // 檢查 mainContent 是否存在，防止 DOM 未渲染完成時操作導致錯誤
-    if (mainContent) {
-      if (isLoading) {
-        // 當加載條顯示時，添加模糊效果
-        mainContent.classList.add("blurContent");
-      } else {
-        // 當加載條隱藏時，移除模糊效果
-        mainContent.classList.remove("blurContent");
-      }
-    } else {
-      // 如果 mainContent 不存在，記錄警告
-      console.warn("mainContent element not found in the DOM.");
-    }
-  }, [isLoading]); // 依賴 isLoading，當加載狀態變化時觸發效果
-
-  // 獲取影片 ID 列表
   useEffect(() => {
     async function fetchVideoIds() {
       try {
