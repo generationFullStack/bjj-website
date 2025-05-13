@@ -142,24 +142,24 @@ export default function NavBar() {
   for (let i = 0; i < categories.length; i++) {
     switch (categories[i]["parent_id"]) {
       case 20:
-        SubmissionSubcategories.push(categories[i]["name"].toUpperCase()); // 轉為大寫
+        SubmissionSubcategories.push(categories[i]["name"].toUpperCase());
         break;
 
       case 19:
-        GuardPassingSubcategories.push(categories[i]["name"].toUpperCase()); // 轉為大寫
+        GuardPassingSubcategories.push(categories[i]["name"].toUpperCase());
         break;
 
       case 22:
-        DefenseSubcategories.push(categories[i]["name"].toUpperCase()); // 轉為大寫
+        DefenseSubcategories.push(categories[i]["name"].toUpperCase());
         break;
 
       case 33:
-        TakeDownSubcategories.push(categories[i]["name"].toUpperCase()); // 轉為大寫
+        TakeDownSubcategories.push(categories[i]["name"].toUpperCase());
         break;
     }
   }
 
-  // 定義類別和子類別數據，並轉為大寫
+  // 定義類別和子類別數據
   const navItems = [
     {
       category: "SUBMISSION", // 直接設置為大寫
@@ -249,8 +249,8 @@ export default function NavBar() {
                   >
                     <Link
                       href={`/${encodeURIComponent(
-                        item.category.toLowerCase()
-                      )}`} // 對類別名稱進行 URL 編碼
+                        item.category
+                      ).toLowerCase()}`} // 對類別名稱進行 URL 編碼
                       onClick={() => handleDropdownClick(index)}
                       className={`no-underline text-white leading-[65px] text-[2.4rem] hover:text-[#1e90ff] max-[900px]:text-left max-[900px]:w-full max-[900px]:text-[3rem] max-[900px]:px-7 max-[900px]:py-5 max-[900px]:flex max-[900px]:items-center max-[900px]:gap-2.5 max-[900px]:text-white! max-[900px]:cursor-pointer`}
                     >
@@ -267,8 +267,8 @@ export default function NavBar() {
                         <Link
                           key={subcategory}
                           href={`/${encodeURIComponent(
-                            item.category
-                          )}/${encodeURIComponent(subcategory)}`} // 對子類別名稱進行 URL 編碼
+                            subcategory
+                          ).toLowerCase()}`} // 對子類別名稱進行 URL 編碼
                           className={`block text-white text-[1.6rem] px-4 py-3 text-left leading-normal hover:bg-[#333] hover:text-[#1e90ff] max-[900px]:text-[2rem] max-[900px]:px-[50px] max-[900px]:text-left max-[900px]:border-t border-[#333] max-[900px]:text-white! last:border-b last:border-[#333]`}
                         >
                           {subcategory}
