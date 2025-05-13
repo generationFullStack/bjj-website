@@ -92,9 +92,7 @@ export default function SearchBar({ isSearchOpen, setIsSearchOpen, navItems }) {
                   href={
                     result.type === "category"
                       ? `/${encodeURIComponent(result.value.toLowerCase())}` // 修改：將 result.value 轉為小寫，確保 URL 是小寫
-                      : `/${encodeURIComponent(
-                          result.category.toLowerCase()
-                        )}/${encodeURIComponent(result.value.toLowerCase())}` // 修改：將 result.category 和 result.value 轉為小寫，確保 URL 是小寫
+                      : `/${encodeURIComponent(result.value.toLowerCase())}` // 修改：將 result.category 和 result.value 轉為小寫，確保 URL 是小寫
                   }
                   className="block text-white text-[1.6rem] px-4 py-3 hover:bg-[#333] hover:text-[#1e90ff] max-[900px]:text-[2rem] max-[900px]:py-3" // 手機版通過 @media (hover: none) 禁用 hover 效果
                   onClick={() => {
