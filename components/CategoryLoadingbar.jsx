@@ -29,7 +29,7 @@ export default function CategoryLoadingbar({ progress, isVisible }) {
             style={{ width: `${progress}%` }} // 動態設置進度寬度
           ></span>
           {/* 加載文字：顯示 "loading"，使用 Arial 字體，加粗，置中，距離進度條上方 30px */}
-          <div className="font-arial font-bold text-center mt-[-30px] text-white">
+          <div className="font-bold text-center mt-[-30px] text-white text-6xl">
             loading
           </div>
         </div>
