@@ -233,7 +233,7 @@ export default function NavBar({ isUserLogged }) {
               isMobile ? (isMenuOpen ? "block" : "hidden") : "block"
             } ${
               isSearchOpen ? "hidden" : ""
-            } max-[900px]:w-full max-[900px]:min-h-screen max-[900px]:bg-[#111] max-[900px]:absolute max-[900px]:top-0 max-[900px]:left-0`} // 移除 activeSubmenu 條件，確保手機版選單展開時顯示，添加定位屬性確保內容可見，調整顯示條件以同步 isMenuOpen 狀態
+            } max-[900px]:w-full max-[900px]:min-h-screen max-[900px]:bg-[#111] max-[900px]:absolute max-[900px]:top-0 max-[900px]:left-0 mt-24`} // 移除 activeSubmenu 條件，確保手機版選單展開時顯示，添加定位屬性確保內容可見，調整顯示條件以同步 isMenuOpen 狀態
           >
             <div
               className={`flex items-center h-[65px] mr-8 max-[900px]:block`}
@@ -346,7 +346,7 @@ export default function NavBar({ isUserLogged }) {
         {isMobile && !isSearchOpen && (
           <div className="flex items-center gap-4">
             <span
-              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[105px] top-1/2 -translate-y-1/2 share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
+              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[155px] top-1/2 -translate-y-1/2 share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
               onClick={handleSearchClick}
             >
               {console.log(
@@ -363,7 +363,7 @@ export default function NavBar({ isUserLogged }) {
               href="/login"
               className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[70px] top-1/2 -translate-y-1/2 share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
             >
-              <FaUser />
+              <div>LOGIN</div>
             </Link>
             {/* 漢堡選單 (navTrigger) - 現在最右邊，位置調整為 right: 60px */}
             <span
