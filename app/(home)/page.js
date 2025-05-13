@@ -1,43 +1,82 @@
-// src/app/page.js
+"use client";
+
 import BjjGymBanner from "@/components/BjjGymBanner";
 import Image from "next/image";
 import Link from "next/link";
+import Script from "next/script";
+import { useEffect } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      window.onYouTubeIframeAPIReady = () => {
+        new window.YT.Player("youtube-player", {
+          videoId: "SXtu_8K2osk",
+          playerVars: {
+            autoplay: 1,
+            mute: 1,
+            loop: 1,
+            playlist: "SXtu_8K2osk",
+            controls: 0,
+            modestbranding: 1,
+            showinfo: 0,
+            iv_load_policy: 3,
+            disablekb: 1,
+            fs: 0,
+          },
+          events: {
+            onReady: (event) => {
+              event.target.playVideo();
+            },
+            onStateChange: (event) => {
+              if (event.data === window.YT.PlayerState.ENDED) {
+                event.target.playVideo();
+              }
+            },
+          },
+        });
+      };
+    }
+  }, []);
+
   return (
     <>
+      <Script
+        src="https://www.youtube.com/iframe_api"
+        strategy="afterInteractive"
+      />
+
       <section className="home flex items-center justify-center">
         <h1 className="text-5xl md:text-6xl font-bold text-center">
           Welcome to <br /> BJJ.JPG
         </h1>
       </section>
       <div></div>
-      {/* 視頻同圖片並排區塊 */}
-      <section className="banner-section py-10 bg-[#111] flex flex-row justify-between items-center gap-5">
-        {/* 左邊視頻 */}
-        <div className="video-container flex-1 max-w-4xl relative">
-          {/* 嵌入 YouTube 影片的 iframe */}
-          <iframe
-            className="w-full rounded-lg aspect-video pointer-events-none" // w-full 和 aspect-video 確保影片寬度適應容器並保持 16:9 比例；pointer-events-none 禁用所有滑鼠事件，防止用戶操作（例如暫停、播放）
-            src="https://www.youtube.com/embed/SXtu_8K2osk?autoplay=1&mute=1&loop=1&playlist=SXtu_8K2osk&controls=0&modestbranding=1" // YouTube 嵌入 URL 設置：
-            // - autoplay=1：自動播放影片
-            // - mute=1：影片靜音（必須靜音，否則瀏覽器可能阻止自動播放）
-            // - loop=1：啟用循環播放
-            // - playlist=SXtu_8K2osk：指定播放列表（與影片 ID 相同），配合 loop=1 實現循環
-            // - controls=0：隱藏 YouTube 控制條
-            // - modestbranding=1：減少 YouTube 品牌顯示（例如隱藏 YouTube 標誌），但無法完全移除“建議觀看”提示
-            title="YouTube video player" // 提供影片標題，用於無障礙訪問
-            frameBorder="0" // 移除 iframe 邊框
-            allow="autoplay; encrypted-media" // 只允許必要的權限：autoplay（自動播放）和 encrypted-media（加密媒體）
-          ></iframe>
-          {/* 遮罩層，防止交互 */}
-          <div className="absolute inset-0 bg-transparent pointer-events-none"></div>
-          {/* absolute inset-0：遮罩層覆蓋整個 iframe（與 iframe 尺寸相同）
-             bg-transparent：遮罩層透明，不影響影片顯示
-             pointer-events-none：確保遮罩層不會響應滑鼠事件，進一步防止交互 */}
+      {/* 視頻和 BjjGymBanner 垂直排列 */}
+      <section className="banner-section py-10 bg-[#111] flex flex-col items-center gap-10">
+        {/* 視頻同文字嘅水平容器 */}
+        <div className="video-text-container w-full max-w-7xl flex flex-col md:flex-row items-start justify-center gap-10">
+          {/* 視頻 */}
+          <div className="video-container w-full max-w-4xl relative">
+            <div
+              id="youtube-player"
+              className="w-full rounded-lg aspect-video pointer-events-none"
+            />
+            <div className="absolute inset-0 bg-transparent pointer-events-none"></div>
+          </div>
+          {/* 文字 */}
+          <div className="text-container w-full max-w-md text-white p-6">
+            <p className="text-3xl leading-relaxed">
+              Its techniques and strategies are based on in-depth research into
+              ground fighting. Jiu-jitsu practitioners excel at bringing
+              opponents to the ground and then gaining dominant positions.
+              Brazilian Jiu-Jitsu techniques primarily focus on positional
+              control and various submission holds.
+            </p>
+          </div>
         </div>
-        {/* 右邊圖片同文字 */}
-        <div className="banner-container flex-1">
+        {/* BjjGymBanner 全寬 */}
+        <div className="banner-container w-full">
           <BjjGymBanner />
         </div>
       </section>

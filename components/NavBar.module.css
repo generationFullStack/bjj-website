@@ -7,7 +7,7 @@
   height: 25px;
   margin: auto;
   position: absolute;
-  right: 30px;
+  right: 90px; /* 調整為中間位置，與 JSX 中的 style 同步 */
   top: 0;
   bottom: 0;
   z-index: 1003;
@@ -113,8 +113,10 @@
 /* 手機版樣式 */
 @media screen and (max-width: 900px) {
   .navTrigger {
-    display: block;
+    display: block; /* 確保手機版顯示 */
+    right: 90px; /* 與上方同步，放置中間 */
   }
+  /* ... 其他樣式保持不變 */
 
   .logo {
     margin-left: 15px;

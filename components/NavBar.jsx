@@ -335,8 +335,13 @@ export default function NavBar() {
         </div>
         {isMobile && !isSearchOpen && (
           <div className="flex items-center gap-4">
+            {/* 放大鏡 (FaSearch) - 現在最左邊 */}
             <span
+<<<<<<< HEAD
               className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[100px] top-1/2 -translate-y-1/2 share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
+=======
+              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[140px] top-1/2 -translate-y-1/2 share-tech-regular`} // 調整 right 位置，移動到最左邊
+>>>>>>> cd3e676 (update by Jason)
               onClick={handleSearchClick}
             >
               {console.log(
@@ -350,9 +355,26 @@ export default function NavBar() {
               {/* 調試 */}
               <FaSearch />
             </span>
+            {/* 漢堡選單 (navTrigger) - 現在中間 */}
+            <span
+              className={`block ${styles.navTrigger} ${
+                isMenuOpen ? "active" : ""
+              }`} // 移除 hidden 類，確保始終顯示，並調整位置
+              onClick={handleNavTriggerClick}
+              style={{ right: "90px" }} // 調整為中間位置
+            >
+              <i></i>
+              <i></i>
+              <i></i>
+            </span>
+            {/* 登入 (FaUser) - 現在最右邊 */}
             <Link
               href="/login"
+<<<<<<< HEAD
               className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[60px] top-1/2 -translate-y-1/2 share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
+=======
+              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[40px] top-1/2 -translate-y-1/2 share-tech-regular`} // 調整 right 位置，移動到最右邊
+>>>>>>> cd3e676 (update by Jason)
             >
               <FaUser />
             </Link>
