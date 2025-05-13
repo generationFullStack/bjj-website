@@ -32,7 +32,7 @@ const VideoTextSlider = () => {
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
-    }, 5000); // 每 5 秒切換
+    }, 8000); // 每 8 秒切換
 
     return () => clearInterval(interval); // 清理 interval
   }, [slides.length, isHovered, isDragging]); // 依賴 isHovered 和 isDragging
