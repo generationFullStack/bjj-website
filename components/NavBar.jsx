@@ -22,22 +22,19 @@ export default function NavBar() {
 
   const [categories, setCategories] = useState([]); // manage the categories fetched from the db --Gavin
 
-  //-------------------------------------- fetch categories from the db --Gavin-----
-  async function fetchCategories() {
-    try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`
-      );
-      const body = await response.json();
-      setCategories(body);
-    } catch (error) {}
-  }
-
   useEffect(() => {
-    // fetch categories from database to show on the navbar --Gavin
+    // fetch categories from db
+    async function fetchCategories() {
+      try {
+        const response = await fetch(
+          `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`
+        );
+        const body = await response.json();
+        setCategories(body);
+      } catch (error) {}
+    }
     fetchCategories();
   }, []);
-  //--------------------------------------------------------------------------------
 
   useEffect(() => {
     setIsClient(true);
@@ -337,11 +334,7 @@ export default function NavBar() {
           <div className="flex items-center gap-4">
             {/* 放大鏡 (FaSearch) - 現在最左邊 */}
             <span
-<<<<<<< HEAD
-              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[100px] top-1/2 -translate-y-1/2 share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
-=======
               className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[140px] top-1/2 -translate-y-1/2 share-tech-regular`} // 調整 right 位置，移動到最左邊
->>>>>>> cd3e676 (update by Jason)
               onClick={handleSearchClick}
             >
               {console.log(
@@ -370,11 +363,7 @@ export default function NavBar() {
             {/* 登入 (FaUser) - 現在最右邊 */}
             <Link
               href="/login"
-<<<<<<< HEAD
-              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[60px] top-1/2 -translate-y-1/2 share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
-=======
               className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[40px] top-1/2 -translate-y-1/2 share-tech-regular`} // 調整 right 位置，移動到最右邊
->>>>>>> cd3e676 (update by Jason)
             >
               <FaUser />
             </Link>
