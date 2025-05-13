@@ -1,7 +1,6 @@
 /**
  * CategoryLoadingbar.jsx
  * 一個加載條組件，用於顯示影片資料獲取時的進度。
- * 參考 CodePen 示例[](https://codepen.io/nfj525/pen/AeRZOr) 設計。
  * 加載條包含一個進度條和 "loading" 文字，位於頁面中間。
  * 進度條根據 fetch 時間動態更新，完成後消失。
  * 使用 Tailwind CSS 實現樣式，並恢復模糊背景效果，防止背景互動。

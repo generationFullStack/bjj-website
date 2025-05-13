@@ -1,14 +1,7 @@
-/**
- * Category.jsx
- * 顯示指定類別的 YouTube 影片列表。
- * 整合 CategoryLoadingbar 組件，在資料獲取時顯示加載條。
- * 加載條根據 fetch 時間動態更新進度，完成後平滑到 100% 才消失。
- * 當加載條顯示時，對背景內容應用模糊效果。
- */
-
 "use client";
 import { useEffect, useState } from "react";
 import CategoryLoadingbar from "@/components/CategoryLoadingbar"; // 引入加載條組件
+import { FaPlay } from "react-icons/fa"; // 引入播放圖標
 
 const YOUTUBE_API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
 
@@ -20,6 +13,9 @@ export default function Category({ category }) {
   const [startTime, setStartTime] = useState(null); // 記錄 fetch 開始時間
   const [estimatedDuration, setEstimatedDuration] = useState(3000); // 估計 fetch 時長（默認 3 秒）
   const [isFetchComplete, setIsFetchComplete] = useState(false); // 標記 fetch 是否完成
+
+  // 解碼類別名稱，將 URL 編碼的字符串轉為正常格式（例如 guard%20passing -> GUARD PASSING）
+  const decodedCategory = decodeURIComponent(category).toUpperCase();
 
   // 模擬加載進度的效果，根據 fetch 時間動態更新
   useEffect(() => {
@@ -89,11 +85,22 @@ export default function Category({ category }) {
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_BASE_URL}/api/videos/${category}`
         );
+
+        // 檢查 API 響應狀態
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const body = await response.json();
         const array = [];
 
-        for (let i = 0; i < body.length; i++) {
-          array.push(body[i].youtube_id);
+        // 檢查 API 返回的數據是否有效
+        if (Array.isArray(body)) {
+          for (let i = 0; i < body.length; i++) {
+            array.push(body[i].youtube_id);
+          }
+        } else {
+          console.warn("fetchVideoIds: API 返回的數據不是陣列:", body);
         }
 
         setVideoIds(array);
@@ -103,6 +110,7 @@ export default function Category({ category }) {
         setEstimatedDuration(fetchDuration * 2); // 設置為實際時長的 2 倍，作為後續 fetch 的估計
       } catch (error) {
         console.error("獲取影片 ID 失敗:", error);
+        setVideoIds([]); // 確保在錯誤時 videoIds 為空陣列
         setIsFetchComplete(true); // 發生錯誤時標記為完成
       }
     }
@@ -112,7 +120,13 @@ export default function Category({ category }) {
   // 獲取影片詳細資料
   useEffect(() => {
     async function fetchVideosData() {
-      if (videoIds.length === 0) return; // 如果沒有影片 ID，則不執行
+      if (videoIds.length === 0) {
+        // 如果 videoIds 為空，模擬一個最小加載時間，避免 loading bar 提前消失
+        setTimeout(() => {
+          setIsFetchComplete(true);
+        }, estimatedDuration);
+        return;
+      }
 
       try {
         setStartTime(Date.now()); // 記錄 fetch 開始時間
@@ -123,51 +137,87 @@ export default function Category({ category }) {
             ","
           )}&key=${YOUTUBE_API_KEY}`
         );
+
+        // 檢查 API 響應狀態
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
         const body = await response.json();
 
-        const array = body.items.map((item) => ({
-          videoId: item.id,
-          title: item.snippet.title,
-        }));
+        // 檢查 API 返回的數據是否有效
+        const array = Array.isArray(body.items)
+          ? body.items.map((item) => ({
+              videoId: item.id,
+              title: item.snippet.title,
+            }))
+          : [];
 
         setVideosData(array);
         setIsFetchComplete(true); // 標記 fetch 完成，觸發進度到 100%
       } catch (error) {
         console.error("獲取影片資料失敗:", error);
+        setVideosData([]); // 確保在錯誤時 videosData 為空陣列
         setIsFetchComplete(true); // 發生錯誤時也標記為完成
       }
     }
     fetchVideosData();
-  }, [videoIds]); // 當 videoIds 變化時重新獲取
+  }, [videoIds, estimatedDuration]); // 當 videoIds 或 estimatedDuration 變化時重新獲取
 
-  console.log(videosData);
+  // 添加日誌檢查條件是否正確執行
+  useEffect(() => {
+    console.log("isLoading:", isLoading, "videosData:", videosData);
+  }, [isLoading, videosData]);
 
   return (
     <>
       {/* 加載條：根據 isLoading 控制顯示，progress 動態更新 */}
       <CategoryLoadingbar progress={loadingProgress} isVisible={isLoading} />
 
-      {/* 影片列表：使用網格佈局顯示影片 */}
-      <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-50 justify-items-center gap-30 p-10">
-        {videosData.map((element) => (
-          <li
-            key={element.videoId}
-            className="p-5 rounded-2xl bg-white/10 shadow-sm shadow-white/60 transition duration-200 ease-in-out hover:scale-103"
-          >
-            <a
-              href={`${process.env.NEXT_PUBLIC_BASE_URL}/video/${element.videoId}`}
-            >
-              <h1 className="text-center text-2xl md:text-3xl font-bold w-full h-25 mb-5 text-clip">
-                {element.title}
-              </h1>
-              <img
-                src={`https://img.youtube.com/vi/${element.videoId}/0.jpg`}
-                className="rounded-2xl"
-              />
-            </a>
-          </li>
-        ))}
-      </ul>
+      {/* 影片列表：使用網格佈局顯示影片，模仿 missav.ws 的設計 */}
+      <div className="max-w-[1300px] mx-auto mt-50 px-4 md:px-12 lg:px-12">
+        {/* 類別標題：顯示當前分頁的類別，模仿 missav.ws 的設計 */}
+        <h2 className="text-left text-5xl md:text-6xl text-white font-bold mb-12">
+          {decodedCategory}
+        </h2>
+        {/* 當影片列表為空時，顯示提示訊息 */}
+        {videosData.length === 0 && !isLoading ? (
+          <p className="text-center text-8xl text-gray-400 mt-4">
+            No Videos In This Category
+          </p>
+        ) : (
+          <ul className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
+            {videosData.map((element) => (
+              <li
+                key={element.videoId}
+                className="group relative transition-transform duration-300 ease-in-out"
+              >
+                <a
+                  href={`${process.env.NEXT_PUBLIC_BASE_URL}/video/${element.videoId}`}
+                  className="block"
+                >
+                  {/* 縮圖容器：設置固定大小，保持 16:9 比例，懸停時放大 */}
+                  <div className="relative w-full h-0 pb-[56.25%] overflow-hidden rounded-2xl">
+                    <img
+                      src={`https://img.youtube.com/vi/${element.videoId}/0.jpg`}
+                      className="absolute top-0 left-0 w-full h-full object-cover transition-transform duration-300 group-hover:scale-105 rounded-md"
+                      alt={element.title}
+                    />
+                    {/* 播放圖標：懸停時顯示，半透明背景 */}
+                    <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-black/50">
+                      <FaPlay className="text-white text-4xl" />
+                    </div>
+                  </div>
+                  {/* 標題：左對齊，懸停時變色 */}
+                  <h1 className="text-left text-2xl md:text-2xl text-white mt-2 line-clamp-2 group-hover:text-[#1e90ff] transition-colors duration-300">
+                    {element.title}
+                  </h1>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </>
   );
 }
