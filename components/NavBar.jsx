@@ -4,11 +4,12 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { FaSearch, FaUser } from "react-icons/fa"; // 引入 Font Awesome 的搜尋和使用者圖示
+import { FaSearch, FaSignOutAlt, FaUser } from "react-icons/fa"; // 引入 Font Awesome 的搜尋和使用者圖示
 import styles from "./NavBar.module.css";
 import SearchBar from "./SearchBar"; // 引入 SearchBar 組件
+import { logout } from "@/actions/action";
 
-export default function NavBar() {
+export default function NavBar({ isUserLogged }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isClient, setIsClient] = useState(false);
@@ -294,12 +295,23 @@ export default function NavBar() {
                   >
                     <FaSearch />
                   </span>
-                  <Link
-                    href="/login"
-                    className={`cursor-pointer text-[2.8rem] text-white z-[1003] block -translate-y-1.5 hover:text-[#1e90ff]`} // 桌面版保留 hover 效果：hover:text-[#1e90ff]
-                  >
-                    <FaUser />
-                  </Link>
+                  {isUserLogged ? (
+                    <form>
+                      <button
+                        formAction={logout}
+                        className={`cursor-pointer text-[2.8rem] text-white z-[1003] block -translate-y-1.5 hover:text-[#1e90ff]`} // 桌面版保留 hover 效果：hover:text-[#1e90ff]
+                      >
+                        <FaSignOutAlt />
+                      </button>
+                    </form>
+                  ) : (
+                    <Link
+                      href={"/login"}
+                      className={`cursor-pointer text-[2.8rem] text-white z-[1003] block -translate-y-1.5 hover:text-[#1e90ff]`}
+                    >
+                      LOGIN
+                    </Link>
+                  )}
                 </div>
               )}
             </div>

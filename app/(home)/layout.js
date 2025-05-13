@@ -11,8 +11,13 @@ export const metadata = {
   description: "J for Jason, P for Pan and G for Gavin",
 };
 
-export default function RootLayout({ children }) {
-  const userId = getSession();
+export default async function RootLayout({ children }) {
+  const session = await getSession();
+  let isSessionExist = false;
+
+  if (session) {
+    isSessionExist = true;
+  }
 
   return (
     <html lang="en">
@@ -25,7 +30,7 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <LoadingWrapper>
-          <NavBar />
+          <NavBar isUserLogged={isSessionExist} />
           <main className="mainContent">{children}</main>
           <Footer />
         </LoadingWrapper>
