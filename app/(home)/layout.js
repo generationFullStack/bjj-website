@@ -4,6 +4,7 @@ import NavBar from "../../components/NavBar";
 import LoadingWrapper from "../../components/LoadingWrapper";
 import Footer from "../../components/Footer";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import { getSession } from "@/lib/dal";
 
 export const metadata = {
   title: "BJJ.JPG",
@@ -11,6 +12,8 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  const userId = getSession();
+
   return (
     <html lang="en">
       <head>
