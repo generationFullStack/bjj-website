@@ -51,8 +51,8 @@ export default function Footer() {
           </a>
         </div>
         <p className="text-[#757575] text-lg font-bold ">
-          BJJ.JPG © 2025 All Rights Reserved. Design by JPG FOR JASON & PAN &
-          GAVIN
+          BJJ.JPG © 2025 All Rights Reserved. <br />
+          Design by JPG FOR JASON & PAN & GAVIN
         </p>
       </div>
     </footer>

@@ -210,8 +210,7 @@ export default function NavBar({ isUserLogged }) {
               height={60}
               style={{ verticalAlign: "middle" }}
             />
-            <span> BJJ.JPG</span>
-            {/* 應用 Share Tech 字體到 Logo 文字 */}
+            {!isMobile && <span> BJJ.JPG</span>}
           </Link>
         </div>
         <div
@@ -359,7 +358,6 @@ export default function NavBar({ isUserLogged }) {
                 "isSearchOpen:",
                 isSearchOpen
               )}{" "}
-              {/* 調試 */}
               <FaSearch />
             </span>
             <Link
@@ -368,6 +366,18 @@ export default function NavBar({ isUserLogged }) {
             >
               <FaUser />
             </Link>
+            {/* 漢堡選單 (navTrigger) - 現在最右邊，位置調整為 right: 60px */}
+            <span
+              className={`block ${styles.navTrigger} ${
+                isMenuOpen ? "active" : ""
+              }`}
+              onClick={handleNavTriggerClick}
+              style={{ right: "60px" }}
+            >
+              <i></i>
+              <i></i>
+              <i></i>
+            </span>
           </div>
         )}
         <span
