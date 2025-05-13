@@ -8,6 +8,7 @@ import { FaSearch, FaSignOutAlt, FaUser } from "react-icons/fa"; // 引入 Font 
 import styles from "./NavBar.module.css";
 import SearchBar from "./SearchBar"; // 引入 SearchBar 組件
 import { logout } from "@/actions/action";
+import MenuButton from "@/components/MobileMenuButton";
 
 export default function NavBar({ isUserLogged }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -331,9 +332,7 @@ export default function NavBar({ isUserLogged }) {
                 {navItems[activeSubmenu].subcategories.map((subcategory) => (
                   <li key={subcategory} className="w-full">
                     <Link
-                      href={`/${encodeURIComponent(
-                        navItems[activeSubmenu].category
-                      )}/${encodeURIComponent(subcategory)}`} // 對子類別名稱進行 URL 編碼
+                      href={`/${encodeURIComponent(subcategory).toLowerCase()}`} // 對子類別名稱進行 URL 編碼
                       className={`block text-[3rem] px-12 py-5 text-left text-white no-underline`} // 手機版移除 hover 效果：移除 hover:text-[#8df2f2]，確保懸停時顏色不變
                     >
                       {subcategory}
@@ -347,7 +346,7 @@ export default function NavBar({ isUserLogged }) {
         {isMobile && !isSearchOpen && (
           <div className="flex items-center gap-4">
             <span
-              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[100px] top-1/2 -translate-y-1/2 share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
+              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[105px] top-1/2 -translate-y-1/2 share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
               onClick={handleSearchClick}
             >
               {console.log(
@@ -362,7 +361,7 @@ export default function NavBar({ isUserLogged }) {
             </span>
             <Link
               href="/login"
-              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[60px] top-1/2 -translate-y-1/2 share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
+              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[70px] top-1/2 -translate-y-1/2 share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
             >
               <FaUser />
             </Link>
@@ -370,26 +369,19 @@ export default function NavBar({ isUserLogged }) {
             <span
               className={`block ${styles.navTrigger} ${
                 isMenuOpen ? "active" : ""
-              }`}
+              } cursor-pointer text-[2.8rem] text-white z-[1003] absolute share-tech-regular bg-transparent`}
               onClick={handleNavTriggerClick}
-              style={{ right: "60px" }}
+              style={{
+                right: "-15px", // 最右邊
+                height: "52px",
+                top: "50%",
+                transform: "translateY(-50%)",
+              }}
             >
-              <i></i>
-              <i></i>
-              <i></i>
+              <MenuButton />
             </span>
           </div>
         )}
-        <span
-          className={`hidden max-[900px]:block ${styles.navTrigger} ${
-            isMenuOpen ? "active" : ""
-          }`}
-          onClick={handleNavTriggerClick}
-        >
-          <i></i>
-          <i></i>
-          <i></i>
-        </span>
       </div>
     </nav>
   );
