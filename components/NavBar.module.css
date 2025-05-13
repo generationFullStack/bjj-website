@@ -7,7 +7,7 @@
   height: 25px;
   margin: auto;
   position: absolute;
-  right: 90px; /* 調整為中間位置，與 JSX 中的 style 同步 */
+  right: 30px;
   top: 0;
   bottom: 0;
   z-index: 1003;
@@ -113,10 +113,8 @@
 /* 手機版樣式 */
 @media screen and (max-width: 900px) {
   .navTrigger {
-    display: block; /* 確保手機版顯示 */
-    right: 90px; /* 與上方同步，放置中間 */
+    display: block;
   }
-  /* ... 其他樣式保持不變 */
 
   .logo {
     margin-left: 15px;
@@ -265,6 +263,37 @@
 
 /* 禁用手機版的 hover 效果，針對不支持 hover 的設備（例如手機、平板） */
 @media (hover: none) {
+  /* 禁用 Logo 連結的 hover 效果 */
+  a:hover {
+    color: inherit !important; /* 確保懸停時文字顏色不變 */
+  }
+
+  /* 禁用導航項和子選單項的 hover 效果 */
+  .navlinks li a:hover,
+  .navlinks li span:hover,
+  .dropdownContent a:hover {
+    color: #fff !important; /* 確保懸停時文字顏色不變 */
+    background-color: inherit !important; /* 確保懸停時背景不變 */
+  }
+
+  /* 禁用返回按鈕的 hover 效果 */
+  div:hover {
+    color: inherit !important; /* 確保懸停時文字顏色不變 */
+  }
+
+  /* 禁用搜尋和使用者圖標的 hover 效果 */
+  span:hover {
+    color: #fff !important; /* 確保懸停時圖標顏色不變 */
+  }
+
+  /* 禁用下拉選單的 hover 顯示效果 */
+  .navItem:hover .dropdownContent {
+    display: none !important; /* 確保手機版不通過 hover 顯示下拉選單 */
+  }
+}
+
+/* 備用方案：針對手機版（螢幕寬度 <= 900px）禁用 hover 效果，確保兼容性 */
+@media (max-width: 900px) {
   /* 禁用 Logo 連結的 hover 效果 */
   a:hover {
     color: inherit !important; /* 確保懸停時文字顏色不變 */

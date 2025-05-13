@@ -68,12 +68,6 @@ export default function SearchBar({ isSearchOpen, setIsSearchOpen, navItems }) {
           autoFocus
         />
         <button
-          type="submit"
-          className={`absolute right-10 top-1/2 -translate-y-1/2 bg-none border-none text-[1.8rem] text-[#888] cursor-pointer hover:text-[#1e90ff] max-[900px]:right-12 max-[900px]:text-[2.5rem]`} // 搜尋按鈕
-        >
-          <FaSearch />
-        </button>
-        <button
           type="button"
           onClick={handleCloseSearch}
           className={`absolute right-2.5 top-1/2 -translate-y-1/2 bg-none border-none text-[1.8rem] text-[#888] cursor-pointer hover:text-[#1e90ff] max-[900px]:right-7 max-[900px]:text-[2.5rem]`} // 關閉按鈕
@@ -97,10 +91,10 @@ export default function SearchBar({ isSearchOpen, setIsSearchOpen, navItems }) {
                 <Link
                   href={
                     result.type === "category"
-                      ? `/${encodeURIComponent(result.value)}`
+                      ? `/${encodeURIComponent(result.value.toLowerCase())}` // 修改：將 result.value 轉為小寫，確保 URL 路徑是小寫
                       : `/${encodeURIComponent(
-                          result.category
-                        )}/${encodeURIComponent(result.value)}`
+                          result.category.toLowerCase()
+                        )}/${encodeURIComponent(result.value.toLowerCase())}` // 修改：將 result.category 和 result.value 轉為小寫，確保 URL 路徑是小寫
                   }
                   className="block text-white text-[1.6rem] px-4 py-3 hover:bg-[#333] hover:text-[#1e90ff] max-[900px]:text-[2rem] max-[900px]:py-3" // 手機版通過 @media (hover: none) 禁用 hover 效果
                   onClick={() => {
@@ -109,12 +103,13 @@ export default function SearchBar({ isSearchOpen, setIsSearchOpen, navItems }) {
                   }}
                 >
                   {result.type === "category" ? (
-                    <span>{result.value}</span>
+                    <span>{result.value}</span> // 顯示時保持原始大小寫（全大寫）
                   ) : (
                     <span>
-                      {result.value}{" "}
+                      {result.value} {/* 顯示時保持原始大小寫（全大寫） */}
                       <span className="text-gray-400">
-                        in {result.category}
+                        in {result.category}{" "}
+                        {/* 顯示時保持原始大小寫（全大寫） */}
                       </span>
                     </span>
                   )}
