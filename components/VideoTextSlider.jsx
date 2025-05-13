@@ -135,7 +135,7 @@ const VideoTextSlider = () => {
               <div className="video-container w-full max-w-6xl relative">
                 {slide.videoSrc ? (
                   <video
-                    className="w-full rounded-lg aspect-video"
+                    className="w-full rounded-2xl aspect-video"
                     src={slide.videoSrc}
                     title={`BJJ Video ${index + 1}`}
                     autoPlay
@@ -147,7 +147,7 @@ const VideoTextSlider = () => {
                   />
                 ) : slide.img ? (
                   <img
-                    className="w-full rounded-lg aspect-video object-cover"
+                    className="w-full rounded-2xl aspect-video object-cover"
                     src={slide.img}
                     alt={`BJJ Image ${index + 1}`}
                     onContextMenu={(e) => e.preventDefault()}
@@ -167,15 +167,15 @@ const VideoTextSlider = () => {
       {/* 左右箭頭 */}
       <button
         onClick={handlePrev}
-        className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        className="absolute top-1/2 left-2 transform -translate-y-1/2 bg-gray-900 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
       >
-        ←
+        <i className="fa-solid fa-arrow-left fa-3x"></i>
       </button>
       <button
         onClick={handleNext}
-        className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-800 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        className="absolute top-1/2 right-2 transform -translate-y-1/2 bg-gray-900 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
       >
-        →
+        <i className="fa-solid fa-arrow-right fa-3x"></i>
       </button>
     </div>
   );
