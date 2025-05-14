@@ -1,3 +1,4 @@
+// VideoPage 組件，展示 YouTube 影片並根據螢幕尺寸調整影片大小，標題位於影片上方
 export default async function VideoPage({ params }) {
   const { videoId } = await params;
 
@@ -12,7 +13,7 @@ export default async function VideoPage({ params }) {
       throw new Error("Invalid video ID");
     }
 
-    // 驗證 API 密鑰是否存在
+    // 檢查 API 密鑰
     if (!YOUTUBE_API_KEY) {
       throw new Error("YouTube API key is not configured");
     }
@@ -32,22 +33,20 @@ export default async function VideoPage({ params }) {
         : "Video Title Not Available";
   } catch (error) {
     console.error("Failed to fetch video title:", error.message);
-    // 顯示影片，但標題使用默認值
     videoTitle = `Error: ${error.message}`;
   }
 
   return (
     <div className="w-screen flex flex-col items-center mt-80 object-contain">
-      <iframe
-        src={`https://www.youtube.com/embed/${videoId}`}
-        width={1200}
-        height={700}
-        className="rounded-lg shadow-lg"
-      />
-      {/* 顯示影片標題 */}
-      <h1 className="mt-4 text-4xl text-white text-center max-w-[600px] px-4">
+      {/* 標題：移到影片上方，根據螢幕尺寸調整字體大小 */}
+      <h1 className="mb-4 text-2xl md:text-5xl text-white text-center max-w-[600px] px-4">
         {videoTitle}
       </h1>
+      {/* 影片：根據螢幕尺寸調整大小，保持 16:9 比例，桌面版稍微縮小 */}
+      <iframe
+        src={`https://www.youtube.com/embed/${videoId}`}
+        className="w-full md:w-[800px] lg:w-[1000px] aspect-video rounded-lg shadow-lg"
+      />
     </div>
   );
 }
