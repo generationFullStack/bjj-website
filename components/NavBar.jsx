@@ -218,7 +218,7 @@ export default function NavBar({ isUserLogged }) {
           id="mainListDiv"
           className={`h-[65px] flex items-center justify-end max-[900px]:w-full max-[900px]:h-0 max-[900px]:overflow-hidden ${
             isMenuOpen
-              ? "max-[900px]:h-screen max-[900px]:block max-[900px]:overflow-y-auto max-[900px]:fixed max-[900px]:top-0 max-[900px]:left-0 max-[900px]:w-full max-[900px]:z-[1001] max-[900px]:bg-[#111] max-[900px]:bg-center-top mt-24"
+              ? "max-[900px]:h-screen max-[900px]:block max-[900px]:overflow-y-auto max-[900px]:fixed max-[900px]:top-0 max-[900px]:left-0 max-[900px]:w-full max-[900px]:z-[1001] max-[900px]:bg-[#111] max-[900px]:bg-center-top"
               : ""
           }`}
         >
@@ -239,8 +239,8 @@ export default function NavBar({ isUserLogged }) {
               className={`flex items-center h-[65px] mr-8 max-[900px]:block`}
             >
               <ul
-                className={`w-auto h-[65px] flex flex-row list-none mt-0 p-0${
-                  isMobile ? (isMenuOpen ? "block" : "hidden") : "block"
+                className={`w-auto h-[65px] flex flex-row list-none p-0${
+                  isMobile ? (isMenuOpen ? "block mt-24" : "hidden") : "block"
                 } ${
                   isSearchOpen ? "hidden" : ""
                 } max-[900px]:flex-col max-[900px]:w-full max-[900px]:min-h-screen max-[900px]:bg-[#111] league-spartan`} // 移除 activeSubmenu 條件，確保手機版選單展開時導航項顯示，調整高度確保內容可見，調整顯示條件以同步 isMenuOpen 狀態，應用 League Spartan 字體到導航項
