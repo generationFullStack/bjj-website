@@ -80,7 +80,7 @@ export default function TestLoginForm() {
           </p>
         )}
         <Link
-          href={`${process.env.NEXT_PUBLIC_BASE_URL}/signup`}
+          href="/signup"
           className="text-white no-underline hover:underline share-tech-regular text-3xl"
         >
           Do not have an account?
