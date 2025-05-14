@@ -321,7 +321,7 @@ export default function NavBar({ isUserLogged }) {
                       href={"/login"}
                       className={`cursor-pointer text-[2.8rem] text-white z-[1003] block -translate-y-1.5 hover:text-[#1e90ff]`}
                     >
-                      <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                      <i className="fa-solid fa-arrow-right-to-bracket"></i>
                     </Link>
                   )}
                 </div>

@@ -27,6 +27,44 @@ export async function GET() {
   }
 }
 
-export async function POST(request) {}
+export async function POST(request) {
+  try {
+    const data = await request.formData();
+    const videoId = data.get("video_id");
+    const categoryId = data.get("category_id");
+    const client = await pool.connect();
+    const result = await client.query(
+      `INSERT INTO video_categories (video_id, category_id) 
+        VALUES (${videoId}, ${categoryId})`
+    );
+    client.release();
 
-export async function DELETE(request) {}
+    return NextResponse.json(result.rows, { status: 200 });
+  } catch (error) {
+    console.error("Error adding category to video:", error);
+    return NextResponse.json(
+      { error: "Error adding category to video" },
+      { status: 500 }
+    );
+  }
+}
+
+export async function DELETE(request) {
+  try {
+    const data = await request.formData();
+    const videoId = data.get("video_id");
+    const categoryId = data.get("category_id");
+    const client = await pool.connect();
+    const result = await client.query(
+      `DELETE FROM video_categories WHERE video_id = ${videoId} AND category_id = ${categoryId}`
+    );
+    client.release();
+    return NextResponse.json(result.rows, { status: 200 });
+  } catch (error) {
+    console.error("Error deleting videos:", error);
+    return NextResponse.json(
+      { error: "Error deleting videos" },
+      { status: 500 }
+    );
+  }
+}

@@ -29,7 +29,7 @@ export default async function DeleteVideosForm() {
         {data.map((element) => (
           <li
             key={element.id}
-            className="flex border-2 justify-between p-3 items-center"
+            className="flex border-b-2 justify-between p-3 items-center"
           >
             <div>
               <div>id: {element.id}</div>
@@ -40,8 +40,8 @@ export default async function DeleteVideosForm() {
 
             <form action={onDelete}>
               <input type="hidden" name="video_id" value={element.id} />
-              <button type="submit" className="border-2 border-red-600">
-                Delete
+              <button type="submit" className="border-2 hover:bg-red-500">
+                DELETE
               </button>
             </form>
           </li>

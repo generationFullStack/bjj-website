@@ -28,7 +28,7 @@ export default function AddVideoForm() {
         <div className="border-2 border-white/50">
           <input name="youtube_id" placeholder="youtube_id" />
         </div>
-        <button type="submit" className="border-2 border-red-500">
+        <button type="submit" className="border-2 hover:bg-red-500">
           Add Video
         </button>
       </form>
