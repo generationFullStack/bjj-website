@@ -208,7 +208,7 @@ export default function NavBar({ isUserLogged }) {
         <div
           className={`w-auto h-auto max-[900px]:ml-[15px] max-[900px]:absolute max-[900px]:left-0 max-[900px]:top-1 max-[900px]:w-auto max-[900px]:h-auto`}
         >
-          <Link
+          <a
             href="/"
             className={`flex items-center no-underline text-white text-[2.5rem] hover:text-[#1e90ff]`} // hover 效果由 CSS 控制，手機版通過 @media (hover: none) 和 @media (max-width: 900px) 禁用
           >
@@ -220,7 +220,7 @@ export default function NavBar({ isUserLogged }) {
               style={{ verticalAlign: "middle" }}
             />
             {!isMobile && <span> BJJ.JPG</span>}
-          </Link>
+          </a>
         </div>
         <div
           id="mainListDiv"
