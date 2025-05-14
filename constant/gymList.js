@@ -25,4 +25,16 @@ export const gymList = [
     address: "2/F, Pacific Mansion, 172-174 Nathan Rd Tsim Sha Tsui, Hong Kong",
     imgSrc: "/klbjjtst.jpg",
   },
+  {
+    name: "123123123123123123",
+    website: "https://www.klnbjj.com",
+    address: "2/F, Pacific Mansion, 172-174 Nathan Rd Tsim Sha Tsui, Hong Kong",
+    imgSrc: "/klbjjtst.jpg",
+  },
+  {
+    name: "222222222)",
+    website: "https://www.klnbjj.com",
+    address: "2/F, Pacific Mansion, 172-174 Nathan Rd Tsim Sha Tsui, Hong Kong",
+    imgSrc: "/klbjjtst.jpg",
+  },
 ];

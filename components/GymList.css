@@ -1,0 +1,184 @@
+/* app/components/GymList.css */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* 確保 html 和 body 占滿螢幕 */
+html,
+body {
+  margin: 0;
+  padding: 0; /* 移除 padding，避免影響居中 */
+  width: 100%;
+  height: 100vh; /* 占滿螢幕高度 */
+  overflow-x: hidden; /* 避免水平滾動條 */
+}
+
+/* 容器樣式 */
+.container {
+  max-width: 700px; /* 縮小卡片寬度，更接近 CodePen 的緊湊感 */
+  width: 100%;
+  padding: 30px 20px; /* 減少內邊距 */
+  border-radius: 12px; /* 圓角效果 */
+  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2), 0px 8px 24px rgba(0, 0, 0, 0.2),
+    0px 16px 56px rgba(0, 0, 0, 0.2); /* 增強陰影，突出卡片效果 */
+}
+
+/* 標題樣式 */
+.topic {
+  font-size: 24px; /* 縮小標題字體 */
+  font-weight: 500;
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.7);
+  text-align: center;
+}
+
+/* 內容區域：標籤列表 + 內容 */
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 左側標籤列表 */
+.list {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 30%; /* 增加標籤列表寬度比例 */
+  margin-right: 30px; /* 減少右邊距 */
+}
+
+/* 標籤樣式 */
+.list label {
+  cursor: pointer;
+  height: 50px; /* 縮小標籤高度 */
+  line-height: 50px;
+  font-size: 18px; /* 縮小字體 */
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  padding-left: 20px; /* 減少左邊距 */
+  transition: all 0.5s ease;
+  z-index: 10;
+}
+
+/* 當標籤被選中時，改變文字顏色 */
+.list label.selected {
+  color: #22272c; /* 與滑塊背景色一致 */
+}
+
+/* 滑塊樣式 */
+.slider {
+  position: absolute;
+  left: 0;
+  height: 50px; /* 與標籤高度一致 */
+  width: 100%;
+  border-radius: 12px;
+  transition: all 0.5s ease;
+  background: #bb86fc; /* CodePen 的滑塊背景色 */
+}
+
+/* 右側內容區域 */
+.text-content {
+  width: 70%; /* 減少內容區域寬度比例 */
+  height: 100%;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* 內容區塊 */
+.text {
+  display: block; /* 始終顯示，由 JavaScript 控制內容 */
+}
+
+/* 內容標題 */
+.text .title {
+  font-size: 20px; /* 縮小標題字體 */
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+/* 內容文字 */
+.text p {
+  text-align: justify;
+}
+
+/* 標籤懸停效果 */
+.list label:hover {
+  color: #bb86fc;
+}
+
+/* 健身房內容區域 */
+.gym-details {
+  display: flex;
+  flex-direction: row;
+  gap: 15px; /* 減少間距 */
+}
+
+/* 健身房網站和地址 */
+.gym-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* 減少間距 */
+}
+
+/* 網站標題 */
+.website-title {
+  font-size: 16px; /* 縮小字體 */
+  font-weight: bold;
+}
+
+/* 網站連結 */
+.website-link {
+  color: #60a5fa; /* 藍色 */
+  text-decoration: underline;
+  font-size: 14px; /* 縮小字體 */
+  word-break: break-all; /* 長連結自動換行 */
+}
+
+.website-link:hover {
+  color: #2563eb; /* 懸停時變深藍色 */
+}
+
+/* 地址標題 */
+.address-title {
+  font-size: 16px; /* 縮小字體 */
+  font-weight: bold;
+}
+
+/* 地址文字 */
+.address-text {
+  font-size: 14px; /* 縮小字體 */
+}
+
+/* 圖片樣式 */
+.gym-image {
+  align-self: center;
+  background-color: white;
+  object-fit: contain;
+  width: 150px; /* 縮小圖片 */
+  height: 150px;
+}
+
+/* 響應式設計：手機版 */
+@media screen and (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .list {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .text-content {
+    width: 100%;
+  }
+
+  .gym-details {
+    flex-direction: column;
+  }
+}
