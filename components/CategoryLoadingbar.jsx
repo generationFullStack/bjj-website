@@ -20,17 +20,17 @@ export default function CategoryLoadingbar({ progress, isVisible }) {
     // 添加 pointer-events-none 到內層，防止點擊穿透到背景
     <div className="fixed inset-0 z-50 bg-black/50 flex items-center justify-center">
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none">
-        {/* 加載條容器：設置寬度為 200px，高度 26px，背景為半透明灰色，圓角 10px，內邊距 2px */}
-        <div className="w-[200px] h-[26px] bg-[#9f9f9f80] rounded-[10px] p-[2px] relative">
-          {/* 進度條：根據 progress 動態設置寬度，背景為深灰色，高度 20px，圓角 8px */}
+        {/* 加載文字：顯示 "loading"，使用 Arial 字體，加粗，置中，距離進度條上方 30px */}
+        <div className="font-bold text-center mt-[-20px] text-white text-6xl z-30">
+          loading
+        </div>
+        {/* 加載條容器：寬 200px，高 26px，背景半透明灰色，圓角 10px，內邊距 2px */}
+        <div className="w-[200px] h-[26px] bg-[#999999] rounded-[10px] p-[2px] relative">
+          {/* 進度條：動態寬度，背景深灰色，高 20px，圓角 8px，垂直居中 */}
           <span
-            className="absolute block h-[20px] w-[calc(100%-10px)] bg-[#474747] rounded-[8px] m-[3px] transition-all duration-500 ease-in-out animate-load"
-            style={{ width: `${progress}%` }} // 動態設置進度寬度
+            className="absolute left-[2px] top-[50%] transform translate-y-[-50%] block h-[20px] bg-[#262626] rounded-[8px] transition-all duration-500 ease-in-out animate-load z-20"
+            style={{ width: `calc(${progress}% - 4px)` }}
           ></span>
-          {/* 加載文字：顯示 "loading"，使用 Arial 字體，加粗，置中，距離進度條上方 30px */}
-          <div className="font-bold text-center mt-[-30px] text-white text-6xl">
-            loading
-          </div>
         </div>
       </div>
     </div>
