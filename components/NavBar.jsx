@@ -300,9 +300,9 @@ export default function NavBar({ isUserLogged }) {
                 ))}
               </ul>
               {!isMobile && (
-                <div className="flex items-center gap-10">
+                <div className="flex items-center gap-7">
                   <span
-                    className={`cursor-pointer text-[2.8rem] text-white z-[1003] block -translate-y-1.5 hover:text-[#1e90ff]`} // 桌面版保留 hover 效果：hover:text-[#1e90ff]
+                    className={`cursor-pointer text-[2.5rem] text-white z-[1003] block -translate-y-1.5 hover:text-[#1e90ff]`} // 桌面版保留 hover 效果：hover:text-[#1e90ff]
                     onClick={handleSearchClick}
                   >
                     <FaSearch />
@@ -334,7 +334,7 @@ export default function NavBar({ isUserLogged }) {
         {isMobile && !isSearchOpen && (
           <div className="flex items-center gap-4">
             <span
-              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[115px] top-1/2 -translate-y-1/2 share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
+              className={`cursor-pointer text-[2.5rem] text-white z-[1003] block absolute right-[95px] top-1/2 -translate-y-1/2 share-tech-regular`} // 從 right-[145px] 改為 right-[100px]
               onClick={handleSearchClick}
             >
               {console.log(
@@ -344,43 +344,41 @@ export default function NavBar({ isUserLogged }) {
                 isMenuOpen,
                 "isSearchOpen:",
                 isSearchOpen
-              )}{" "}
+              )}
               <FaSearch />
             </span>
             {isUserLogged ? (
               <form>
                 <button
                   formAction={logout}
-                  className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[70px] top-1/2 -translate-y-1/2 share-tech-regular`} // 桌面版保留 hover 效果：hover:text-[#1e90ff]
+                  className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[55px] top-1/2 -translate-y-1/2 share-tech-regular`} // 從 right-[70px] 改為 right-[50px]
                 >
-                  <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                  <i className="fa-solid fa-arrow-right-from-bracket"></i>
                 </button>
               </form>
             ) : (
               <Link
                 href={"/login"}
-                className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[70px] top-1/2 -translate-y-1/2 share-tech-regular`}
+                className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[55px] top-1/2 -translate-y-1/2 share-tech-regular`} // 從 right-[70px] 改為 right-[50px]
               >
-                <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                <i className="fa-solid fa-arrow-right-to-bracket"></i>
               </Link>
             )}
-
-            {/* 漢堡選單 (navTrigger) - 現在最右邊，位置調整為 right: 10px */}
+            {/* 漢堡選單 (navTrigger) - 位置不變 */}
             <span
               className={`block ${
                 styles.navTrigger
               } cursor-pointer text-[2.8rem] text-white z-[1003] absolute share-tech-regular bg-transparent ${
                 isMenuOpen ? styles.active : ""
-              }`} // 根據 isMenuOpen 動態添加 active 類，控制漢堡選單圖標樣式
+              }`}
               onClick={handleNavTriggerClick}
               style={{
-                right: "10px", // 最右邊，可微調此值調整漢堡選單圖標的水平位置
-                height: "28px", // 高度，影響圖標的整體尺寸，可微調
+                right: "10px",
+                height: "30px",
                 top: "50%",
                 transform: "translateY(-50%)",
               }}
             >
-              {/* 直接渲染三條線，樣式由 NavBar.module.css 控制 */}
               <i></i>
               <i></i>
               <i></i>
