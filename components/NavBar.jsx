@@ -375,7 +375,7 @@ export default function NavBar({ isUserLogged }) {
               onClick={handleNavTriggerClick}
               style={{
                 right: "10px", // 最右邊，可微調此值調整漢堡選單圖標的水平位置
-                height: "52px", // 高度，影響圖標的整體尺寸，可微調
+                height: "28px", // 高度，影響圖標的整體尺寸，可微調
                 top: "50%",
                 transform: "translateY(-50%)",
               }}
