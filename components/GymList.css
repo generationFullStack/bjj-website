@@ -1,15 +1,12 @@
 /* app/components/GymList.css */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
-<<<<<<< HEAD
 .mainContent {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh; /* 使用視窗高度 */
 }
-=======
->>>>>>> 4c9f964 (update by jason)
 /* 容器樣式 */
 .container {
   max-width: 800px; /* 縮小卡片寬度，更接近 CodePen 的緊湊感 */
