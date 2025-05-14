@@ -1,21 +1,12 @@
 /* app/components/GymList.css */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
 
-* {
-  margin: 0;
-  box-sizing: border-box;
+.mainContent {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; /* 使用視窗高度 */
 }
-
-/* 確保 html 和 body 占滿螢幕 */
-html,
-body {
-  margin: 0;
-  padding: 0; /* 移除 padding，避免影響居中 */
-  width: 100%;
-  height: 100vh; /* 占滿螢幕高度 */
-  overflow-x: hidden; /* 避免水平滾動條 */
-}
-
 /* 容器樣式 */
 .container {
   max-width: 800px; /* 縮小卡片寬度，更接近 CodePen 的緊湊感 */

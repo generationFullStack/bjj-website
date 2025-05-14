@@ -46,55 +46,57 @@ export default function GymList() {
   }, [selectedIndex]);
 
   return (
-    <div className="container">
-      <h1 className="topic">GYMS IN HONG KONG</h1>
-      <div className="content">
-        <div className="list">
-          {gymList.map((element, index) => (
-            <label
-              key={index}
-              onClick={() => handleLabelClick(index)}
-              className={`gym-${index} ${
-                selectedIndex === index ? "selected" : ""
-              }`}
-            >
-              <span
-                ref={(el) => (labelRefs.current[index] = el)} // 為每個 span 添加 ref
-                className="whitespace-nowrap"
+    <div className="mainContent">
+      <div className="container">
+        <h1 className="topic">GYMS IN HONG KONG</h1>
+        <div className="content">
+          <div className="list">
+            {gymList.map((element, index) => (
+              <label
+                key={index}
+                onClick={() => handleLabelClick(index)}
+                className={`gym-${index} ${
+                  selectedIndex === index ? "selected" : ""
+                }`}
               >
-                {element.name}
-              </span>
-            </label>
-          ))}
-          <div
-            className="slider"
-            style={{ top: `${sliderTop}px`, width: `${sliderWidth}px` }} // 動態設置滑塊寬度
-          />
-        </div>
-        <div className="text-content">
-          <div className="text">
-            <div className="title">{gymList[selectedIndex].name}</div>
-            <div className="gym-details">
-              <div className="gym-info">
-                <a
-                  href={gymList[selectedIndex].website}
-                  target="_blank"
-                  className="website-link"
+                <span
+                  ref={(el) => (labelRefs.current[index] = el)} // 為每個 span 添加 ref
+                  className="whitespace-nowrap"
                 >
-                  {gymList[selectedIndex].website}
-                </a>
+                  {element.name}
+                </span>
+              </label>
+            ))}
+            <div
+              className="slider"
+              style={{ top: `${sliderTop}px`, width: `${sliderWidth}px` }} // 動態設置滑塊寬度
+            />
+          </div>
+          <div className="text-content">
+            <div className="text">
+              <div className="title">{gymList[selectedIndex].name}</div>
+              <div className="gym-details">
+                <div className="gym-info">
+                  <a
+                    href={gymList[selectedIndex].website}
+                    target="_blank"
+                    className="website-link"
+                  >
+                    {gymList[selectedIndex].website}
+                  </a>
 
-                <div className="address-text break-words whitespace-normal break-all">
-                  {gymList[selectedIndex].address}
+                  <div className="address-text break-words whitespace-normal break-all">
+                    {gymList[selectedIndex].address}
+                  </div>
                 </div>
+                <img
+                  src={gymList[selectedIndex].imgSrc}
+                  alt="Logo of the gym"
+                  width={150}
+                  height={150}
+                  className="gym-image"
+                />
               </div>
-              <img
-                src={gymList[selectedIndex].imgSrc}
-                alt="Logo of the gym"
-                width={150}
-                height={150}
-                className="gym-image"
-              />
             </div>
           </div>
         </div>
