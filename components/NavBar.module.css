@@ -229,8 +229,6 @@
 
 /* 禁用手機版的 hover 效果，針對不支持 hover 的設備（例如手機、平板） */
 @media (hover: none) {
-
-
   .navlinks li a:hover,
   .navlinks li span:hover,
   .dropdownContent a:hover {
