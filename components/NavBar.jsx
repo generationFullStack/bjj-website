@@ -346,7 +346,7 @@ export default function NavBar({ isUserLogged }) {
         {isMobile && !isSearchOpen && (
           <div className="flex items-center gap-4">
             <span
-              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[155px] top-1/2 -translate-y-1/2 share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
+              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[145px] top-1/2 -translate-y-1/2 share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
               onClick={handleSearchClick}
             >
               {console.log(
@@ -359,12 +359,24 @@ export default function NavBar({ isUserLogged }) {
               )}{" "}
               <FaSearch />
             </span>
-            <Link
-              href="/login"
-              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[70px] top-1/2 -translate-y-1/2 share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
-            >
-              <div>LOGIN</div>
-            </Link>
+            {isUserLogged ? (
+              <form>
+                <button
+                  formAction={logout}
+                  className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[70px] top-1/2 -translate-y-1/2 share-tech-regular`} // 桌面版保留 hover 效果：hover:text-[#1e90ff]
+                >
+                  <FaSignOutAlt />
+                </button>
+              </form>
+            ) : (
+              <Link
+                href={"/login"}
+                className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[70px] top-1/2 -translate-y-1/2 share-tech-regular`}
+              >
+                LOGIN
+              </Link>
+            )}
+
             {/* 漢堡選單 (navTrigger) - 現在最右邊，位置調整為 right: 60px */}
             <span
               className={`block ${styles.navTrigger} ${
