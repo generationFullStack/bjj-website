@@ -77,8 +77,8 @@ export default function NavBar({ isUserLogged }) {
     const handleScroll = () => {
       const newIsScrolled = window.scrollY > 50;
       setIsScrolled(newIsScrolled);
-      console.log("ScrollY:", window.scrollY);
-      console.log("isScrolled:", newIsScrolled);
+      //console.log("ScrollY:", window.scrollY);
+      //console.log("isScrolled:", newIsScrolled);
     };
 
     window.addEventListener("scroll", handleScroll);
