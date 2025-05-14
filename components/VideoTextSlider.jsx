@@ -157,8 +157,8 @@ const VideoTextSlider = () => {
                 <div className="absolute inset-0 bg-transparent pointer-events-none" />
               </div>
               {/* 文字：放大寬度 */}
-              <div className="text-container w-[90%] max-w-[800px] text-white p-6">
-                <p className="text-3xl leading-relaxed">{slide.text}</p>
+              <div className="text-container w-[90%] max-w-[800px] text-white p-6  flex flex-col justify-center h-full">
+                <p className="text-3xl leading-relaxed ">{slide.text}</p>
               </div>
             </div>
           ))}
