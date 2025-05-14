@@ -334,7 +334,7 @@ export default function NavBar({ isUserLogged }) {
         {isMobile && !isSearchOpen && (
           <div className="flex items-center gap-4">
             <span
-              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[145px] top-1/2 -translate-y-1/2 share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
+              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[115px] top-1/2 -translate-y-1/2 share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
               onClick={handleSearchClick}
             >
               {console.log(
