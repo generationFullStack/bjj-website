@@ -1,4 +1,3 @@
-// app/components/NavBar.js
 "use client";
 
 import { useState, useEffect } from "react";
@@ -8,7 +7,6 @@ import { FaSearch, FaSignOutAlt, FaUser } from "react-icons/fa"; // 引入 Font 
 import styles from "./NavBar.module.css";
 import SearchBar from "./SearchBar"; // 引入 SearchBar 組件
 import { logout } from "@/actions/action";
-import MenuButton from "@/components/MobileMenuButton";
 
 export default function NavBar({ isUserLogged }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -94,10 +92,10 @@ export default function NavBar({ isUserLogged }) {
     if (mainContent) {
       if (hoveredItem !== null || isSearchOpen) {
         // 當滑鼠懸停在導航項或搜尋框打開時，添加模糊效果
-        mainContent.classList.add(styles.blurContent); // 修正：classNameList 改為 classList，classList 是 DOM 元素的標準屬性，用於操作 CSS 類名
+        mainContent.classList.add(styles.blurContent);
       } else {
         // 當滑鼠離開導航項且搜尋框關閉時，移除模糊效果
-        mainContent.classList.remove(styles.blurContent); // 修正：classNameList 改為 classList
+        mainContent.classList.remove(styles.blurContent);
       }
     } else {
       // 如果 mainContent 不存在，記錄警告（可選）
@@ -119,6 +117,16 @@ export default function NavBar({ isUserLogged }) {
       setActiveSubmenu(activeDropdown === index ? null : index);
     } else {
       setActiveDropdown(activeDropdown === index ? null : index);
+    }
+  };
+
+  // 處理導航項點擊，手機版點擊後自動關閉選單
+  const handleNavItemClick = () => {
+    if (isMobile) {
+      console.log("Closing menu in handleNavItemClick");
+      setIsMenuOpen(false); // 手機版點擊導航項後自動收起選單
+      setActiveSubmenu(null); // 重置子選單狀態
+      setActiveDropdown(null); // 重置下拉選單狀態
     }
   };
 
@@ -260,7 +268,10 @@ export default function NavBar({ isUserLogged }) {
                       href={`/${encodeURIComponent(
                         item.category
                       ).toLowerCase()}`} // 對類別名稱進行 URL 編碼
-                      onClick={() => handleDropdownClick(index)}
+                      onClick={() => {
+                        handleDropdownClick(index);
+                        handleNavItemClick(); // 點擊主類別後自動關閉選單
+                      }}
                       className={`no-underline text-white leading-[65px] text-[2.4rem] hover:text-[#1e90ff] max-[900px]:text-left max-[900px]:w-full max-[900px]:text-[3rem] max-[900px]:px-7 max-[900px]:py-5 max-[900px]:flex max-[900px]:items-center max-[900px]:gap-2.5 max-[900px]:text-white! max-[900px]:cursor-pointer`} // hover 效果由 CSS 控制，手機版通過 @media (hover: none) 和 @media (max-width: 900px) 禁用
                     >
                       {item.category}
@@ -278,6 +289,7 @@ export default function NavBar({ isUserLogged }) {
                           href={`/${encodeURIComponent(
                             subcategory
                           ).toLowerCase()}`} // 對子類別名稱進行 URL 編碼
+                          onClick={handleNavItemClick} // 點擊子類別後自動關閉選單
                           className={`block text-white text-[1.6rem] px-4 py-3 text-left leading-normal hover:bg-[#333] hover:text-[#1e90ff] max-[900px]:text-[2rem] max-[900px]:px-[50px] max-[900px]:text-left max-[900px]:border-t border-[#333] max-[900px]:text-white! last:border-b last:border-[#333]`} // hover 效果由 CSS 控制，手機版通過 @media (hover: none) 和 @media (max-width: 900px) 禁用
                         >
                           {subcategory}
@@ -301,7 +313,7 @@ export default function NavBar({ isUserLogged }) {
                         formAction={logout}
                         className={`cursor-pointer text-[2.8rem] text-white z-[1003] block -translate-y-1.5 hover:text-[#1e90ff]`} // 桌面版保留 hover 效果：hover:text-[#1e90ff]
                       >
-                        <FaSignOutAlt />
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
                       </button>
                     </form>
                   ) : (
@@ -309,44 +321,20 @@ export default function NavBar({ isUserLogged }) {
                       href={"/login"}
                       className={`cursor-pointer text-[2.8rem] text-white z-[1003] block -translate-y-1.5 hover:text-[#1e90ff]`}
                     >
-                      LOGIN
+                      <i class="fa-solid fa-arrow-right-to-bracket"></i>
                     </Link>
                   )}
                 </div>
               )}
             </div>
           </div>
-          {activeSubmenu !== null && isMobile && (
-            <div
-              className={`fixed top-0 left-0 w-full h-screen bg-[#111] z-[1002] overflow-y-auto pt-[65px]`} // 子選單顯示條件：activeSubmenu 不為 null 且為手機版
-            >
-              <div
-                className={`px-5 py-5 text-[2rem] text-[#1e90ff] cursor-pointer border-b border-[#333] share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
-                onClick={handleBackToMainMenu}
-              >
-                BACK {/* 應用 Share Tech 字體到子選單的返回按鈕 */}
-              </div>
-              <ul className={`list-none p-0 m-0 share-tech-regular`}>
-                {" "}
-                {/* 應用 Share Tech 字體到子選單項 */}
-                {navItems[activeSubmenu].subcategories.map((subcategory) => (
-                  <li key={subcategory} className="w-full">
-                    <Link
-                      href={`/${encodeURIComponent(subcategory).toLowerCase()}`} // 對子類別名稱進行 URL 編碼
-                      className={`block text-[3rem] px-12 py-5 text-left text-white no-underline`} // 手機版移除 hover 效果：移除 hover:text-[#8df2f2]，確保懸停時顏色不變
-                    >
-                      {subcategory}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
         </div>
+        {console.log("isMobile:", isMobile, "isSearchOpen:", isSearchOpen)}{" "}
+        {/* 調試條件渲染 */}
         {isMobile && !isSearchOpen && (
           <div className="flex items-center gap-4">
             <span
-              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[145px] top-1/2 -translate-y-1/2 share-tech-regular `} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
+              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[145px] top-1/2 -translate-y-1/2 share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
               onClick={handleSearchClick}
             >
               {console.log(
@@ -365,7 +353,7 @@ export default function NavBar({ isUserLogged }) {
                   formAction={logout}
                   className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[70px] top-1/2 -translate-y-1/2 share-tech-regular`} // 桌面版保留 hover 效果：hover:text-[#1e90ff]
                 >
-                  <FaSignOutAlt />
+                  <i class="fa-solid fa-arrow-right-from-bracket"></i>
                 </button>
               </form>
             ) : (
@@ -373,24 +361,29 @@ export default function NavBar({ isUserLogged }) {
                 href={"/login"}
                 className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[70px] top-1/2 -translate-y-1/2 share-tech-regular`}
               >
-                LOGIN
+                <i class="fa-solid fa-arrow-right-to-bracket"></i>
               </Link>
             )}
 
-            {/* 漢堡選單 (navTrigger) - 現在最右邊，位置調整為 right: 60px */}
+            {/* 漢堡選單 (navTrigger) - 現在最右邊，位置調整為 right: 10px */}
             <span
-              className={`block ${styles.navTrigger} ${
-                isMenuOpen ? "active" : ""
-              } cursor-pointer text-[2.8rem] text-white z-[1003] absolute share-tech-regular bg-transparent `}
+              className={`block ${
+                styles.navTrigger
+              } cursor-pointer text-[2.8rem] text-white z-[1003] absolute share-tech-regular bg-transparent ${
+                isMenuOpen ? styles.active : ""
+              }`} // 根據 isMenuOpen 動態添加 active 類，控制漢堡選單圖標樣式
               onClick={handleNavTriggerClick}
               style={{
-                right: "-30px", // 最右邊
-                height: "52px",
+                right: "10px", // 最右邊，可微調此值調整漢堡選單圖標的水平位置
+                height: "52px", // 高度，影響圖標的整體尺寸，可微調
                 top: "50%",
                 transform: "translateY(-50%)",
               }}
             >
-              <MenuButton />
+              {/* 直接渲染三條線，樣式由 NavBar.module.css 控制 */}
+              <i></i>
+              <i></i>
+              <i></i>
             </span>
           </div>
         )}

@@ -3,24 +3,25 @@
 
 .navTrigger {
   cursor: pointer;
-  width: 30px;
-  height: 25px;
+  width: 30px; /* 圖標寬度，可微調以調整漢堡選單圖標大小 */
+  height: 25px; /* 圖標高度，可微調以調整漢堡選單圖標大小 */
   margin: auto;
   position: absolute;
-  right: 60px; /* 從 right: 90px 改為 right: 60px，與 JSX 同步 */
+  right: 10px; /* 調整右邊距，確保圖標在螢幕範圍內，可微調 */
   top: 0;
   bottom: 0;
   z-index: 1003;
-  display: none;
+  display: none; /* 初始隱藏，手機版通過 @media 顯示 */
 }
 
 .navTrigger i {
-  background-color: #fff;
+  background-color: #fff; /* 確保線條可見，可微調顏色 */
   border-radius: 2px;
   content: "";
   display: block;
   width: 100%;
-  height: 4px;
+  height: 4px; /* 線條高度，可微調以調整線條粗細 */
+  transition: transform 0.3s ease; /* 添加過渡效果，確保展開和還原動畫平滑 */
 }
 
 .navTrigger i:nth-child(1) {
@@ -28,7 +29,7 @@
 }
 
 .navTrigger i:nth-child(2) {
-  margin: 5px 0;
+  margin: 5px 0; /* 確保三條線間距一致，避免錯位，可微調間距 */
   transform: rotate(0deg); /* 初始狀態 */
 }
 
@@ -37,51 +38,15 @@
 }
 
 .navTrigger.active i:nth-child(1) {
-  animation: inT 0.8s forwards !important;
-  transform: translateY(9px) rotate(135deg) !important; /* 最終狀態 */
+  transform: translateY(9px) rotate(135deg); /* 展開時第一條線變為叉號的一部分 */
 }
 
 .navTrigger.active i:nth-child(2) {
-  animation: inM 0.8s forwards !important;
-  transform: rotate(45deg) !important; /* 最終狀態 */
+  transform: rotate(45deg); /* 展開時第二條線變為叉號的一部分 */
 }
 
 .navTrigger.active i:nth-child(3) {
-  animation: inBtm 0.8s forwards !important;
-  transform: translateY(-9px) rotate(135deg) !important; /* 最終狀態 */
-}
-
-@keyframes inM {
-  50% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(45deg);
-  }
-}
-
-@keyframes inT {
-  0% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(9px) rotate(0deg);
-  }
-  100% {
-    transform: translateY(9px) rotate(135deg);
-  }
-}
-
-@keyframes inBtm {
-  0% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-9px) rotate(0deg);
-  }
-  100% {
-    transform: translateY(-9px) rotate(135deg);
-  }
+  transform: translateY(-9px) rotate(135deg); /* 展開時第三條線變為叉號的一部分 */
 }
 
 .blurContent {
@@ -114,7 +79,7 @@
 @media screen and (max-width: 900px) {
   .navTrigger {
     display: block; /* 確保手機版顯示 */
-    right: 60px; /* 與上方同步，放置中間 */
+    right: 10px; /* 與上方同步，確保圖標可見，可微調 */
   }
 
   .logo {
@@ -264,62 +229,52 @@
 
 /* 禁用手機版的 hover 效果，針對不支持 hover 的設備（例如手機、平板） */
 @media (hover: none) {
-  /* 禁用 Logo 連結的 hover 效果 */
   a:hover {
-    color: inherit !important; /* 確保懸停時文字顏色不變 */
+    color: inherit !important;
   }
 
-  /* 禁用導航項和子選單項的 hover 效果 */
   .navlinks li a:hover,
   .navlinks li span:hover,
   .dropdownContent a:hover {
-    color: #fff !important; /* 確保懸停時文字顏色不變 */
-    background-color: inherit !important; /* 確保懸停時背景不變 */
+    color: #fff !important;
+    background-color: inherit !important;
   }
 
-  /* 禁用返回按鈕的 hover 效果 */
   div:hover {
-    color: inherit !important; /* 確保懸停時文字顏色不變 */
+    color: inherit !important;
   }
 
-  /* 禁用搜尋和使用者圖標的 hover 效果 */
   span:hover {
-    color: #fff !important; /* 確保懸停時圖標顏色不變 */
+    color: #fff !important;
   }
 
-  /* 禁用下拉選單的 hover 顯示效果 */
   .navItem:hover .dropdownContent {
-    display: none !important; /* 確保手機版不通過 hover 顯示下拉選單 */
+    display: none !important;
   }
 }
 
 /* 備用方案：針對手機版（螢幕寬度 <= 900px）禁用 hover 效果，確保兼容性 */
 @media (max-width: 900px) {
-  /* 禁用 Logo 連結的 hover 效果 */
   a:hover {
-    color: inherit !important; /* 確保懸停時文字顏色不變 */
+    color: inherit !important;
   }
 
-  /* 禁用導航項和子選單項的 hover 效果 */
   .navlinks li a:hover,
   .navlinks li span:hover,
   .dropdownContent a:hover {
-    color: #fff !important; /* 確保懸停時文字顏色不變 */
-    background-color: inherit !important; /* 確保懸停時背景不變 */
+    color: #fff !important;
+    background-color: inherit !important;
   }
 
-  /* 禁用返回按鈕的 hover 效果 */
   div:hover {
-    color: inherit !important; /* 確保懸停時文字顏色不變 */
+    color: inherit !important;
   }
 
-  /* 禁用搜尋和使用者圖標的 hover 效果 */
   span:hover {
-    color: #fff !important; /* 確保懸停時圖標顏色不變 */
+    color: #fff !important;
   }
 
-  /* 禁用下拉選單的 hover 顯示效果 */
   .navItem:hover .dropdownContent {
-    display: none !important; /* 確保手機版不通過 hover 顯示下拉選單 */
+    display: none !important;
   }
 }
