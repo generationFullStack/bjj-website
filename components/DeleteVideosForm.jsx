@@ -23,9 +23,9 @@ export default async function DeleteVideosForm() {
   const data = await response.json();
 
   return (
-    <div className="w-full text-3xl">
+    <div className="w-full max-w-6xl text-3xl my-10">
       <h1 className="text-center">Delete Videos form</h1>
-      <ul className="flex flex-col">
+      <ul className="flex flex-col h-200 overflow-y-scroll border-2">
         {data.map((element) => (
           <li
             key={element.id}

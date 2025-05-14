@@ -5,7 +5,7 @@ export default async function ShowCategories() {
   );
   const data = await response.json();
   return (
-    <div className="border-2 w-1/4 text-3xl">
+    <div className="border-2 w-1/2 text-3xl h-200 overflow-y-scroll">
       <ul>
         {data.map((element) => (
           <li
