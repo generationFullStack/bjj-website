@@ -218,7 +218,7 @@ export default function NavBar({ isUserLogged }) {
           id="mainListDiv"
           className={`h-[65px] flex items-center justify-end max-[900px]:w-full max-[900px]:h-0 max-[900px]:overflow-hidden ${
             isMenuOpen
-              ? "max-[900px]:h-screen max-[900px]:block max-[900px]:overflow-y-auto max-[900px]:fixed max-[900px]:top-0 max-[900px]:left-0 max-[900px]:w-full max-[900px]:z-[1001] max-[900px]:bg-[#111] max-[900px]:bg-center-top"
+              ? "max-[900px]:h-screen max-[900px]:block max-[900px]:overflow-y-auto max-[900px]:fixed max-[900px]:top-0 max-[900px]:left-0 max-[900px]:w-full max-[900px]:z-[1001] max-[900px]:bg-[#111] max-[900px]:bg-center-top mt-24"
               : ""
           }`}
         >
@@ -239,7 +239,7 @@ export default function NavBar({ isUserLogged }) {
               className={`flex items-center h-[65px] mr-8 max-[900px]:block`}
             >
               <ul
-                className={`w-auto h-[65px] flex flex-row list-none mt-24 p-0${
+                className={`w-auto h-[65px] flex flex-row list-none mt-0 p-0${
                   isMobile ? (isMenuOpen ? "block" : "hidden") : "block"
                 } ${
                   isSearchOpen ? "hidden" : ""
