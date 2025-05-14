@@ -46,6 +46,7 @@ export default async function VideoPage({ params }) {
       <iframe
         src={`https://www.youtube.com/embed/${videoId}`}
         className="w-full md:w-[800px] lg:w-[1000px] aspect-video rounded-lg shadow-lg"
+        allowFullScreen
       />
     </div>
   );

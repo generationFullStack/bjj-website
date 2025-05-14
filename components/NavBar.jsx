@@ -206,7 +206,7 @@ export default function NavBar({ isUserLogged }) {
         className={`max-w-[1300px] mx-auto flex items-center justify-between`}
       >
         <div
-          className={`w-auto h-auto pl-12 max-[900px]:ml-[15px] max-[900px]:absolute max-[900px]:left-0 max-[900px]:top-1 max-[900px]:w-auto max-[900px]:h-auto`}
+          className={`w-auto h-auto max-[900px]:ml-[15px] max-[900px]:absolute max-[900px]:left-0 max-[900px]:top-1 max-[900px]:w-auto max-[900px]:h-auto`}
         >
           <Link
             href="/"
