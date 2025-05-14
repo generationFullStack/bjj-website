@@ -27,12 +27,9 @@ export default function AboutUs() {
       role: "Fitness Trainer",
       description:
         "Michael focuses on BJJ-inspired fitness programs to help students build strength and endurance.",
-      image:
-        "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=300&h=300",
-      extraImages: [
-        "https://images.unsplash.com/photo-1606602197777-781d1c51d5d1?auto=format&fit=crop&w=200&h=200",
-      ],
-      link: "https://www.instagram.com/gavinlui", // 占位超連結
+      image: "/images/gavin.jpg",
+      extraImages: ["/images/lkkgavin.png"],
+      link: "https://www.instagram.com/lkkgavin", // 占位超連結
     },
   ];
 
