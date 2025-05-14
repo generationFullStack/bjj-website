@@ -68,7 +68,7 @@ export default function TestLoginForm() {
           {/* login button */}
           <button
             type="submit"
-            className="w-full p-[12px_20px] bg-gradient-to-r from-[#ff357a] to-[#fff172] border-none rounded-[40px] text-2xl text-white cursor-pointer share-tech-regular"
+            className="w-full p-[12px_20px] bg-gradient-to-r from-[#2828FF] to-[#3C3C3C] border-none rounded-[40px] text-2xl text-white cursor-pointer share-tech-regular"
             disabled={pending}
           >
             {pending ? "Logging in" : "Login"}

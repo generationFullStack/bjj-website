@@ -18,17 +18,17 @@ body {
 
 /* 容器樣式 */
 .container {
-  max-width: 700px; /* 縮小卡片寬度，更接近 CodePen 的緊湊感 */
+  max-width: 800px; /* 縮小卡片寬度，更接近 CodePen 的緊湊感 */
   width: 100%;
   padding: 30px 20px; /* 減少內邊距 */
   border-radius: 12px; /* 圓角效果 */
-  box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.2), 0px 8px 24px rgba(0, 0, 0, 0.2),
-    0px 16px 56px rgba(0, 0, 0, 0.2); /* 增強陰影，突出卡片效果 */
+  box-shadow: 0px 4px 16px rgba(255, 255, 255, 0.2),
+    0px 8px 24px rgba(0, 0, 0, 0.2), 0px 16px 56px rgba(0, 0, 0, 0.2); /* 增強陰影，突出卡片效果 */
 }
 
 /* 標題樣式 */
 .topic {
-  font-size: 24px; /* 縮小標題字體 */
+  font-size: 45px; /* 縮小標題字體 */
   font-weight: 500;
   margin-bottom: 20px;
   color: rgba(255, 255, 255, 0.7);
@@ -56,12 +56,16 @@ body {
   cursor: pointer;
   height: 50px; /* 縮小標籤高度 */
   line-height: 50px;
-  font-size: 18px; /* 縮小字體 */
+  font-size: 19px; /* 縮小字體 */
   font-weight: 500;
   color: rgba(255, 255, 255, 0.5);
-  padding-left: 20px; /* 減少左邊距 */
+  padding-left: 10px; /* 減少左邊距 */
   transition: all 0.5s ease;
   z-index: 10;
+}
+
+.list label span {
+  white-space: nowrap; /* 確保文字保持單行 */
 }
 
 /* 當標籤被選中時，改變文字顏色 */
@@ -72,17 +76,17 @@ body {
 /* 滑塊樣式 */
 .slider {
   position: absolute;
-  left: 0;
-  height: 50px; /* 與標籤高度一致 */
-  width: 100%;
-  border-radius: 12px;
-  transition: all 0.5s ease;
-  background: #bb86fc; /* CodePen 的滑塊背景色 */
+  left: 5px;
+  height: 50px;
+  border-radius: 15px;
+  transition: all 0.3s ease; /* 包含 top 和 width 的過渡動畫 1e90ff*/
+  background: #1e90ff;
 }
 
 /* 右側內容區域 */
 .text-content {
   width: 70%; /* 減少內容區域寬度比例 */
+  margin-left: 20px; /* 向右移動 20px */
   height: 100%;
   color: rgba(255, 255, 255, 0.7);
 }
@@ -94,7 +98,7 @@ body {
 
 /* 內容標題 */
 .text .title {
-  font-size: 20px; /* 縮小標題字體 */
+  font-size: 25px; /* 縮小標題字體 */
   margin-bottom: 10px;
   font-weight: 500;
 }
@@ -106,7 +110,7 @@ body {
 
 /* 標籤懸停效果 */
 .list label:hover {
-  color: #bb86fc;
+  color: #1e90ff;
 }
 
 /* 健身房內容區域 */
@@ -120,20 +124,14 @@ body {
 .gym-info {
   display: flex;
   flex-direction: column;
-  gap: 8px; /* 減少間距 */
-}
-
-/* 網站標題 */
-.website-title {
-  font-size: 16px; /* 縮小字體 */
-  font-weight: bold;
+  gap: 20px; /* 減少間距 */
 }
 
 /* 網站連結 */
 .website-link {
   color: #60a5fa; /* 藍色 */
   text-decoration: underline;
-  font-size: 14px; /* 縮小字體 */
+  font-size: 16px; /* 縮小字體 */
   word-break: break-all; /* 長連結自動換行 */
 }
 
@@ -141,15 +139,9 @@ body {
   color: #2563eb; /* 懸停時變深藍色 */
 }
 
-/* 地址標題 */
-.address-title {
-  font-size: 16px; /* 縮小字體 */
-  font-weight: bold;
-}
-
 /* 地址文字 */
 .address-text {
-  font-size: 14px; /* 縮小字體 */
+  font-size: 16px; /* 縮小字體 */
 }
 
 /* 圖片樣式 */
@@ -157,8 +149,8 @@ body {
   align-self: center;
   background-color: white;
   object-fit: contain;
-  width: 150px; /* 縮小圖片 */
-  height: 150px;
+  width: 180px; /* 縮小圖片 */
+  height: 180px;
 }
 
 /* 響應式設計：手機版 */

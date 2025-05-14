@@ -1,11 +1,12 @@
 "use client";
 import { gymList } from "@/constant/gymList";
-import { useState } from "react";
-import "./GymList.css"; // 引入普通 CSS 文件
+import { useState, useEffect, useRef } from "react";
+import "./GymList.css";
 
-// GymList 組件，實現垂直標籤佈局，左側顯示健身房名稱，右側顯示選中健身房的內容
 export default function GymList() {
-  const [selectedIndex, setSelectedIndex] = useState(0); // 管理當前選中的健身房索引，初始為 0
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [sliderWidth, setSliderWidth] = useState(0); // 新增狀態：滑塊寬度
+  const labelRefs = useRef([]); // 用於存儲每個標籤的 ref
 
   // 處理標籤點擊，更新選中的索引
   const handleLabelClick = (index) => {
@@ -13,39 +14,68 @@ export default function GymList() {
   };
 
   // 計算滑塊的 top 值（標籤高度 50px * 索引）
-  const sliderTop = selectedIndex * 50; // 每個標籤高度為 50px
+  const sliderTop = selectedIndex * 50;
+
+  // 當選中索引變化時，更新滑塊寬度
+  useEffect(() => {
+    if (labelRefs.current[selectedIndex]) {
+      const spanElement = labelRefs.current[selectedIndex];
+      const spanWidth = spanElement.offsetWidth; // 獲取文字的實際寬度
+      const paddingLeft = 20; // 與 .list label 的 padding-left: 20px 一致
+      setSliderWidth(spanWidth + paddingLeft); // 滑塊寬度 = 文字寬度 + 左邊距
+    }
+  }, [selectedIndex]);
+
+  // 初始加載時設置滑塊寬度，並處理窗口大小變化
+  useEffect(() => {
+    const updateSliderWidth = () => {
+      if (labelRefs.current[selectedIndex]) {
+        const spanElement = labelRefs.current[selectedIndex];
+        const spanWidth = spanElement.offsetWidth;
+        const paddingLeft = 20;
+        setSliderWidth(spanWidth + paddingLeft);
+      }
+    };
+
+    // 初始計算
+    updateSliderWidth();
+
+    // 監聽窗口大小變化，重新計算寬度
+    window.addEventListener("resize", updateSliderWidth);
+    return () => window.removeEventListener("resize", updateSliderWidth);
+  }, [selectedIndex]);
 
   return (
     <div className="container">
-      {/* 標題 */}
       <h1 className="topic">GYMS IN HONG KONG</h1>
-
-      {/* 內容區域：左側標籤 + 右側內容 */}
       <div className="content">
-        {/* 左側標籤列表 */}
         <div className="list">
           {gymList.map((element, index) => (
             <label
               key={index}
-              onClick={() => handleLabelClick(index)} // 點擊時更新選中的索引
+              onClick={() => handleLabelClick(index)}
               className={`gym-${index} ${
                 selectedIndex === index ? "selected" : ""
-              }`} // 動態添加選中狀態的類名
+              }`}
             >
-              <span>{element.name}</span>
+              <span
+                ref={(el) => (labelRefs.current[index] = el)} // 為每個 span 添加 ref
+                className="whitespace-nowrap"
+              >
+                {element.name}
+              </span>
             </label>
           ))}
-          {/* 滑塊：根據選中的索引動態移動 */}
-          <div className="slider" style={{ top: `${sliderTop}px` }} />
+          <div
+            className="slider"
+            style={{ top: `${sliderTop}px`, width: `${sliderWidth}px` }} // 動態設置滑塊寬度
+          />
         </div>
-
-        {/* 右側內容區域：根據選中的索引顯示對應內容 */}
         <div className="text-content">
           <div className="text">
             <div className="title">{gymList[selectedIndex].name}</div>
             <div className="gym-details">
               <div className="gym-info">
-                <div className="website-title">WEBSITE</div>
                 <a
                   href={gymList[selectedIndex].website}
                   target="_blank"
@@ -53,8 +83,8 @@ export default function GymList() {
                 >
                   {gymList[selectedIndex].website}
                 </a>
-                <div className="address-title">ADDRESS</div>
-                <div className="address-text">
+
+                <div className="address-text break-words whitespace-normal break-all">
                   {gymList[selectedIndex].address}
                 </div>
               </div>
