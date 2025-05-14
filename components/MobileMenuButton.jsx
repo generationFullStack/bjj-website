@@ -14,6 +14,7 @@ const MenuButton = () => {
         right: "50px",
         padding: "0",
         margin: "0",
+        marginTop: "8px",
         fontSize: "2.8rem",
         zIndex: 1003,
         fontFamily: '"Share Tech", sans-serif',
@@ -26,7 +27,7 @@ const MenuButton = () => {
         style={{
           width: "40px",
           height: "40px",
-          // marginTop: "10px",
+          // marginTop: "8px",
           padding: "0",
           position: "relative",
           background: "transparent",

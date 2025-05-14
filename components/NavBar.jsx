@@ -346,7 +346,7 @@ export default function NavBar({ isUserLogged }) {
         {isMobile && !isSearchOpen && (
           <div className="flex items-center gap-4">
             <span
-              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[145px] top-1/2 -translate-y-1/2 share-tech-regular`} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
+              className={`cursor-pointer text-[2.8rem] text-white z-[1003] block absolute right-[145px] top-1/2 -translate-y-1/2 share-tech-regular `} // 手機版移除 hover 效果：移除 hover:text-[#1e90ff]，確保懸停時顏色不變
               onClick={handleSearchClick}
             >
               {console.log(
@@ -381,10 +381,10 @@ export default function NavBar({ isUserLogged }) {
             <span
               className={`block ${styles.navTrigger} ${
                 isMenuOpen ? "active" : ""
-              } cursor-pointer text-[2.8rem] text-white z-[1003] absolute share-tech-regular bg-transparent`}
+              } cursor-pointer text-[2.8rem] text-white z-[1003] absolute share-tech-regular bg-transparent `}
               onClick={handleNavTriggerClick}
               style={{
-                right: "-15px", // 最右邊
+                right: "-30px", // 最右邊
                 height: "52px",
                 top: "50%",
                 transform: "translateY(-50%)",
