@@ -20,7 +20,7 @@ export default function Footer() {
               className="mr-2.5"
             />
             <span className="hover:text-[#757575] transition-colors duration-600">
-              BJJ.JPG
+              BJJ-JPG
             </span>
           </Link>
         </div>
@@ -51,7 +51,7 @@ export default function Footer() {
           </a>
         </div>
         <p className="text-[#757575] text-lg font-bold ">
-          BJJ.JPG © 2025 All Rights Reserved. <br />
+          BJJ-JPG © 2025 All Rights Reserved. <br />
           Design by JPG FOR JASON & PAN & GAVIN
         </p>
       </div>

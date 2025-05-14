@@ -6,7 +6,7 @@ import VideoTextSlider from "@/components/VideoTextSlider"; // 引入抽離的 V
 // 歡迎標題組件
 const WelcomeHeader = () => (
   <h1 className="text-5xl md:text-6xl font-bold text-center">
-    Welcome to <br /> BJJ.JPG
+    Welcome to <br /> BJJ-JPG
   </h1>
 );
 

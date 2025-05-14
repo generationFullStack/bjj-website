@@ -7,7 +7,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import { getSession } from "@/lib/dal";
 
 export const metadata = {
-  title: "BJJ.JPG",
+  title: "BJJ-JPG",
   description: "J for Jason, P for Pan and G for Gavin",
 };
 

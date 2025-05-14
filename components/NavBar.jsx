@@ -219,7 +219,7 @@ export default function NavBar({ isUserLogged }) {
               height={60}
               style={{ verticalAlign: "middle" }}
             />
-            {!isMobile && <span> BJJ.JPG</span>}
+            {!isMobile && <span> BJJ-JPG</span>}
           </a>
         </div>
         <div

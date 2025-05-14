@@ -236,14 +236,6 @@
     background-color: inherit !important;
   }
 
-  div:hover {
-    color: inherit !important;
-  }
-
-  span:hover {
-    color: #fff !important;
-  }
-
   .navItem:hover .dropdownContent {
     display: none !important;
   }
@@ -251,23 +243,11 @@
 
 /* 備用方案：針對手機版（螢幕寬度 <= 900px）禁用 hover 效果，確保兼容性 */
 @media (max-width: 900px) {
-  a:hover {
-    color: inherit !important;
-  }
-
   .navlinks li a:hover,
   .navlinks li span:hover,
   .dropdownContent a:hover {
     color: #fff !important;
     background-color: inherit !important;
-  }
-
-  div:hover {
-    color: inherit !important;
-  }
-
-  span:hover {
-    color: #fff !important;
   }
 
   .navItem:hover .dropdownContent {
