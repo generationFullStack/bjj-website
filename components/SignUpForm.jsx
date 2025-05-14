@@ -116,7 +116,7 @@ export default function SignUpForm() {
           </button>
         </div>
         <Link
-          href="http://localhost:3000/login"
+          href="/login"
           className="text-white no-underline hover:underline share-tech-regular text-3xl"
         >
           Already have an account?

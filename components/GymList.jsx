@@ -46,7 +46,7 @@ export default function GymList() {
   }, [selectedIndex]);
 
   return (
-    <div className="mainContent">
+    <div className="gymContent">
       <div className="container">
         <h1 className="topic">GYMS IN HONG KONG</h1>
         <div className="content">
