@@ -6,7 +6,7 @@ const VideoTextSlider = () => {
   // 滑動卡片數據
   const slides = [
     {
-      videoSrc: "/video/BJJNo-Gi_home.mp4",
+      img: "/gavinko.png",
       text: "Its techniques and strategies are based on in-depth research into ground fighting. Jiu-jitsu practitioners excel at bringing opponents to the ground and then gaining dominant positions. Brazilian Jiu-Jitsu techniques primarily focus on positional control and various submission holds.",
     },
     {
@@ -133,27 +133,13 @@ const VideoTextSlider = () => {
             >
               {/* 視頻或圖片：放大寬度 */}
               <div className="video-container w-full max-w-6xl relative">
-                {slide.videoSrc ? (
-                  <video
-                    className="w-full rounded-2xl aspect-video"
-                    src={slide.videoSrc}
-                    title={`BJJ Video ${index + 1}`}
-                    autoPlay
-                    muted
-                    loop
-                    disablePictureInPicture
-                    onContextMenu={(e) => e.preventDefault()}
-                    style={{ pointerEvents: "none" }}
-                  />
-                ) : slide.img ? (
-                  <img
-                    className="w-full rounded-2xl aspect-video object-cover"
-                    src={slide.img}
-                    alt={`BJJ Image ${index + 1}`}
-                    onContextMenu={(e) => e.preventDefault()}
-                    style={{ pointerEvents: "none" }}
-                  />
-                ) : null}
+                <img
+                  className="w-full rounded-2xl aspect-video object-cover"
+                  src={slide.img}
+                  alt={`BJJ Image ${index + 1}`}
+                  onContextMenu={(e) => e.preventDefault()}
+                  style={{ pointerEvents: "none" }}
+                />
                 <div className="absolute inset-0 bg-transparent pointer-events-none" />
               </div>
               {/* 文字：放大寬度 */}

@@ -26,25 +26,33 @@ export default function Footer() {
         </div>
         <div className={`my-5 flex gap-10 ${styles.socialMedia}`}>
           <a
-            href="#"
+            href="https://www.facebook.com/shootogymhongkong/?locale=zh_HK"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-white text-5xl hover:text-[#3b5998] transition-colors duration-600"
           >
             <i className="fab fa-facebook-f fa-2xs"></i>
           </a>
           <a
-            href="#"
+            href="https://x.com/renzograciebjj"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-white text-5xl hover:text-[#71767b] transition-colors duration-600"
           >
             <i className="fab fa-x-twitter fa-2xs"></i>
           </a>
           <a
-            href="#"
+            href="https://www.instagram.com/shootogym_hk/"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-white text-5xl hover:text-[#e1306c] transition-colors duration-600"
           >
             <i className="fab fa-instagram fa-2xs"></i>
           </a>
           <a
-            href="#"
+            href="https://www.youtube.com/@BTeamJiuJitsu"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-white text-5xl hover:text-[#ff0000] transition-colors duration-600"
           >
             <i className="fab fa-youtube fa-2xs"></i>
