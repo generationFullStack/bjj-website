@@ -3,50 +3,50 @@
 
 .navTrigger {
   cursor: pointer;
-  width: 30px; /* 圖標寬度，可微調以調整漢堡選單圖標大小 */
-  height: 25px; /* 圖標高度，可微調以調整漢堡選單圖標大小 */
+  width: 30px;
+  height: 25px;
   margin: auto;
   position: absolute;
-  right: 10px; /* 調整右邊距，確保圖標在螢幕範圍內，可微調 */
+  right: 10px;
   top: 0;
   bottom: 0;
   z-index: 1003;
-  display: none; /* 初始隱藏，手機版通過 @media 顯示 */
+  display: none;
 }
 
 .navTrigger i {
-  background-color: #fff; /* 確保線條可見，可微調顏色 */
+  background-color: #fff;
   border-radius: 2px;
   content: "";
   display: block;
   width: 100%;
-  height: 4px; /* 線條高度，可微調以調整線條粗細 */
-  transition: transform 0.3s ease; /* 添加過渡效果，確保展開和還原動畫平滑 */
+  height: 4px;
+  transition: transform 0.3s ease;
 }
 
 .navTrigger i:nth-child(1) {
-  transform: translateY(0px) rotate(0deg); /* 初始狀態 */
+  transform: translateY(0px) rotate(0deg);
 }
 
 .navTrigger i:nth-child(2) {
-  margin: 5px 0; /* 確保三條線間距一致，避免錯位，可微調間距 */
-  transform: rotate(0deg); /* 初始狀態 */
+  margin: 5px 0;
+  transform: rotate(0deg);
 }
 
 .navTrigger i:nth-child(3) {
-  transform: translateY(0px) rotate(0deg); /* 初始狀態 */
+  transform: translateY(0px) rotate(0deg);
 }
 
 .navTrigger.active i:nth-child(1) {
-  transform: translateY(9px) rotate(135deg); /* 展開時第一條線變為叉號的一部分 */
+  transform: translateY(9px) rotate(135deg);
 }
 
 .navTrigger.active i:nth-child(2) {
-  transform: rotate(45deg); /* 展開時第二條線變為叉號的一部分 */
+  transform: rotate(45deg);
 }
 
 .navTrigger.active i:nth-child(3) {
-  transform: translateY(-9px) rotate(135deg); /* 展開時第三條線變為叉號的一部分 */
+  transform: translateY(-9px) rotate(135deg);
 }
 
 .blurContent {
@@ -67,7 +67,7 @@
 }
 
 .hidden {
-  display: none !important; /* 提高優先級 */
+  display: none !important;
 }
 
 /* 當選單展開時，確保搜尋圖示隱藏 */
@@ -78,8 +78,8 @@
 /* 手機版樣式 */
 @media screen and (max-width: 900px) {
   .navTrigger {
-    display: block; /* 確保手機版顯示 */
-    right: 10px; /* 與上方同步，確保圖標可見，可微調 */
+    display: block;
+    right: 10px;
   }
 
   .logo {
@@ -159,11 +159,12 @@
 
   .dropdownContent {
     position: static;
-    background-color: #222;
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-    width: 100%;
-    box-shadow: none;
+    background-color: #222 !important; /* 確保背景色為純色 */
+    backdrop-filter: none !important; /* 移除模糊效果 */
+    -webkit-backdrop-filter: none !important; /* 移除 Webkit 模糊效果 */
+    width: 100% !important;
+    box-shadow: none !important;
+    background: #222 !important; /* 備用方案：確保背景不透明 */
   }
 
   .dropdownContent a {

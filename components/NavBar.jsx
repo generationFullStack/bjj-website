@@ -86,22 +86,22 @@ export default function NavBar({ isUserLogged }) {
   }, [isClient]);
 
   useEffect(() => {
-    // 獲取主內容區域的元素，用於添加或移除模糊效果
     const mainContent = document.querySelector(".mainContent");
-    // 檢查 mainContent 是否存在，防止 DOM 未渲染完成時操作導致錯誤
     if (mainContent) {
-      if (hoveredItem !== null || isSearchOpen) {
-        // 當滑鼠懸停在導航項或搜尋框打開時，添加模糊效果
+      if (isMobile) {
+        // 在手機設備上，始終移除模糊效果
+        mainContent.classList.remove(styles.blurContent);
+      } else if (hoveredItem !== null || isSearchOpen) {
+        // 在非手機設備上，根據條件添加模糊效果
         mainContent.classList.add(styles.blurContent);
       } else {
-        // 當滑鼠離開導航項且搜尋框關閉時，移除模糊效果
+        // 在非手機設備上，移除模糊效果
         mainContent.classList.remove(styles.blurContent);
       }
     } else {
-      // 如果 mainContent 不存在，記錄警告（可選）
       console.warn("mainContent element not found in the DOM.");
     }
-  }, [hoveredItem, isSearchOpen]); // 依賴 hoveredItem 和 isSearchOpen，當這些狀態變化時觸發效果
+  }, [hoveredItem, isSearchOpen, isMobile]); // 添加 isMobile 作為依賴
 
   const handleNavTriggerClick = () => {
     console.log("Before click, isMenuOpen:", isMenuOpen); // 調試
@@ -279,7 +279,9 @@ export default function NavBar({ isUserLogged }) {
                     <div
                       className={`absolute top-[65px] left-0 min-w-[200px] shadow-[0_8px_16px_rgba(0,0,0,0.2)] z-[1001] ${
                         styles.dropdownContent
-                      } ${hoveredItem === index ? "block" : "hidden"} ${
+                      } ${isMobile ? styles.mobileDropdown : ""} ${
+                        hoveredItem === index ? "block" : "hidden"
+                      } ${
                         activeDropdown === index ? "block" : "hidden"
                       } max-[900px]:w-full max-[900px]:shadow-none`}
                     >
@@ -288,9 +290,9 @@ export default function NavBar({ isUserLogged }) {
                           key={subcategory}
                           href={`/${encodeURIComponent(
                             subcategory
-                          ).toLowerCase()}`} // 對子類別名稱進行 URL 編碼
-                          onClick={handleNavItemClick} // 點擊子類別後自動關閉選單
-                          className={`block text-white text-[1.6rem] px-4 py-3 text-left leading-normal hover:bg-[#333] hover:text-[#1e90ff] max-[900px]:text-[2rem] max-[900px]:px-[50px] max-[900px]:text-left max-[900px]:border-t border-[#333] max-[900px]:text-white! last:border-b last:border-[#333]`} // hover 效果由 CSS 控制，手機版通過 @media (hover: none) 和 @media (max-width: 900px) 禁用
+                          ).toLowerCase()}`}
+                          onClick={handleNavItemClick}
+                          className={`block text-white text-[1.6rem] px-4 py-3 text-left leading-normal hover:bg-[#333] hover:text-[#1e90ff] max-[900px]:text-[2rem] max-[900px]:px-[50px] max-[900px]:text-left max-[900px]:border-t border-[#333] max-[900px]:text-white! last:border-b last:border-[#333]`}
                         >
                           {subcategory}
                         </Link>
