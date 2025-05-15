@@ -26,6 +26,8 @@ export async function signup(previousState, formData) {
   } catch (error) {
     console.error(error);
   }
+
+  redirect("/login");
 }
 
 export async function login(previousState, formData) {
