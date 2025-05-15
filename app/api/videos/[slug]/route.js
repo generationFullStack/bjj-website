@@ -22,10 +22,6 @@ export async function GET(request, { params }) {
       WHERE categories.id = ${result1.rows[0]["id"]} OR categories.parent_id = ${result1.rows[0]["id"]}`
     );
 
-    if (result1.rowCount === 0) {
-      return NextResponse.json({ status: 404 });
-    }
-
     client.release();
     return NextResponse.json(result2.rows, { status: 200 });
   } catch (error) {
