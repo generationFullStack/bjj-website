@@ -10,8 +10,16 @@ const VideoTextSlider = () => {
       text: "Its techniques and strategies are based on in-depth research into ground fighting. Jiu-jitsu practitioners excel at bringing opponents to the ground and then gaining dominant positions. Brazilian Jiu-Jitsu techniques primarily focus on positional control and various submission holds.",
     },
     {
+      img: "/gavincham.png",
+      text: "自從上一張圖條友比Gavin打到斷腳，之後Gavin 就 Champion!!",
+    },
+    {
       img: "/bjj_gihome.jpg",
       text: "Gi-based attacks depend on using the fabric to either control or support an attack. As the Gi provides additional control points, establishing, stripping, and re-establishing grips are of primary importance in Gi BJJ.",
+    },
+    {
+      img: "/bjjgiornogi.png",
+      text: "Gi vs No-Gi",
     },
     {
       img: "/bjj_nogihome.jpg",
