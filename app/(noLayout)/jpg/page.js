@@ -33,10 +33,10 @@ export default function AboutUs() {
   return (
     <div className="min-h-screen bg-[#151414] flex flex-col items-center justify-center py-10">
       {/* 頁面標題 */}
-      <div className="text-6xl md:text-6xl font-bold text-white text-center mb-1">
+      <div className="text-5xl md:text-6xl font-bold text-white text-center mb-1">
         點擊此處與3位猛男激烈對話
       </div>
-      <div className="text-6xl md:text-6xl font-bold text-white text-center mb-10">
+      <div className="text-5xl md:text-6xl font-bold text-white text-center mb-10">
         Three Handsome Boys
       </div>
       {/* 成員卡片容器：調整間距以適應更大的卡片和更多成員 */}
