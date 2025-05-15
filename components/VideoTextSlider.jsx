@@ -11,7 +11,7 @@ const VideoTextSlider = () => {
     },
     {
       img: "/gavincham.png",
-      text: "自從上一張圖條友比Gavin打到斷腳，之後Gavin 就 Champion!!",
+      text: "Gavin won his first bjj no gi competition in Vamos",
     },
     {
       img: "/bjj_gihome.jpg",
