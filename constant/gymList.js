@@ -25,4 +25,10 @@ export const gymList = [
     address: "2/F, Pacific Mansion, 172-174 Nathan Rd Tsim Sha Tsui, Hong Kong",
     imgSrc: "/klbjjtst.jpg",
   },
+  {
+    name: "Kowloon Jiu Jitsu (Mong Kok)",
+    website: "http://www.falcon-fitness.com",
+    address: "1/F, 215A Tung Choi Street, Mong Kok, Kowloon, Hong Kong",
+    imgSrc: "/klnbjjmk.jpg",
+  },
 ];
