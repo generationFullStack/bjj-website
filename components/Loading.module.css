@@ -10,16 +10,16 @@
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  animation: fadeOut 1.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-  animation-delay: 2s;
+  animation: fadeOut 500ms cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-delay: 500ms;
 }
 
 .loadingLogo {
-  animation: fadeIn 1s ease-in-out;
+  animation: fadeIn 500ms ease-in-out;
 }
 
 .mainContent {
-  animation: fadeInMain 1s ease-in-out forwards; /* 主內容淡入動畫 */
+  animation: fadeInMain 500ms ease-in-out forwards; /* 主內容淡入動畫 */
 }
 
 @keyframes fadeIn {
