@@ -69,10 +69,7 @@ export default function NavBar({ isUserLogged }) {
 
     // 客戶端加載時滾動到頂部並檢查初始滾動位置
     window.scrollTo({ top: 0, behavior: "instant" });
-    console.log("Initial scrollY after scrollTo:", window.scrollY);
     setIsScrolled(window.scrollY > 50);
-    console.log("Initial scrollY:", window.scrollY);
-    console.log("Initial isScrolled:", window.scrollY > 50);
 
     const handleScroll = () => {
       const newIsScrolled = window.scrollY > 50;
@@ -104,12 +101,10 @@ export default function NavBar({ isUserLogged }) {
   }, [hoveredItem, isSearchOpen, isMobile]); // 添加 isMobile 作為依賴
 
   const handleNavTriggerClick = () => {
-    console.log("Before click, isMenuOpen:", isMenuOpen); // 調試
     setIsMenuOpen(!isMenuOpen);
     setActiveSubmenu(null);
     setActiveDropdown(null);
     setIsSearchOpen(false);
-    console.log("After click, isMenuOpen:", !isMenuOpen); // 調試
   };
 
   const handleDropdownClick = (index) => {
