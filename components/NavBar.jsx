@@ -331,7 +331,6 @@ export default function NavBar({ isUserLogged }) {
             </div>
           </div>
         </div>
-        {console.log("isMobile:", isMobile, "isSearchOpen:", isSearchOpen)}{" "}
         {/* 調試條件渲染 */}
         {isMobile && !isSearchOpen && (
           <div className="flex items-center gap-4">
@@ -339,14 +338,6 @@ export default function NavBar({ isUserLogged }) {
               className={`cursor-pointer text-[2.5rem] text-white z-[1003] block absolute right-[95px] top-1/2 -translate-y-1/2 share-tech-regular`} // 從 right-[145px] 改為 right-[100px]
               onClick={handleSearchClick}
             >
-              {console.log(
-                "isMobile:",
-                isMobile,
-                "isMenuOpen:",
-                isMenuOpen,
-                "isSearchOpen:",
-                isSearchOpen
-              )}
               <FaSearch />
             </span>
             {isUserLogged ? (
