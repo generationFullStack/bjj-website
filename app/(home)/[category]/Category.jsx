@@ -1,4 +1,5 @@
 "use client";
+import CategoryFilterButton from "@/components/CategoryFilterButton";
 import { useEffect, useState } from "react";
 
 const YOUTUBE_API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY;
@@ -23,6 +24,8 @@ export default function Category({ category }) {
   const [videosData, setVideosData] = useState([]); // 儲存影片資料
   const [isLoading, setIsLoading] = useState(true); // 控制加載條是否顯示
 
+  const [filter, setFilter] = useState(""); // filter state for the filter button
+
   // 管理所有影片卡片的預覽索引
   const [previewIndices, setPreviewIndices] = useState({}); // 物件形式，key 為 videoId，value 為預覽索引
 
@@ -35,7 +38,7 @@ export default function Category({ category }) {
       try {
         setIsLoading(true); // 顯示加載條
 
-        // Step 1: 獲取影片 ID 列表
+        // Step 1: 獲取影片 ID 列表 && video category
         const responseIds = await fetch(
           `${process.env.NEXT_PUBLIC_BASE_URL}/api/videos/${category}`
         );
@@ -45,16 +48,14 @@ export default function Category({ category }) {
           throw new Error(`HTTP error! status: ${responseIds.status}`);
         }
 
-        const bodyIds = await responseIds.json();
-        let arrayIds = [];
+        const body = await responseIds.json();
 
-        // 檢查 API 返回的數據是否有效
-        if (Array.isArray(bodyIds)) {
-          for (let i = 0; i < bodyIds.length; i++) {
-            arrayIds.push(bodyIds[i].youtube_id);
-          }
-        } else {
-          console.warn("fetchVideoIds: API 返回的數據不是陣列:", bodyIds);
+        let arrayIds = [];
+        let arrayCategory = [];
+
+        for (let i = 0; i < body.length; i++) {
+          arrayIds.push(body[i].youtube_id);
+          arrayCategory.push(body[i].category_name);
         }
 
         setVideoIds(arrayIds);
@@ -74,9 +75,10 @@ export default function Category({ category }) {
 
         // 檢查 API 返回的數據是否有效
         const arrayVideos = Array.isArray(bodyVideos.items)
-          ? bodyVideos.items.map((item) => ({
+          ? bodyVideos.items.map((item, index) => ({
               videoId: item.id,
               title: item.snippet.title,
+              category: arrayCategory[index],
               duration: parseDuration(item.contentDetails.duration), // 解析時長
             }))
           : [];
@@ -97,16 +99,26 @@ export default function Category({ category }) {
       {/* 影片列表：使用網格佈局顯示影片，模仿 missav.ws 的設計 */}
       <div className="max-w-[1300px] mx-auto mt-50 px-4 md:px-12 lg:px-12">
         {/* 類別標題：顯示當前分頁的類別，模仿 missav.ws 的設計 */}
-        <h2 className="text-left text-5xl md:text-6xl text-white font-bold mb-12">
-          {decodedCategory}
-          {isLoading && (
-            <div className="flex-col gap-4 w-full flex items-center justify-center mt-10">
-              <div className="w-20 h-20 border-4 border-transparent text-blue-400 text-4xl animate-spin flex items-center justify-center border-t-blue-400 rounded-full">
-                <div className="w-16 h-16 border-4 border-transparent text-red-400 text-2xl animate-spin flex items-center justify-center border-t-red-400 rounded-full"></div>
-              </div>
+        <div className="flex flex-col gap-4 sm:flex-row sm:gap-20">
+          <h2 className="text-left text-5xl md:text-6xl text-white font-bold mb-12">
+            {decodedCategory}
+          </h2>
+          <div className="mb-12">
+            <CategoryFilterButton
+              category={category}
+              setFilter={setFilter}
+              filter={filter}
+            />
+          </div>
+        </div>
+
+        {isLoading && (
+          <div className="flex-col gap-4 w-full flex items-center justify-center mt-10">
+            <div className="w-20 h-20 border-4 border-transparent text-blue-400 text-4xl animate-spin flex items-center justify-center border-t-blue-400 rounded-full">
+              <div className="w-16 h-16 border-4 border-transparent text-red-400 text-2xl animate-spin flex items-center justify-center border-t-red-400 rounded-full"></div>
             </div>
-          )}
-        </h2>
+          </div>
+        )}
         {/* 當影片列表為空時，顯示提示訊息 */}
         {videosData.length === 0 && !isLoading ? (
           <p className="text-center text-8xl text-gray-400 mt-4">
@@ -158,7 +170,14 @@ export default function Category({ category }) {
               return (
                 <li
                   key={element.videoId}
-                  className="group relative transition-transform duration-300 ease-in-out"
+                  className={`group relative transition-transform duration-300 ease-in-out ${
+                    // hide videos depends on the state of filter
+                    filter === ""
+                      ? ""
+                      : filter === element.category
+                      ? "block"
+                      : "hidden"
+                  }`}
                   onMouseEnter={handleMouseEnter}
                   onMouseLeave={handleMouseLeave}
                 >

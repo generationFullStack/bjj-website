@@ -15,7 +15,7 @@ export async function GET(request, { params }) {
       `SELECT categories.id FROM categories WHERE name = '${decodeURI(slug)}'` // decode %20 to ' ' e.g. guard%20pass --> guard pass
     );
     const result2 = await client.query(
-      `SELECT videos.id, videos.youtube_id, video_categories.category_id, categories.parent_id, categories.name
+      `SELECT videos.id, videos.youtube_id, video_categories.category_id, categories.parent_id, categories.name as category_name
       FROM videos
       JOIN video_categories ON videos.id = video_categories.video_id
       JOIN categories ON video_categories.category_id = categories.id

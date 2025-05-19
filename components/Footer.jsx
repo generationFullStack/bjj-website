@@ -34,7 +34,7 @@ export default function Footer() {
             <i className="fab fa-facebook-f fa-2xs"></i>
           </a>
           <a
-            href="https://x.com/renzograciebjj"
+            href="/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-white text-5xl hover:text-[#71767b] transition-colors duration-600"
@@ -50,7 +50,7 @@ export default function Footer() {
             <i className="fab fa-instagram fa-2xs"></i>
           </a>
           <a
-            href="https://www.youtube.com/@BTeamJiuJitsu"
+            href="/"
             target="_blank"
             rel="noopener noreferrer"
             className="text-white text-5xl hover:text-[#ff0000] transition-colors duration-600"
