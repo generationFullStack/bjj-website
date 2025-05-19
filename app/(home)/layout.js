@@ -8,7 +8,8 @@ import { getSession } from "@/lib/dal";
 
 export const metadata = {
   title: "BJJ-JPG",
-  description: "J for Jason, P for Pan and G for Gavin",
+  description:
+    "A BJJ video platform for learning purpose, developed by team JPG",
 };
 
 export default async function RootLayout({ children }) {

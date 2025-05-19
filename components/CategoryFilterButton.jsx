@@ -31,7 +31,7 @@ export default function CategoryFilterButton({ category, setFilter, filter }) {
             }
           }}
           key={element.id}
-          className={`border-2 p-1 ${
+          className={`border-2 p-1 select-none cursor-pointer ${
             filter == element.name ? "bg-blue-400/40" : ""
           }`}
         >
