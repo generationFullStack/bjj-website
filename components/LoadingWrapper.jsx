@@ -14,7 +14,7 @@ export default function LoadingWrapper({ children }) {
     if (pathname === "/") {
       const timer = setTimeout(() => {
         setIsLoading(false);
-      }, 800);
+      }, 1000);
 
       return () => clearTimeout(timer);
     }
