@@ -29,8 +29,8 @@ export async function POST(request) {
     const youtube_id = data.get("youtube_id");
     const client = await pool.connect();
     const result = await client.query(
-      `INSERT INTO videos (title, description, youtube_id, user_id)
-       VALUES ('${title}', '${description}', '${youtube_id}', 1)`
+      `INSERT INTO videos (title, description, youtube_id)
+       VALUES ('${title}', '${description}', '${youtube_id}')`
     );
     client.release();
 
